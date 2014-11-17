@@ -9,3 +9,4 @@ entity alu is
 		r   : out std_logic_vector (3 downto 0);
 		c   : out std_logic);
 end entity alu;
+
