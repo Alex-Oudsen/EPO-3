@@ -33,3 +33,4 @@ clk <=  '1' after  0 ns,
 lbl1: alu port map (clk, a, b, f, r, c);
 
 end architecture behaviour;  
+
