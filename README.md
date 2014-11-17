@@ -1,2 +1,3 @@
-EPO-3 projectgroep A1
+EPO-3
 =====
+Projectgroep A1
