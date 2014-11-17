@@ -80,4 +80,4 @@ begin
 
 end process;
 
-end architecture behavioural;
+end architecture behaviour;
