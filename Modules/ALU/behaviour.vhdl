@@ -75,6 +75,10 @@ begin
 				z(2) <= a(3);
 				z(1) <= a(2);
 				z(0) <= a(1);
+				
+			when others =>
+				d <= d;
+				z <= z;
 
 		end case;
 
