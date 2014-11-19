@@ -11,12 +11,12 @@ architecture behaviour of alu_tb is
           c   : out std_logic);
   end component alu;
   
-signal clk : in  std_logic;
-signal a   : in  std_logic_vector(3 downto 0);
-signal b   : in  std_logic_vector(3 downto 0);
-signal f   : in  std_logic_vector(2 downto 0);
-signal r   : out std_logic_vector(3 downto 0);
-signal c   : out std_logic;
+signal clk : std_logic;
+signal a   : std_logic_vector(3 downto 0);
+signal b   : std_logic_vector(3 downto 0);
+signal f   : std_logic_vector(2 downto 0);
+signal r   : std_logic_vector(3 downto 0);
+signal c   : std_logic;
 
 begin
 
