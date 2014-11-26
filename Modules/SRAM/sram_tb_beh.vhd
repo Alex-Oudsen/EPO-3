@@ -25,7 +25,7 @@ begin
 
 
 	read_write_line <='0' after 0 ns, 
-			'1' after 750 ns,
+			'1' after 499 ns,
 			'0' after 5000 ns;
 
 	write_data<=	"0000" after 1 ns,
