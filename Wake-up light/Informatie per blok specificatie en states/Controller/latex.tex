@@ -1,0 +1,129 @@
+                                                                                                                                                                                                                                                                                                                                                                           \documentclass[a4paper, twoside, 10pt]{article}
+
+\usepackage{verbatim}
+\usepackage[hidelinks]{hyperref}
+\usepackage[dutch]{babel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+%\usepackage[table]{xcolor}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+%\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{listings}			% Used to include VHDL-code and fragments
+\usepackage[dutch]{babel}		% Dutch hyphenation patterns and dutch names 
+\usepackage{soul}				% dingen doorstrepen
+\usepackage[normalem]{ulem}				%dingen dooruniten
+\usepackage{pslatex}			% Times, helvetica and courier
+\usepackage[T1]{fontenc}		% Nicer font-encoding
+\usepackage{hyperref}			% Gives clickable references in pdf-file
+\usepackage{graphicx}			% Used to include .pdf, .jpg and .png-files
+\usepackage{tabularx}			% Used for evenly spread tables
+\usepackage{eso-pic}			% Absolute positioning, used for lines-to-track appendix and front- and backpage
+\usepackage{datetime}			% Used for some data-references
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=up]{caption}	% Nicer captions
+\usepackage{nonfloat}			% Captions for non-floating figures and tables
+\usepackage{nextpage}			% Advanced nextpage commands
+\usepackage{keystroke}			% "real" keys
+\usepackage[nottoc]{tocbibind}		% Include Bibliography in ToC
+\usepackage{multirow}			% Span text over multiple rows
+\usepackage{verbatim}			% For comment-environment
+\usepackage[left=3.5cm, right=2.5cm]{geometry}
+\usepackage{enumitem} % Mogelijkheid tot geen enters in itemize en enurate
+
+\crefname{equation}{vergelijking}{vergelijkingen}
+\crefname{table}{tabel}{tabellen}
+\crefname{figure}{figuur}{figuren}
+
+
+\definecolor{comment}{RGB}{0, 15 , 117}		%Kleur blauw defineren
+\definecolor{keyword}{RGB}{165, 42, 42}		%Kleur rood defineren
+\definecolor{STD}{RGB}{46, 139, 87}			%Kleur groen defineren
+\lstdefinelanguage{VHDL}{
+  morekeywords=[1]{ 		%Defineren van keywords die blauw worden
+    library,use,all,entity,is,port,in,out,end,architecture,of,
+    begin,and,or,not,downto,ALL,signal,type,case,if,elsif,for,when,array,
+    others,loop,process,to
+  },
+  morekeywords=[2]{			%Defineren van keyword die groen worden
+    STD_LOGIC_VECTOR,STD_LOGIC,STD_LOGIC_1164,
+    NUMERIC_STD,STD_LOGIC_ARITH,STD_LOGIC_UNSIGNED,std_logic_vector,unsigned,
+    std_logic
+  },
+  morecomment=[l]--
+}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \footnotesize \ttfamily,
+  keywordstyle = [1]\color{keyword}\bfseries, %Keywords kleuren
+  keywordstyle = [2]\color{STD}\bfseries,	%Keywords kleuren
+  commentstyle = \color{comment}, % Commits kleuren
+  numbers=left,					  % Regel nummering
+  breaklines=true,                % sets automatic line breaking
+  tabsize=4                       % sets default tabsize to 4 spaces
+}
+
+
+\title{\textbf{Een klein beetje alles standaardiseren}}	
+
+\author{
+Produced by the members of projectgroup A1\\
+\begin{tabular}{c | l}
+Rens Hamburger & 4292936 \\
+\end{tabular}
+}
+
+\date{\today\\ Version 1.0} 
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+
+
+\newpage
+\section{Introduction}
+In dit document vinden jullie de gebruikte usepackages om een aantal funties te gebruiken en wat standaarden in de opmaak aan te brengen. Gebruik de bovenste 65 regels van dit document voor de vereiste usepackages en vereiste aangepaste latex commands. Of gebruik het bijgeleverd leeg document.
+\section{VHDL code}
+Voor het invoegen van vhdl het ik een speciale stijl gedefineerd welke de syntax highlighting volgt van GEDIT voor VHDL. Het invoegen van VHDL wordt gebruik gemaakt van het pakket van lstings. De mee te geven functies zijn [style = VHDL]\{bestandnaam\} hieronder zie je een voorbeeld resultaat.
+\subsection{Voorbeeld VHDL code}
+\scriptsize 
+ \lstinputlisting [style= VHDL]{sram_ent.vhd}
+ \normalsize
+\label{code:sram_ent}
+\section{Labels}
+Om een overzicht te houden in de gebruikt te labels is er een kort lijstje opgesteld zodat je snel kan zien waar je naar verwijst binnen de teskst. \\ \\
+\begin{table}[ht!]
+\begin{tabular}{|l|l|}
+\hline 
+Te labelen & label \\ \hline
+Figuur & fig:"NAAM" \\ \hline
+Vergelijking & eq:"NAAM" \\ \hline
+Tabel & tab:"NAAM" \\ \hline
+Source code & lst:"NAAM" \\ \hline
+Bijlage & app: \\ \hline
+\end{tabular}
+\caption{Tabel met informatie over labels}
+\label{tab:labels}
+\end{table}
+\section{Refereren}
+Voor het refereren ergens naar is er afgesproken om \textbackslash cref te gebruiken in plaats van \textbackslash ref dit is er een naar \cref{tab:labels}. \textbackslash cref hoeft er niet gespecifeerd te worden waarheen er wordt verwezen
+\section{Opsommingen}
+De standaard instellen voor enumare en itemize is na ieder puntje een enter te zetten dit kan voorkomen woorden door gebruik te maken van [nolistsep]. \\
+Te gebruiken formaat \textbackslash begin\{itemize\}[nolistsep]
+\begin{itemize}
+\item zonder nolistsep
+\item zonder nolistsep
+\item zonder nolistsep
+\end{itemize}
+Nu een itemize met nolistsep
+\begin{itemize}[nolistsep]
+\item met nolistsep
+\item met nolistsep
+\item met nolistsep \\
+\end{itemize}
+
+\noindent Dit maakt het een stuk compacter om ook extra tabs te kunnen verwerken in de opsomming kan je gebruik maken van.
+\end{document}
