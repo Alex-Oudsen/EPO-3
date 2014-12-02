@@ -1,0 +1,69 @@
+\documentclass[11pt,twoside,a4paper]{article}
+\usepackage[dutch]{babel}
+\usepackage{a4wide,times}
+
+%Roy Blokker
+%Martin Geertjes
+%Rens Hamburger
+%Kevin Hill
+%Alex Oudsen
+%Joran Out
+%Elke Salzmann
+%Jeroen van Uffelen
+
+\title{Notulen A1}
+\author{
+Voorzitter: Jeroen van Uffelen\\
+Notulist: Elke Salzmann\\
+Aanwezigen: Roy Blokker, Martin Geertjes, Rens Hamburger, Kevin Hill, Alex Oudsen\\
+Afwezigen: Joran Out\\
+}
+\date{01-12-2014}
+\begin{document}
+\maketitle
+
+\section{Opening}
+9:00
+\section{Vaststellen agenda}
+-
+\section{Naam}
+Effectieve Winterslaap Interrupter, oftewel EWI
+
+\section{Presentatie}
+De presentatie is af, door de afwezigheid van Joran zullen Kevin en Elke die presenteren. Na de vergadering zullen ze nog even de slides doorkijken.
+
+\section{Plan van Aanpak}
+Deadline is verschoven naar vrijdag 5 december.\\
+Donderdag moet het verslag voor de groep af zijn.
+Elke zal eraan werken.
+
+\section{Afspraken VHDL, projectverslag}
+Rens heeft de afspraken geformuleerd en zal ze op Git zetten. Iedereen moet hiernaar kijken.
+
+\section{WVTTK}
+\emph{klokfrequentie}: Voor de LCD is een frequentie van 6.1 MHz het handigst. Maar voor de DCF controller is de frequentie van 32 kHz beter, omdat de klok gedeeld moet worden tot een frequentie van 1 Hz.
+Conclusie: Er worden twee klokfrequenties gebruikt, die gesynchroniseerd worden door middel van een flipflop.\\
+\emph{Main controller}: geen alarm state, (nog) geen signaal voor aan/uit van het licht of het geluid.\\
+Later zal er besloten worden of er een RGB gebruikt gaat worden. Allereerst wordt er met \'e\'en LEDje gewerkt, er is dus maar \'e\'en PWM signaal nodig.
+
+\section{Rondvraag}
+-
+
+\section{Sluiting}
+9:35
+
+\section{Eindvergadering}
+\begin{itemize}
+\item Iedereen gaat de entity van zijn eigen blok maken. De blokken die er nu zijn moeten in kleinere blokken verdeeld worden. Eventueel \emph{optionele opties} bedenken voor het eigen blok. Donderdag zullen de blokken en in-/uitgangen aan elkaar geknoopt worden.\\
+\item De FSMs moeten ook af zijn voor donderdag en tijdens de projectochtend aan elkaar gepresenteerd worden!!!
+\item Zorg dat de main controller niet te groot wordt.\\
+\item Het is belangrijk de inputs te bufferen.\\
+\item Wat is de beste manier om de tijd op te slaan? Als het DCF register naar de main controller gaat, hoeft er niet overbodig veel tijd opgeslagen te worden en hoe vroeg mogelijk de signalen vergeleken worden, hoe minder ruimte de draden nodig hebben.
+\item In de main controller zouden ook twee registers gemaakt kunnen worden; \'e\'en voor de alarmtijd en \'e\'en voor de huidige tijd.
+\item De tijd waarop de lamp aan moet beginnen te gaan zou gebaseerd kunnen worden op het aftrekken van de twee tijden in de twee registers en op het resultaat het PWM signaal baseren.
+\end{itemize}
+
+\vfill
+KQ van vandaag: Net als in GTA is het niet handig om van een brug af te springen.
+
+\end{document}
