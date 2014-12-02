@@ -1,0 +1,173 @@
+\documentclass[a4paper, oneside, 10pt]{article}
+
+\usepackage{verbatim}
+\usepackage[hidelinks]{hyperref}
+\usepackage[dutch]{babel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+%\usepackage[table]{xcolor}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+%\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{longtable}			% Table is te groot
+\usepackage{listings}			% Used to include VHDL-code and fragments
+\usepackage[dutch]{babel}		% Dutch hyphenation patterns and dutch names 
+\usepackage{soul}				% dingen doorstrepen
+\usepackage[normalem]{ulem}				%dingen dooruniten
+\usepackage{pslatex}			% Times, helvetica and courier
+\usepackage[T1]{fontenc}		% Nicer font-encoding
+\usepackage{hyperref}			% Gives clickable references in pdf-file
+\usepackage{graphicx}			% Used to include .pdf, .jpg and .png-files
+\usepackage{tabularx}			% Used for evenly spread tables
+\usepackage{eso-pic}			% Absolute positioning, used for lines-to-track appendix and front- and backpage
+\usepackage{datetime}			% Used for some data-references
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=up]{caption}	% Nicer captions
+\usepackage{nonfloat}			% Captions for non-floating figures and tables
+\usepackage{nextpage}			% Advanced nextpage commands
+\usepackage{keystroke}			% "real" keys
+\usepackage[nottoc]{tocbibind}		% Include Bibliography in ToC
+\usepackage{multirow}			% Span text over multiple rows
+\usepackage{verbatim}			% For comment-environment
+\usepackage[left=3.5cm, right=2.5cm]{geometry}
+\usepackage{enumitem} % Mogelijkheid tot geen enters in itemize en enurate
+
+\crefname{equation}{vergelijking}{vergelijkingen}
+\crefname{table}{tabel}{tabellen}
+\crefname{figure}{figuur}{figuren}
+
+
+\definecolor{comment}{RGB}{0, 15 , 117}		%Kleur blauw defineren
+\definecolor{keyword}{RGB}{165, 42, 42}		%Kleur rood defineren
+\definecolor{STD}{RGB}{46, 139, 87}			%Kleur groen defineren
+\lstdefinelanguage{VHDL}{
+  morekeywords=[1]{ 		%Defineren van keywords die blauw worden
+    library,use,all,entity,is,port,in,out,end,architecture,of,
+    begin,and,or,not,downto,ALL,signal,type,case,if,elsif,for,when,array,
+    others,loop,process,to
+  },
+  morekeywords=[2]{			%Defineren van keyword die groen worden
+    STD_LOGIC_VECTOR,STD_LOGIC,STD_LOGIC_1164,
+    NUMERIC_STD,STD_LOGIC_ARITH,STD_LOGIC_UNSIGNED,std_logic_vector,unsigned,
+    std_logic
+  },
+  morecomment=[l]--
+}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \footnotesize \ttfamily,
+  keywordstyle = [1]\color{keyword}\bfseries, %Keywords kleuren
+  keywordstyle = [2]\color{STD}\bfseries,	%Keywords kleuren
+  commentstyle = \color{comment}, % Commits kleuren
+  numbers=left,					  % Regel nummering
+  breaklines=true,                % sets automatic line breaking
+  tabsize=4                       % sets default tabsize to 4 spaces
+}
+
+
+\title{\textbf{States controller met alle uitgangen gedefineerd}}	
+
+\author{
+Gemaakt door leden van projectgroep A1\\
+\begin{tabular}{c | l}
+Rens Hamburger & 4292936 \\
+\end{tabular}
+}
+
+\date{\today\\ Version 1.0} 
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\section{Entity}
+\scriptsize 
+ \lstinputlisting [style= VHDL]{menu-ent.vhd}
+ \normalsize
+
+\section{States}
+\begin{longtable}{|l| p{10cm} |}
+\hline
+Rust, Reset &
+Write\_ enable ='0' \newline
+Wektijd=wekdata[10 down to 0] \newline
+Wekker='0' \newline
+select='1' \newline
+data\_ out='00' \\ \hline
+Wekker toggel &
+Write\_ enable ='1' \newline
+Wektijd=wekdata[10 down to 0] \newline
+Wekker=niet wekdata[11] \newline
+select='1' \newline
+data\_ out=wekdata[13 down to 12] \\ \hline
+Wekkertijd &
+Write\_ enable ='0' \newline
+Wektijd=wekdata[10 down to 0] \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out='00' \\ \hline
+Led &
+Write\_ enable ='0' \newline
+Wektijd=wekdata[10 down to 0] een mooi getal code \newline
+Wekker='0' \newline
+select='1' \newline
+data\_ out='00' \\ \hline
+Led toggel &
+Write\_ enable ='1' \newline
+Wektijd=wekdata[10 down to 0] een mooi getal code \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out= niet wekdata[12] + wekdata[13] \\ \hline
+Geluid & 
+Write\_ enable ='0' \newline
+Wektijd=wekdata[10 down to 0] een mooi getal code \newline
+Wekker='0' \newline
+select='1' \newline
+data\_ out='00' \\ \hline
+Geluid toggel &
+Write\_ enable ='1' \newline
+Wektijd=wekdata[10 down to 0] een mooi getal code \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out= wekdata[12] + niet wekdata[13] \\ \hline
+Uren instellen &
+Write\_ enable ='0' \newline
+Wektijd=wekdata[10 down to 0] \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out='00' \\ \hline
+Uren plus &
+Write\_ enable ='1' \newline
+Wektijd=wekdata[10 down to 0]+1 \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out='00' \\ \hline
+Uren min &
+Write\_ enable ='1' \newline
+Wektijd=wekdata[10 down to 0]-1 \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out='00' \\ \hline
+Minuten instellen &
+Write\_ enable ='0' \newline
+Wektijd=wekdata[10 down to 0] \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out='00' \\ \hline
+Minuten plus &
+Write\_ enable ='1' \newline
+Wektijd=wekdata[10 down to 0]+1 \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out='00' \\ \hline
+Minuten min &
+Write\_ enable ='1' \newline
+Wektijd=wekdata[10 down to 0]-1 \newline
+Wekker='0' \newline
+select='0' \newline
+data\_ out='00' \\ \hline
+\end{longtable}
+
+
+\end{document}

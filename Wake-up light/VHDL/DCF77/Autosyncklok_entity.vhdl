@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 
 entity autosyncklok is
     port (clk:	    in  std_logic;
+	  reset:    in  std_logic;
 	  sync_now: in  std_logic;
 	  time_ref: in  std_logic_vector(16 downto 0);
 	  minutes:  out std_logic_vector(5 downto 0);
