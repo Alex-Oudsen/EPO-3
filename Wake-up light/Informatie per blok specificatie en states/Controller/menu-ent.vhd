@@ -7,7 +7,7 @@ entity menu is
 		knoppen		:in    std_logic_vector(3 downto 0);
 		tijd		:in    std_logic_vector(10 downto 0);
 		wekdata		:in	   std_logic_vector(13 downto 0);
-		enable		:out   std_logic_vector;
+		enable		:out   std_logic;
 		wekker		:out   std_logic_vector(13 downto 0);
 end menu;
 
