@@ -88,101 +88,71 @@ Rens Hamburger & 4292936 \\
 \section{Ingangen en uitgangen}
 \begin{tabular}{|l|p{10cm}|}
 \hline
-geluid{\_}led & bevat informatie of geluid en de licht status \newline
-geluid{\_}led[1] = geluid \newline
-geluid{\_}led[0] = led  \\ \hline
-wektijd & Wektijd bestaat uit wekminuten en wekuren.
-Deze gaat door naar register en afhankelijk van state ook naar de lcd scherm \\ \hline
-wektijdmin,wektijduren & Deze twee bevatten de waarde van de nieuwe wekkertijd \\ \hline
-wekker & Dit is het togle bit of de wekker aan of uit is \\ \hline
-select{\_}bit & Deze bepaalt wat op het lcd scherm wordt weergeven \newline
-1 = Huidige tijd \newline
-0 = De wekker tijd \\ \hline
-data{\_}out & Deze bevat informatie over het geluid en leds \newline
-data{\_}out[1] = geluid; 1 = aan; 0 = uit \newline
-data{\_}out[0] = led; 1= aan; 0 = uit \\ \hline
+tijd & De huidige tijd \newline
+tijd[5 down to 0] = minuten \newline
+tijd[10 down to 6] = uren  \\ \hline
+wekdata & De huidige info over de wekker instellingen uit geheugen \newline
+wekdata[5 down to 0] daarin staan de minuten \newline
+wekdata[10 down to 6] daarin staan de uren \newline
+wekdata[11] geluid bit \newline
+wekdata[12] led bit \newline
+wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
+wekker & Bevat nieuwe informatie over de wekker \newline
+wekdata[5 down to 0] daarin staan de minuten \newline
+wekdata[10 down to 6] daarin staan de uren \newline
+wekdata[11] geluid bit \newline
+wekdata[12] led bit \newline
+wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
 \end{tabular}
 \section{States}
 \begin{longtable}{|l| p{10cm} |}
 \hline
 Rust, Reset &
-Write{\_}enable ='0' \newline
-Wektijd=wekdata[10 down to 0] \newline
-Wekker='0' \newline
-select='1' \newline
-data{\_}out='00' \\ \hline
+enable ='0' \newline
+wekker[10 down to 0]=tijd \newline
+wekker[12 down to 11]='00' \newline
+wekker[13]=wekdata[13] \\ \hline
 Wekker toggel &
-Write{\_}enable ='1' \newline
-Wektijd=wekdata[10 down to 0] \newline
-Wekker=niet wekdata[11] \newline
-select='1' \newline
-data{\_}out=wekdata[13 down to 12] \\ \hline
+enable ='1' \newline
+wekker[12 down to 0]=wekdata[12 down to 0] \newline
+wekker[13]=niet wekdata[13] \\ \hline
 Wekkertijd &
-Write{\_}enable ='0' \newline
-Wektijd=wekdata[10 down to 0] \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out='00' \\ \hline
+enable ='0' \newline
+wekker=wekdata \\ \hline
 Led &
-Write{\_}enable ='0' \newline
-Wektijd=wekdata[10 down to 0] een mooi getal code \newline
-Wekker='0' \newline
-select='1' \newline
-data{\_}out='00' \\ \hline
+enable ='0' \newline
+wekker=wekdata of een mooi getal code \\ \hline
 Led toggel &
-Write{\_}enable ='1' \newline
-Wektijd=wekdata[10 down to 0] een mooi getal code \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out= niet wekdata[12] + wekdata[13] \\ \hline
+enable ='1' \newline
+wekker[11 down to 0]=wekdata[11 down to 0] een mooi getal code \newline
+wekker[12] = niet wekdata[12] \newline
+wekker[13] = wekdata[13] \\ \hline
 Geluid & 
-Write{\_}enable ='0' \newline
-Wektijd=wekdata[10 down to 0] een mooi getal code \newline
-Wekker='0' \newline
-select='1' \newline
-data{\_}out='00' \\ \hline
+enable ='0' \newline
+wekker=wekdata of een mooi getal code \\ \hline
 Geluid toggel &
-Write{\_}enable ='1' \newline
-Wektijd=wekdata[10 down to 0] een mooi getal code \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out= wekdata[12] + niet wekdata[13] \\ \hline
+enable ='1' \newline
+wekker[10 down to 0]=wekdata[10 down to 0] een mooi getal code \newline
+wekker[11] = niet wekdata[11] \newline
+wekker[13 downto 12] = wekdata[13 downto 12] \\ \hline
 Uren instellen &
-Write{\_}enable ='0' \newline
-Wektijd=wekdata[10 down to 0] \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out='00' \\ \hline
+enable ='0' \newline
+wekker=wekdata \\ \hline
 Uren plus &
-Write{\_}enable ='1' \newline
-Wektijd=wekdata[10 down to 0]+1 \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out='00' \\ \hline
+enable ='1' \newline
+wekker=wekker+1 \\ \hline
 Uren min &
-Write{\_}enable ='1' \newline
-Wektijd=wekdata[10 down to 0]-1 \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out='00' \\ \hline
+enable ='1' \newline
+wekker=wekdata-1 \\ \hline
 Minuten instellen &
-Write{\_}enable ='0' \newline
-Wektijd=wekdata[10 down to 0] \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out='00' \\ \hline
+enable ='0' \newline
+wekker=wekdata \\ \hline
 Minuten plus &
-Write{\_}enable ='1' \newline
-Wektijd=wekdata[10 down to 0]+1 \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out='00' \\ \hline
+enable ='1' \newline
+Wektijd=wekdata+1 \\ \hline
 Minuten min &
-Write{\_}enable ='1' \newline
-Wektijd=wekdata[10 down to 0]-1 \newline
-Wekker='0' \newline
-select='0' \newline
-data{\_}out='00' \\ \hline
+enable ='1' \newline
+wekker=wekdata-1 \\ \hline
 \end{longtable}
 
 
