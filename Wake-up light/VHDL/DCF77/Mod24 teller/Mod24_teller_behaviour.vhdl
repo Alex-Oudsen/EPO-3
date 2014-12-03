@@ -9,7 +9,7 @@ use ieee.std_logic_unsigned.all;
 
 architecture behaviour of mod24_teller is
 
-type m24_state is (clear, counting, switch, synchronising);
+type m24_state is (clear, counting, switch);
 
 signal state, new_state: m24_state;
 signal h_count: std_logic_vector(4 downto 0);
