@@ -26,10 +26,10 @@ begin
 			t_count <= "000000";
 			state <= clear;
 		elsif(clk'event and clk = '1') then		-- Opgaande klokflank v.d. systeemklok
-			state <= new_state;
 			if(sync_now = '1') then
 				t_count <= ref;
 			elsif(clk_in'event and clk_in = '1') then
+				state <= new_state;
 				if(state = counting) then
 					t_count <= t_count + 1;	-- Tellen gebeurt op de sturende klok
 				else
@@ -47,18 +47,14 @@ begin
 				new_state <= counting;
 			when counting =>			-- Er wordt getelt
 				t_temp <= t_temp;
-				if(t_count < 59) then
+				if(t_count < 58) then
 					new_state <= counting;
 				else
 					new_state <= switch;
 				end if;
 			when switch =>				-- De uitgang verandert
 				t_temp <= not t_temp;
-				if(t_count = 0) then
-					new_state <= counting;
-				else
-					new_state <= switch;
-				end if;
+				new_state <= counting;
 			when others =>				-- Dummy state, zou nooit mogen voorkomen
 				t_temp <= '1';
 				new_state <= clear;
