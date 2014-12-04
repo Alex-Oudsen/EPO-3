@@ -4,7 +4,8 @@ use IEEE.std_logic_1164.ALL;
 architecture behaviour of menu is
 type fsm_states is (rust, wekkertijd, led, led_toggle, geluid, geluid_toggle, wekker_toggle, uren_set, uren_plus, uren_min, minuten_set, minuten_plus, minuten_min);
 signal state, new_state : fsm_states;
-signal toggleur : std_logic;
+signal uren_tmp : std_logic_vector (4 downto 0);
+signal minuten_tmp : std_logic_vector (5 downto 0);
 begin
 	assign : process(clk, reset) --Daadwerkelijk alles toekennen
 	begin
@@ -23,31 +24,23 @@ begin
 			when rust =>
 				enable <= '0';
 				wekker <= wekdata;
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 				menu <= "000";
 
 			when wekker_toggle =>
 				enable <= '1';
 				wekker(12 downto 0) <= wekdata(12 downto 0);
 				wekker(13) <= not wekdata(13);
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 				menu <= "000";
 
 			when wekkertijd =>
 				enable <= '0';
 				wekker <= wekdata;
 				menu <= "000";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 
 			when led =>
 				enable <= '0';
 				wekker <= wekdata;
 				menu <= "011";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 
 			when led_toggle =>
 				enable <= '1';
@@ -55,15 +48,11 @@ begin
 				wekker(12) <= not wekdata(12);
 				wekker(13) <= wekdata(13);
 				menu <= "011";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 
 			when geluid =>
 				enable <= '0';
 				wekker <= wekdata;
 				menu <= "100";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 
 			when geluid_toggle =>
 				enable <= '1';
@@ -71,50 +60,44 @@ begin
 				wekker(11) <= not wekdata(11);
 				wekker(13 downto 12) <= wekdata(13 downto 12);
 				menu <= "100";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 
 			when uren_set =>
 				enable <= '0';
 				wekker <= wekdata;
 				menu <= "001";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 
 			when uren_plus =>
 				enable <= '1';
-				--		PLUS 1
 				menu <= "001";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
+				if (to_integer(wekdata(10 downto 6))) < 23 then
+					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(wekdata(10 downto 6))+1));
+				else
+					wekker(10 downto 6) <= "00000";
+				end if;
 
 			when uren_min =>
 				enable <= '1';
-				--		MIN 1 
 				menu <= "001";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
+				if (to_integer(wekdata(10 downto 6))) > 0 then
+					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(wekdata(10 downto 6))-1));
+				else
+					wekker(10 downto 6) <= "10111";
+				end if;
 
 			when minuten_set =>
 				enable <= '0';
 				wekker <= wekdata;
 				menu <= "010";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 
 			when minuten_plus =>
 				enable <= '1';
 				--		PLUS 1
 				menu <= "010";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 
 			when minuten_min =>
 				enable <= '1';
 				--		MIN 1 
 				menu <= "010";
-				toggleur <= not toggleur;
-				toggle <= toggleur;
 		end case;
 	end process actie_uitvoeren;
 	
