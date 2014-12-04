@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.ALL;
+use IEEE.Numeric_Std.all;
 
 entity menu is
    port(clk				:in    std_logic;
