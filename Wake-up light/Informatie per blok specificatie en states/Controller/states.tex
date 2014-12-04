@@ -100,7 +100,7 @@ wekdata[10 down to 6] daarin staan de uren \newline
 wekdata[11] geluid bit \newline
 wekdata[12] led bit \newline
 wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
-toggle & Deze bit veranderd bij veranderingen in de uitgang van wekkerdata \\ \hline
+toggle & Deze bit verandert bij veranderingen in de uitgang van wekkerdata \\ \hline
 menu & Deze geeft door aan de in welke state we zitten aan de lcd module \newline
 000 : Het normale scherm weergeven met alarm en wekkertijd weergave state: Rust,Wekkertijd \newline
 001 : Uren aanpassen \newline
@@ -116,59 +116,71 @@ enable ='0' \newline
 wekker=wekdata \newline
 toggle=niet toggle \newline
 menu='000' \\ \hline
-Wekker toggel &
+Wekker toggle &
 enable ='1' \newline
 wekker[12 down to 0]=wekdata[12 down to 0] \newline
 wekker[13]=niet wekdata[13] \newline
-toggel = niet toggel \newline
+toggle = niet toggle \newline
 menu = menu \\ \hline
 Wekkertijd &
 enable ='0' \newline
 wekker=wekdata \newline
 menu = 000 \newline
-toggel = niet toggel \\ \hline
+toggle = niet toggle \\ \hline
 Led &
 enable ='0' \newline
 wekker=wekdata \newline
 menu = 011 \newline
-toggel = niet toggel \\ \hline
-Led toggel &
+toggle = niet toggle \\ \hline
+Led toggle &
 enable ='1' \newline
-wekker[11 down to 0]=wekdata[11 down to 0] een mooi getal code \newline
+wekker[11 down to 0]=wekdata[11 down to 0]\newline
 wekker[12] = niet wekdata[12] \newline
 wekker[13] = wekdata[13] \newline
 menu = menu \newline
-toggel = niet toggel \\ \hline
+toggle = niet toggle \\ \hline
 Geluid & 
 enable ='0' \newline
 wekker=wekdata of een mooi getal code \newline
 menu = 100 \newline
-toggel = niet toggel \\ \hline
-Geluid toggel &
+toggle = niet toggle \\ \hline
+Geluid toggle &
 enable ='1' \newline
 wekker[10 down to 0]=wekdata[10 down to 0] \newline
 wekker[11] = niet wekdata[11] \newline
 wekker[13 downto 12] = wekdata[13 downto 12] \newline
 menu = menu \newline
-toggel=niet toggel \\ \hline
+toggle=niet toggle \\ \hline
 Uren instellen &
 enable ='0' \newline
-wekker=wekdata \\ \hline
+wekker=wekdata \newline
+menu = 001 \newline
+toggle =niet toggle \\ \hline
 Uren plus &
 enable ='1' \newline
-wekker=wekker+1 \\ \hline
+wekker=wekker+1 \newline
+menu =menu \newline
+toggle = niet toggle \\ \hline
 Uren min &
 enable ='1' \newline
-wekker=wekdata-1 \\ \hline
+wekker=wekdata-1 \newline
+menu \newline
+toggle = niet toggle \\ \hline
 Minuten instellen &
 enable ='0' \newline
-wekker=wekdata \\ \hline
+wekker=wekdata \newline
+menu = 010 \newline
+toggle =niet toggle \\ \hline
 Minuten plus &
 enable ='1' \newline
-Wektijd=wekdata+1 \\ \hline
+Wektijd=wekdata+1 \newline
+menu = menu \newline
+toggle = niet toggle \\ \hline
 Minuten min &
 enable ='1' \newline
-wekker=wekdata-1 \\ \hline
+wekker=wekdata-1 \newline
+menu = menu \newline
+toggle = niet toggle \\ \hline
 \end{longtable}
 
 
