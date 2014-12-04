@@ -91,12 +91,18 @@ begin
 
 			when minuten_plus =>
 				enable <= '1';
-				--		PLUS 1
+				if (to_integer(wekdata(0 downto 5))) < 59 then
+					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(wekdata(5 downto 0))+1));
+				else
+					wekker(5 downto 0) <= "000000";
 				menu <= "010";
 
 			when minuten_min =>
 				enable <= '1';
-				--		MIN 1 
+				if (to_integer(wekdata(0 downto 5))) > 0 then
+					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(wekdata(5 downto 0))-1));
+				else
+					wekker(5 downto 0) <= "111011";
 				menu <= "010";
 		end case;
 	end process actie_uitvoeren;
