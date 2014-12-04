@@ -25,6 +25,9 @@ begin
 		if(reset = '1') then				-- Systeemreset
 			t_count <= "000000";
 			state <= clear;
+		elsif(reset = '0' and state = clear) then
+			t_count<= "000000";
+			state <= counting;
 		elsif(clk_in'event and clk_in = '1') then
 			state <= new_state;
 			if(state = counting) then
@@ -35,16 +38,18 @@ begin
 		elsif(clk'event and clk = '1') then		-- Opgaande klokflank v.d. systeemklok
 			if(sync_now = '1') then
 				t_count <= ref;
+				if(ref = 59) then
+					state <= switch;
+				else
+					state <= counting;
+				end if;
 			else
 				t_count <= t_count;
 			end if;
-		elsif(reset = '0' and state = clear) then
-			t_count<= "000000";
-			state <= counting;
 		end if;
 	end process;
 
-	process(reset, t_count, state) is
+	process(t_count, state) is
 	begin
 		case state is
 			when clear =>				-- Er wordt gereset

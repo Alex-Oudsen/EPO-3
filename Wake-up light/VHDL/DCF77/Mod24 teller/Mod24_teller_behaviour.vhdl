@@ -22,16 +22,26 @@ begin
 		if(reset = '1') then				-- Systeemreset
 			h_count <= "00000";
 			state <= clear;
-		elsif(clk'event and clk = '1') then		-- Opgaande klokflank v.d. systeemklok
+		elsif(reset = '0' and state = clear) then
+			h_count<= "00000";
+			state <= counting;
+		elsif(clk_in'event and clk_in = '1') then
 			state <= new_state;
+			if(state = counting) then
+				h_count <= h_count + 1;		-- Tellen gebeurt op de sturende klok
+			else
+				h_count <= "00000";
+			end if;
+		elsif(clk'event and clk = '1') then		-- Opgaande klokflank v.d. systeemklok
 			if(sync_now = '1') then
 				h_count <= ref;
-			elsif(clk_in'event and clk_in = '1') then
-				if(state = counting) then
-					h_count <= h_count + 1;	-- Tellen gebeurt op de sturende klok
+				if(ref = 23) then
+					state <= switch;
 				else
-					h_count <= "00000";
+					state <= counting;
 				end if;
+			else
+				h_count <= h_count;
 			end if;
 		end if;
 	end process;
@@ -42,17 +52,13 @@ begin
 			when clear =>				-- Er wordt gereset
 				new_state <= counting;
 			when counting =>			-- Er wordt getelt
-				if(h_count < 23) then
+				if(h_count < 22) then
 					new_state <= counting;
 				else
 					new_state <= switch;
 				end if;
 			when switch =>				-- Er wordt teruggeschakeld naar 0
-				if(h_count = 0) then
-					new_state <= counting;
-				else
-					new_state <= switch;
-				end if;
+				new_state <= counting;
 			when others =>				-- Dummy state, zou nooit mogen voorkomen
 				new_state <= clear;
 		end case;

@@ -4,6 +4,9 @@
 -- niet beschikbaar is - wanneer het dcf signaal wel beschikbaar
 -- is, wordt deze klok gesynchroniseerd met dit signaal
 
+-- Voor de klok wordt gebruik gemaakt van de volgende subblokken:
+-- mod24_teller en mod60_teller (x2)
+
 library ieee;
 use ieee.std_logic_1164.all;
 
