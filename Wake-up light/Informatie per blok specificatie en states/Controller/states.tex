@@ -87,6 +87,10 @@ Rens Hamburger & 4292936 \\
  \normalsize
 \section{Ingangen en uitgangen}
 \begin{tabular}{|l|p{10cm}|}
+Knoppen & knoppen[0] =menu \newline
+knoppen[1] = set \newline
+knoppen[2] = up\newline
+knoppen[3] = down \\ \hline
 \hline
 wekdata & De huidige info over de wekker instellingen uit geheugen \newline
 wekdata[5 down to 0] daarin staan de minuten \newline
@@ -151,7 +155,7 @@ wekker[11] = niet wekdata[11] \newline
 wekker[13 downto 12] = wekdata[13 downto 12] \newline
 menu = menu \newline
 toggle=niet toggle \\ \hline
-Uren instellen &
+Uren set &
 enable ='0' \newline
 wekker=wekdata \newline
 menu = 001 \newline
@@ -166,7 +170,7 @@ enable ='1' \newline
 wekker=wekdata-1 \newline
 menu \newline
 toggle = niet toggle \\ \hline
-Minuten instellen &
+Minuten set &
 enable ='0' \newline
 wekker=wekdata \newline
 menu = 010 \newline
