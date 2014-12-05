@@ -24,16 +24,19 @@ begin
 
 	enable <='0' after 0 ns, 
 			'1' after 155 ns,
-			'0' after 365 ns;
+			'0' after 365 ns,
 			'1' after 665 ns;
 
 	wek_in <= 	"00000000000000" after 0 ns,
 				"00000000000010" after 65 ns,
 				"00000000000100" after 385 ns,
-				"00000000001000" after 705 ns,
+				"00000000001000" after 705 ns;
 
-	sram_pm: sram port map(clk,read_write_line,reset,write_data,address,data_out);
+	geheugen_pm: geheugen port map(clk,reset,enable,wek_in,wek_out);
 end behaviour;
+
+
+
 
 
 
