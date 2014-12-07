@@ -48,7 +48,26 @@ begin
 			"0000" after 748 ns,	--minuten_min -> minuten_set
 			"0001" after 788 ns,	--minuten_set -> rust
 			"0001" after 828 ns,	--rust -> wekkertijd
-			
+			"0010" after 868 ns,	--wekkertijd -> uren_set
+			"0010" after 908 ns,	--uren_set -> minuten_set
+			"0010" after 948 ns,	--minuten_set -> wekkertijd
+			"1000" after 988 ns,	--wekkertijd -> led
+			"0001" after 1028 ns,	--led -> rust
+			"0001" after 1068 ns,	--rust -> wekkertijd
+			"0100" after 1108 ns,	--wekkertijd -> geluid
+			"0100" after 1148 ns,	--geluid -> led
+			"0100" after 1188 ns,	--led -> wekkertijd
+			"1000" after 1228 ns,	--wekkertijd -> led
+			"1000" after 1268 ns,	--led -> geluid
+			"1000" after 1308 ns,	--geluid -> wekkertijd
+			"1000" after 1348 ns,	--wekkertijd -> led
+			"0010" after 1388 ns,	--led -> led_toggle
+			"0000" after 1428 ns,	--led_toggle -> led
+			"1000" after 1468 ns,	--led -> geluid
+			"0010" after 1508 ns,	--geluid -> geluid_toggle
+			"0000" after 1548 ns,	--geluid_toggle -> geluid
+			"0001" after 1588 ns,	--geluid -> rust
+			"0000" after 1628 ns; 	--done, done, done;			
 
 	wekdata <= wekker after 40 ns;
 
