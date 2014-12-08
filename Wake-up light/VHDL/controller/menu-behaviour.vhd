@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.ALL;
-use IEEE.Numeric_Std.all;
+use IEEE.numeric_Std.all;
 
 architecture behaviour of menu is
 type fsm_states is (rust, wekkertijd, led, led_toggle, geluid, geluid_toggle, wekker_toggle, uren_set, uren_plus, uren_min, minuten_set, minuten_plus, minuten_min);
@@ -25,86 +25,94 @@ begin
 			when rust =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "000";
+				menu_signal <= "000";
 
 			when wekker_toggle =>
 				enable <= '1';
 				wekker(12 downto 0) <= wekdata(12 downto 0);
 				wekker(13) <= not wekdata(13);
-				menu <= "000";
+				menu_signal <= "000";
 
 			when wekkertijd =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "000";
+				menu_signal <= "000";
 
 			when led =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "011";
+				menu_signal <= "011";
 
 			when led_toggle =>
 				enable <= '1';
 				wekker(11 downto 0) <= wekdata(11 downto 0);
 				wekker(12) <= not wekdata(12);
 				wekker(13) <= wekdata(13);
-				menu <= "011";
+				menu_signal <= "011";
 
 			when geluid =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "100";
+				menu_signal <= "100";
 
 			when geluid_toggle =>
 				enable <= '1';
 				wekker(10 downto 0) <= wekdata(10 downto 0);
 				wekker(11) <= not wekdata(11);
 				wekker(13 downto 12) <= wekdata(13 downto 12);
-				menu <= "100";
+				menu_signal <= "100";
 
 			when uren_set =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "001";
+				menu_signal <= "001";
 
 			when uren_plus =>
 				enable <= '1';
-				menu <= "001";
-				if (to_integer(wekdata(10 downto 6))) < 23 then
-					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(wekdata(10 downto 6))+1));
+				menu_signal <= "001";
+				if (to_integer(unsigned(wekdata(10 downto 6)))) < 23 then
+					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) + 1, 5));
 				else
 					wekker(10 downto 6) <= "00000";
 				end if;
+				wekker(13 downto 11) <= wekdata(13 downto 11);
+				wekker(5 downto 0) <= wekdata(5 downto 0);
 
 			when uren_min =>
 				enable <= '1';
-				menu <= "001";
-				if (to_integer(wekdata(10 downto 6))) > 0 then
-					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(wekdata(10 downto 6))-1));
+				menu_signal <= "001";
+				if (to_integer(unsigned(wekdata(10 downto 6)))) > 0 then
+					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) - 1, 5));
 				else
 					wekker(10 downto 6) <= "10111";
 				end if;
+				wekker(13 downto 11) <= wekdata(13 downto 11);
+				wekker(5 downto 0) <= wekdata(5 downto 0);
 
 			when minuten_set =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "010";
+				menu_signal <= "010";
 
 			when minuten_plus =>
 				enable <= '1';
-				if (to_integer(wekdata(0 downto 5))) < 59 then
-					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(wekdata(5 downto 0))+1));
+				if (to_integer(unsigned(wekdata(5 downto 0)))) < 59 then
+					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(5 downto 0))) + 1, 6));
 				else
 					wekker(5 downto 0) <= "000000";
-				menu <= "010";
+				end if;
+				menu_signal <= "010";
+				wekker(13 downto 6) <= wekdata(13 downto 6);
 
 			when minuten_min =>
 				enable <= '1';
-				if (to_integer(wekdata(0 downto 5))) > 0 then
-					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(wekdata(5 downto 0))-1));
+				if (to_integer(unsigned(wekdata(5 downto 0)))) > 0 then
+					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(5 downto 0))) - 1, 6));
 				else
 					wekker(5 downto 0) <= "111011";
-				menu <= "010";
+				end if;
+				menu_signal <= "010";
+				wekker(13 downto 6) <= wekdata(13 downto 6);
 		end case;
 	end process actie_uitvoeren;
 	
@@ -208,6 +216,12 @@ begin
 		end case;
 	end process next_state;
 end behaviour;
+
+
+
+
+
+
 
 
 

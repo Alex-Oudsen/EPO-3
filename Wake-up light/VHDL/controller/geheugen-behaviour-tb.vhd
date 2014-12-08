@@ -29,8 +29,12 @@ begin
 
 	wek_in <= 	"00000000000000" after 0 ns,
 				"00000000000010" after 65 ns,
-				"00000000000100" after 385 ns,
-				"00000000001000" after 705 ns;
+				"00000000000011" after 105 ns,
+				"00000000000100" after 145 ns,
+				"00000000001000" after 385 ns,
+				"00000000010000" after 705 ns,
+				"00000000000000" after 745 ns,
+				"00000000000000" after 765 ns;
 
 	geheugen_pm: geheugen port map(clk,reset,enable,wek_in,wek_out);
 end behaviour;
