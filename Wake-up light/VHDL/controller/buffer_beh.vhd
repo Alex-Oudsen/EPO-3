@@ -16,27 +16,32 @@ begin
 			end if;
 		end if;
 	end process assign;
-	actie_uitvoeren : process(knoppen, wekdata, clk, reset, state) --Voer acties uit
+	actie_uitvoeren : process(knoppen,clk, reset, state) --Voer acties uit
 	begin
 		case state is
 			when rust =>
 				knopjes <= "0000";
-				if ((knoppen(0) = '1' xor knoppen(1) = '1') xor (knoppen(2) = '1' xor knoppen(3) = '1'))
-					next_state <= one;
+				if ((knoppen(0) = '1' xor knoppen(1) = '1') xor (knoppen(2) = '1' xor knoppen(3) = '1')) then
+					new_state <= one;
 				else
-					next_state <= state;
+					new_state <= state;
+				end if;
 			when zero =>
 				knopjes <= "0000";
-				if ((knoppen(0) = '0' and knoppen(1) = '0') and (knoppen(2) = '0' and knoppen(3) = '0'))
-					next_state <= rust;
+				if ((knoppen(0) = '0' and knoppen(1) = '0') and (knoppen(2) = '0' and knoppen(3) = '0')) then
+					new_state <= rust;
 				else
-					next_state <= state;
+					new_state <= state;
+				end if;
 			when one =>
 				knopjes <= knoppen;
-				next_state <= zero;
+				new_state <= zero;
 		end case;
 	end process actie_uitvoeren;
 end behaviour;
+
+
+
 
 
 
