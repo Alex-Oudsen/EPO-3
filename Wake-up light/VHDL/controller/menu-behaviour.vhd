@@ -25,70 +25,74 @@ begin
 			when rust =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "000";
+				menu_signal <= "000";
 
 			when wekker_toggle =>
 				enable <= '1';
 				wekker(12 downto 0) <= wekdata(12 downto 0);
 				wekker(13) <= not wekdata(13);
-				menu <= "000";
+				menu_signal <= "000";
 
 			when wekkertijd =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "000";
+				menu_signal <= "000";
 
 			when led =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "011";
+				menu_signal <= "011";
 
 			when led_toggle =>
 				enable <= '1';
 				wekker(11 downto 0) <= wekdata(11 downto 0);
 				wekker(12) <= not wekdata(12);
 				wekker(13) <= wekdata(13);
-				menu <= "011";
+				menu_signal <= "011";
 
 			when geluid =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "100";
+				menu_signal <= "100";
 
 			when geluid_toggle =>
 				enable <= '1';
 				wekker(10 downto 0) <= wekdata(10 downto 0);
 				wekker(11) <= not wekdata(11);
 				wekker(13 downto 12) <= wekdata(13 downto 12);
-				menu <= "100";
+				menu_signal <= "100";
 
 			when uren_set =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "001";
+				menu_signal <= "001";
 
 			when uren_plus =>
 				enable <= '1';
-				menu <= "001";
+				menu_signal <= "001";
 				if (to_integer(unsigned(wekdata(10 downto 6)))) < 23 then
 					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) + 1, 5));
 				else
 					wekker(10 downto 6) <= "00000";
 				end if;
+				wekker(13 downto 11) <= wekdata(13 downto 11);
+				wekker(5 downto 0) <= wekdata(5 downto 0);
 
 			when uren_min =>
 				enable <= '1';
-				menu <= "001";
+				menu_signal <= "001";
 				if (to_integer(unsigned(wekdata(10 downto 6)))) > 0 then
 					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) - 1, 5));
 				else
 					wekker(10 downto 6) <= "10111";
 				end if;
+				wekker(13 downto 11) <= wekdata(13 downto 11);
+				wekker(5 downto 0) <= wekdata(5 downto 0);
 
 			when minuten_set =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu <= "010";
+				menu_signal <= "010";
 
 			when minuten_plus =>
 				enable <= '1';
@@ -97,7 +101,8 @@ begin
 				else
 					wekker(5 downto 0) <= "000000";
 				end if;
-				menu <= "010";
+				menu_signal <= "010";
+				wekker(13 downto 6) <= wekdata(13 downto 6);
 
 			when minuten_min =>
 				enable <= '1';
@@ -106,7 +111,8 @@ begin
 				else
 					wekker(5 downto 0) <= "111011";
 				end if;
-				menu <= "010";
+				menu_signal <= "010";
+				wekker(13 downto 6) <= wekdata(13 downto 6);
 		end case;
 	end process actie_uitvoeren;
 	
@@ -210,6 +216,9 @@ begin
 		end case;
 	end process next_state;
 end behaviour;
+
+
+
 
 
 
