@@ -21,7 +21,7 @@ begin
 		case state is
 			when rust =>
 				knopjes <= "0000";
-				if ((knoppen(0) = '1' or knoppen(1) = '1') or (knoppen(2) = '1' or knoppen(3) = '1'))
+				if ((knoppen(0) = '1' xor knoppen(1) = '1') xor (knoppen(2) = '1' xor knoppen(3) = '1'))
 					next_state <= one;
 				else
 					next_state <= state;
