@@ -9,8 +9,7 @@ entity menu is
 		wekdata		:in	   std_logic_vector(13 downto 0);
 		enable			:out   std_logic;
 		wekker			:out		 std_logic_vector(13 downto 0);
-		toggle			:out		 std_logic;
-		menu			:out		 std_logic_vector(2 downto 0));
+		menu_signal			:out		 std_logic_vector(2 downto 0));
 end menu;
 
 
