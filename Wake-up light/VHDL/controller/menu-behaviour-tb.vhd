@@ -4,7 +4,7 @@ library IEEE;
 use IEEE.std_logic_1164.ALL;
 use IEEE.Numeric_Std.all;
 
-architecture behaviour of menu-tb is
+architecture behaviour of menu_tb is
 component menu is
 	port(clk		:in		std_logic;
 		reset		:in		std_logic;
@@ -12,13 +12,13 @@ component menu is
 		wekdata		:in		std_logic_vector(13 downto 0);
 		enable		:out	std_logic;
 		wekker		:out	std_logic_vector(13 downto 0);
-		toggle		:out	std_logic;
-		menu		:out	std_logic_vector(2 downto 0));
+		menu_signal		:out	std_logic_vector(2 downto 0));
 end component menu;
 
-signal clk, reset, 		:	std_logic;
-signal knoppen			:	std_logic_vector (3 downto 0);
-signal wekdata			:	std_logic_vector (13 downto 0);
+signal clk, reset, enable 						:	std_logic;
+signal menu_signal								: std_logic_vector (2 downto 0);
+signal knoppen								: std_logic_vector (3 downto 0);
+signal wekdata, wekker		:	std_logic_vector (13 downto 0);
 
 begin
 	clk		<=	'1' after 0 ns,
@@ -69,8 +69,11 @@ begin
 			"0001" after 1588 ns,	--geluid -> rust
 			"0000" after 1628 ns; 	--done, done, done;			
 
-	wekdata <= wekker after 40 ns;
+	wekdata <= "00000000000000" after 20 ns;
 
-	menu_pm: menu port map(clk, reset, knoppen, wekdata, enable, wekker, toggle, menu);
-end behaviour;
+	menu_pm: menu port map(clk, reset, knoppen, wekdata, enable, wekker, menu_signal);
+end architecture;
+
+
+
 

@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.ALL;
-use IEEE.Numeric_Std.all;
+use IEEE.numeric_Std.all;
 
 architecture behaviour of menu is
 type fsm_states is (rust, wekkertijd, led, led_toggle, geluid, geluid_toggle, wekker_toggle, uren_set, uren_plus, uren_min, minuten_set, minuten_plus, minuten_min);
@@ -70,8 +70,8 @@ begin
 			when uren_plus =>
 				enable <= '1';
 				menu <= "001";
-				if (to_integer(wekdata(10 downto 6))) < 23 then
-					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(wekdata(10 downto 6))+1));
+				if (to_integer(unsigned(wekdata(10 downto 6)))) < 23 then
+					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) + 1, 5));
 				else
 					wekker(10 downto 6) <= "00000";
 				end if;
@@ -79,8 +79,8 @@ begin
 			when uren_min =>
 				enable <= '1';
 				menu <= "001";
-				if (to_integer(wekdata(10 downto 6))) > 0 then
-					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(wekdata(10 downto 6))-1));
+				if (to_integer(unsigned(wekdata(10 downto 6)))) > 0 then
+					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) - 1, 5));
 				else
 					wekker(10 downto 6) <= "10111";
 				end if;
@@ -92,18 +92,20 @@ begin
 
 			when minuten_plus =>
 				enable <= '1';
-				if (to_integer(wekdata(0 downto 5))) < 59 then
-					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(wekdata(5 downto 0))+1));
+				if (to_integer(unsigned(wekdata(5 downto 0)))) < 59 then
+					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(5 downto 0))) + 1, 6));
 				else
 					wekker(5 downto 0) <= "000000";
+				end if;
 				menu <= "010";
 
 			when minuten_min =>
 				enable <= '1';
-				if (to_integer(wekdata(0 downto 5))) > 0 then
-					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(wekdata(5 downto 0))-1));
+				if (to_integer(unsigned(wekdata(5 downto 0)))) > 0 then
+					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(5 downto 0))) - 1, 6));
 				else
 					wekker(5 downto 0) <= "111011";
+				end if;
 				menu <= "010";
 		end case;
 	end process actie_uitvoeren;
@@ -208,6 +210,9 @@ begin
 		end case;
 	end process next_state;
 end behaviour;
+
+
+
 
 
 
