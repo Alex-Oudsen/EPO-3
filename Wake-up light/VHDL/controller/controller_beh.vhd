@@ -37,6 +37,7 @@ begin
 buffer_portmap : buff port map (clk,reset,knoppen,knoppen_buff);
 menu_portmap : menu port map (clk,reset,knoppen_buff,wekdata_men,write_enable,wekker_men,menu_state);
 menory_portmap: geheugen port map (clk,reset,write_enable,wekker_men,wekdata_men);
+wekker <= wekdata_men;
 
 end behaviour;
 
