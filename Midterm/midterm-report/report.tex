@@ -1,0 +1,61 @@
+\documentclass[dutch, oneside]{tudelft-report}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{siunitx}
+\usepackage{nameref}
+
+
+\begin{document}
+
+%% Use Roman numerals for the page numbers of the title pages and table of
+%% contents.
+\frontmatter
+
+\title[Title\\ Midterm report]{EPO-3}
+\author{Projectgroep A1}
+\affiliation{Technische Universiteit Delft} 
+\coverimage{cover/Light-Bulb}
+\makecover
+
+%% Include an optional title page.
+%\input{title}
+
+%\input{preface}
+
+\tableofcontents
+
+%% Use Arabic numerals for the page numbers of the chapters.
+\mainmatter 
+
+\input{samenvatting}
+
+\input{introduction}
+
+\input{Design_specification}
+
+\input{designoverviewandsystemdesign}
+
+\input{DCF_controller}
+
+\input{main_controller}
+
+\input{Alarm}
+
+\input{LCD_controller}
+
+\input{results}
+
+\input{testplan}
+
+\input{projectprocess}
+
+\input{conclusions}
+
+%% Use letters for the chapter numbers of the appendices.
+\appendix
+
+%\input{appendix-a}
+\bibliography{references}
+
+\end{document}
