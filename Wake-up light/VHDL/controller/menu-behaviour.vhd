@@ -69,7 +69,7 @@ begin
 
 			when uren_plus =>
 				enable <= '1';
-				menu_signal <= "001";
+				menu_signal <= "101"; --let op dit is alleen gedaan voor testen
 				if (to_integer(unsigned(wekdata(10 downto 6)))) < 23 then
 					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) + 1, 5));
 				else
@@ -80,7 +80,7 @@ begin
 
 			when uren_min =>
 				enable <= '1';
-				menu_signal <= "001";
+				menu_signal <= "110"; --let op dit is alleen gedaan voor testen
 				if (to_integer(unsigned(wekdata(10 downto 6)))) > 0 then
 					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) - 1, 5));
 				else
@@ -101,7 +101,7 @@ begin
 				else
 					wekker(5 downto 0) <= "000000";
 				end if;
-				menu_signal <= "010";
+				menu_signal <= "111"; --let op dit is alleen gedaan voor testen
 				wekker(13 downto 6) <= wekdata(13 downto 6);
 
 			when minuten_min =>
@@ -111,7 +111,7 @@ begin
 				else
 					wekker(5 downto 0) <= "111011";
 				end if;
-				menu_signal <= "010";
+				menu_signal <= "111"; --let op dit is alleen gedaan voor testen
 				wekker(13 downto 6) <= wekdata(13 downto 6);
 		end case;
 	end process actie_uitvoeren;

@@ -70,7 +70,7 @@ begin
 			"0001" after 1628 ns,	--geluid -> rust
 			"0000" after 1668 ns; 	--done, done, done;			
 
-	wekdata <= "00000000000000" after 20 ns;
+	wekdata <= "00000001000001" after 20 ns;
 
 	menu_pm: menu port map(clk, reset, knoppen, wekdata, enable, wekker, menu_signal);
 end architecture;
