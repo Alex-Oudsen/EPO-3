@@ -47,6 +47,7 @@ lbl1: process(clk)
 		end if;
 	end process;
 
+
 lbl2: process (state, menu, ready)
 begin
 	case state is
