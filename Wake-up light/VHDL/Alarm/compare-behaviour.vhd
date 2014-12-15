@@ -13,6 +13,8 @@ begin
 		if (clk'event and clk = '1') then
 			if (reset = '1') or (stop_alarm = '1') then
 				state <= steady;
+				alarm_min <= std_logic_vector(to_unsigned(0, 6));
+				alarm_uur <= std_logic_vector(to_unsigned(0,5));
 			else
 				if (to_integer(unsigned(wekker_min)) > 14) then
 					alarm_min <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_min)) - 15, 6));
@@ -29,27 +31,23 @@ begin
 			end if;
 		end if;
 	end process;
-	lbl2: process (state, tijd_min, tijd_uur, wekker_min, wekker_uur)
+	lbl2: process (state, alarm_min, alarm_uur, wekker_uur, wekker_min, tijd_min, tijd_uur)
 	begin
 		case state is
 			when steady =>
-				if (alarm_uur = tijd_uur) and (alarm_min = tijd_min) then
-					geluid <= '0';
-					licht <= '1';					
+				geluid <= '0';
+				licht <= '0';
+				if (alarm_min = tijd_min) and (alarm_uur = tijd_uur) then
 					new_state <= start;
 				else
-					geluid <= '0';
-					licht <= '0';
 					new_state <= steady;
 				end if;
 			when start =>
+				geluid <= '0';
+				licht <= '1';
 				if (wekker_uur = tijd_uur) and (wekker_min = tijd_min) then
-					geluid <= '1';
-					licht <= '1';					
 					new_state <= final;
 				else
-					geluid <= '0';
-					licht <= '1';
 					new_state <= start;
 				end if;
 			when final =>
@@ -57,7 +55,17 @@ begin
 				licht <= '1';
 				new_state <= final;
 			when others =>
+				geluid <= '0';
+				licht <= '1';
 				new_state <= state;
 		end case;
 	end process;
 end behaviour;
+
+
+
+
+
+
+
+
