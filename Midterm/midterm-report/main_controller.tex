@@ -10,12 +10,17 @@ De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd d
 \begin{itemize}[nolistsep]
 \item Klok, dit is een standaard input;
 \item Reset, ook dit is een standaard input;
+\item Knoppen, dit zijn de 4 knoppen die (nadat ze gebufferd zijn) onderdeel zijn van de interface.
 \end{itemize}
 
 \subsection{Uitgangen}
+\begin{itemize}[nolistsep]
+\item Wekker, dit is de tijd dat de wekker af moet gaan en de wekkerdata, dus of licht/geluid aan staan, en of de wekker uberhaupt aanstaat;
+\item Menu-state, dit is de staat in welke de FSM zich op het moment bevindt. Dit is een output, zodat deze op het LCD-scherm weergegeven kan worden.
+\end{itemize}
 
 \subsection{Gedrag}
-
+Om te beginnen moet de interface de wekker kunnen instellen, en aan/uit kunnen zetten. 
 
 \section{Functionaliteit}
 
