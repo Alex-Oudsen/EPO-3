@@ -1,2 +1,27 @@
 \chapter{Main controller}
-text text text...
+\section{Inleiding}
+De main controller bevat de interface van de wekker. Deze zorgt er voor dat een wekker ingesteld kan worden, aangepast kan worden en uitgezet kan worden. Belangrijk aan elke interface is, dat deze gebruiksvriendelijk is. Dit kan onder andere bereikt worden door een optimum voor het aantal knoppen te bepalen. Te veel knoppen, en de gebruiker weet niet welke knop wat doet, te weinig knoppen, en de gebruiker moet navigeren door nodeloos ingewikkeld menu. \\
+Daarnaast is er nog een beperkende factor: het aantal pinnen op de chip. \\
+Al deze informatie samengenomen, is besloten dat 4 knoppen voor de interface het meest gebruiksvriendelijke resultaat oplevert. Daarnaast is er nog een knop die slechts gebruikt wordt om een afgaand alarm uit te zetten. \\
+De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd dat dit hierdoor een van de grootste onderdelen van de chip zou kunnen worden.
+
+\section{Specificaties}
+\subsection{Ingangen}
+\begin{itemize}[nolistsep]
+\item Klok, dit is een standaard input;
+\item Reset, ook dit is een standaard input;
+\item Knoppen, dit zijn de 4 knoppen die (nadat ze gebufferd zijn) onderdeel zijn van de interface.
+\end{itemize}
+
+\subsection{Uitgangen}
+\begin{itemize}[nolistsep]
+\item Wekker, dit is de tijd dat de wekker af moet gaan en de wekkerdata, dus of licht/geluid aan staan, en of de wekker uberhaupt aanstaat;
+\item Menu-state, dit is de staat in welke de FSM zich op het moment bevindt. Dit is een output, zodat deze op het LCD-scherm weergegeven kan worden.
+\end{itemize}
+
+\subsection{Gedrag}
+Om te beginnen moet de interface de wekker kunnen instellen, en aan/uit kunnen zetten. 
+
+\section{Functionaliteit}
+
+\section{Testen}
