@@ -3,7 +3,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-architecture behavioural of bcd2bin_tb is
+architecture behaviour of bcd2bin_tb is
 	component bcd2bin is
  		port (clk:	in  std_logic;
 		      reset:    in  std_logic;
@@ -28,4 +28,4 @@ begin
 
 convert: bcd2bin port map(clk, reset, start, bcd_in, bin_out, ready);
 
-end architecture behavioural;
+end behaviour;

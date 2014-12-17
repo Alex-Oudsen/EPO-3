@@ -102,4 +102,4 @@ begin
 				new_state <= waits;
 		end case;
 	end process;
-end architecture behaviour;
+end behaviour;
