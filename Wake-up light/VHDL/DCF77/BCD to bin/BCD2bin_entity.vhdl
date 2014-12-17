@@ -10,4 +10,4 @@ entity bcd2bin is
 	  bcd_in:	in  std_logic_vector(7 downto 0);
 	  bin_out:	out std_logic_vector(6 downto 0);
 	  ready:	out std_logic);
-end entity bcd2bin;
+end bcd2bin;

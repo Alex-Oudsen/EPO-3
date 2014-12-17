@@ -97,8 +97,3 @@ begin
 
 	controller_pm: controller port map(clk, reset, knoppen, wekker,menu_signal);
 end architecture;
-
-
-
-
-

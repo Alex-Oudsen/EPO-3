@@ -8,5 +8,3 @@ entity geheugen is
         wek_in :in    std_logic_vector(13 downto 0);
         wek_out:out   std_logic_vector(13 downto 0));
 end geheugen;
-
-

@@ -7,7 +7,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-architecture behavioural of mod60_teller_tb is
+architecture behaviour of mod60_teller_tb is
 	component mod60_teller is
  		port (clk:	in  std_logic;
 		      clk_in:	in  std_logic;
@@ -34,4 +34,4 @@ begin
 
 count60: mod60_teller port map(clk, clk_in, reset, sync_now, ref, t_clk, count);
 
-end architecture behavioural;
+end behaviour;

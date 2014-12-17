@@ -11,4 +11,4 @@ entity mod60_teller is
 	  ref:		in  std_logic_vector(5 downto 0);
 	  t_clk:	out std_logic;
 	  count:	out std_logic_vector(5 downto 0));
-end entity mod60_teller;
+end mod60_teller;

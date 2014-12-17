@@ -29,18 +29,3 @@ begin
 
 	buff_pm: buff port map(clk,reset,knoppen,knoppjes);
 end behaviour;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

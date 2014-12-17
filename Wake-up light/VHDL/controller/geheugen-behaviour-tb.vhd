@@ -49,21 +49,3 @@ begin
 
 	geheugen_pm: geheugen port map(clk,reset,enable,wek_in,wek_out);
 end behaviour;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

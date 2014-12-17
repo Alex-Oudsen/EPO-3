@@ -40,6 +40,3 @@ menory_portmap: geheugen port map (clk,reset,write_enable,wekker_men,wekdata_men
 wekker <= wekdata_men;
 
 end behaviour;
-
-
-
