@@ -11,8 +11,3 @@ entity menu is
 		wekker			:out		 std_logic_vector(13 downto 0);
 		menu_signal			:out		 std_logic_vector(2 downto 0));
 end menu;
-
-
-
-
-

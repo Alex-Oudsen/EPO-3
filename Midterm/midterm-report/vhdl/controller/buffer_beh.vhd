@@ -47,21 +47,3 @@ begin
 		
 	end process actie_uitvoeren;
 end behaviour;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,8 +7,3 @@ entity buff is
 		knoppen		:in		std_logic_vector(4 downto 0);
 		knopbuff	:out	std_logic_vector(4 downto 0));
 end buff;
-
-
-
-
-
