@@ -10,7 +10,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-architecture structural of autosyncklok is
+architecture structure of autosyncklok is
 	component mod60_teller is
 		port (clk:	in  std_logic;
 		      clk_in:	in  std_logic;
@@ -33,17 +33,13 @@ architecture structural of autosyncklok is
 	signal m_clk: std_logic;
 	signal h_clk: std_logic;
 	signal sec_ref: std_logic_vector(5 downto 0);
-	signal min_ref: std_logic_vector(5 downto 0);
-	signal hour_ref: std_logic_vector(4 downto 0);
 
 begin
 
-	sec_ref <= time_ref(5 downto 0);
-	min_ref <= time_ref(11 downto 6);
-	hour_ref <= time_ref(16 downto 12);
+	sec_ref <= "000000";
 
 	SEC: mod60_teller port map(clk, s_clk, reset, sync_now, sec_ref, m_clk, open);
 	MIN: mod60_teller port map(clk, m_clk, reset, sync_now, min_ref, h_clk, minutes);
-	HRS: mod24_teller port map(clk, h_clk, reset, sync_now, hour_ref, hours);
+	HRS: mod24_teller port map(clk, h_clk, reset, sync_now, hr_ref, hours);
 
-end architecture structural;
+end structure;
