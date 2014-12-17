@@ -46,7 +46,14 @@ De code voor het alarm is opgedeeld in 3 stukken:
 \item alarm-counter
 \item alarm-pwm
 \end{itemize}
-De VHDL code is te vinden in Appendix ??
+Alarm-counter en alarm-pwm zijn onderdeel van een top entity, alarm. Omdat het nog niet zeker is waar alarm-compare geplaatst gaat worden op de chip is die daar niet bij inbegrepen.
+De code voor het alarm is te vinden in \cref{Ap:code_alarm}.
+\begin{itemize}[nolistsep]
+\item De entity en behavioural van alarm compare is te vinden in \cref{code:ent_alarm_compare,code:beh_alarm_compare}.
+\item De top entity en port map van alarm is te vinden in \cref{code:ent_alarm,code:beh_alarm}.
+\item De entity en behavioural van alarm-counter is te vinden in \cref{code:ent_alarm_counter,code:beh_alarm_counter}.
+\item De entity en behavioural van alarm-pwm is te vinden in \cref{code:ent_alarm_pwm,code:beh_alarm_pwm}.
+\end{itemize}
 \section{Resultaten}
 Alle onderdelen werken in de simulaties. Zowel de simulatie van de behaviour als van de extracted vhdl.
 Onderstaande afbeeldingen zijn de resultaten van de simulaties, eerst die van de behaviour daarna van de extracted.
