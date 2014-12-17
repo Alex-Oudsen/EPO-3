@@ -48,3 +48,24 @@ De code voor het alarm is opgedeeld in 3 stukken:
 \end{itemize}
 De VHDL code is te vinden in Appendix ??
 \section{Resultaten}
+Alle onderdelen werken in de simulaties. Zowel de simulatie van de behaviour als van de extracted vhdl.
+Onderstaande afbeeldingen zijn de resultaten van de simulaties, eerst die van de behaviour daarna van de extracted.
+De eerste 2 afbeedingen zijn van ``alarm-compare", de andere 2 van ``alarm-pwm".
+\\
+
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{results/compare.jpg}
+
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{results/compare_ext.jpg}
+\\
+\\
+Te zien is in de 2 afbeeldingen hier boven dat wanneer de huidige tijd (tijd\_uur en tijd\_min) gelijk is aan de wekker tijd (wekker\_uur en wekker\_min) minus 15 minuten, dan gaat het signaal licht naar '1'. Als de huidige tijd gelijk is aan de wekker tijd, gaat ook het geluid signaal naar '1'.
+Ook is te zien dat wanneer de knop (in de simulatie stop\_alarm) naar '1' gaat het licht en/of geluid weer naar '0' gaat.
+\\
+
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{results/alarm.jpg}
+\\
+
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{results/alarm_ext.jpg}
+\\
+\\
+Bovenstaande 2 afbeeldingen laten zien dat op het moment dat er 15 seconde zijn verstreken het pwm-signaal breder wordt.
