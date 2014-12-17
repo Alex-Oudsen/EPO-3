@@ -74,7 +74,3 @@ begin
 
 	menu_pm: menu port map(clk, reset, knoppen, wekdata, enable, wekker, menu_signal);
 end architecture;
-
-
-
-

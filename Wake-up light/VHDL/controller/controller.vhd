@@ -8,4 +8,3 @@ entity controller is
         wekker :out   std_logic_vector(13 downto 0);
         menu_state   :out   std_logic_vector(2 downto 0));
 end controller;
-
