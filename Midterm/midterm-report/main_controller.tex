@@ -61,11 +61,77 @@ Wij gebruiken twee fsm een voor de buffer en een voor de menu.
 
 
 \subsubsection{Menu}
+In \cref{fig:FSM_controller} staat de gemaakte fsm en in \cref{tab:states_controller} staan de uitgangen per state gespecificeerd.
+
 \begin{figure}[ht!]
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{FSM/controller_fsm.png}
-\label{fig:FSM_controller}
 \caption{FSM diagramma van de menu}
+\label{fig:FSM_controller}
 \end{figure}
+
+\begin{longtable}{|l| p{10cm} |}
+\hline
+Rust, Reset &
+enable ='0' \newline
+wekker=wekdata \newline
+menu='000' \\ \hline
+Wekker toggle &
+enable ='1' \newline
+wekker[12 down to 0]=wekdata[12 down to 0] \newline
+wekker[13]=niet wekdata[13] \newline
+menu = menu \\ \hline
+Wekkertijd &
+enable ='0' \newline
+wekker=wekdata \newline
+menu = 000 \\ \hline
+Led &
+enable ='0' \newline
+wekker=wekdata \newline
+menu = 011 \\ \hline
+Led toggle &
+enable ='1' \newline
+wekker[11 down to 0]=wekdata[11 down to 0]\newline
+wekker[12] = niet wekdata[12] \newline
+wekker[13] = wekdata[13] \newline
+menu = menu \\ \hline
+Geluid & 
+enable ='0' \newline
+wekker=wekdata of een mooi getal code \newline
+menu = 100 \\ \hline
+Geluid toggle &
+enable ='1' \newline
+wekker[10 down to 0]=wekdata[10 down to 0] \newline
+wekker[11] = niet wekdata[11] \newline
+wekker[13 downto 12] = wekdata[13 downto 12] \newline
+menu = menu \\ \hline
+Uren set &
+enable ='0' \newline
+wekker=wekdata \newline
+menu = 001 \\ \hline
+Uren plus &
+enable ='1' \newline
+wekker=wekker+1 \newline
+menu =menu \\ \hline
+Uren min &
+enable ='1' \newline
+wekker=wekdata-1 \newline
+menu = menu \\ \hline
+Minuten set &
+enable ='0' \newline
+wekker=wekdata \newline
+menu = 010 \\ \hline
+Minuten plus &
+enable ='1' \newline
+Wektijd=wekdata+1 \newline
+menu = menu \\ \hline
+Minuten min &
+enable ='1' \newline
+wekker=wekdata-1 \newline
+menu = menu \\ \hline
+\caption{Uitgangen binnen de state van de controller} 
+\label{tab:states_controller}
+\end{longtable}
+
 \subsection{VHDL code}
 De code voor de controller van de wekker is te vinden in \cref{Ap:code_controller}. Voor de overzicht en het modular opbouwen is de code in vier blokken geschreven.
 \begin{itemize}[nolistsep]
