@@ -1,0 +1,124 @@
+\documentclass[dutch, oneside]{tudelft-report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{siunitx}
+\usepackage{nameref}
+
+\usepackage{verbatim}
+%\usepackage[hidelinks]{hyperref}
+\usepackage[dutch]{babel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+%\usepackage[table]{xcolor}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+%\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{longtable}			% Table is te groot
+\usepackage{tikz}				% Voor fsm
+\usepackage{listings}			% Used to include VHDL-code and fragments
+\usepackage[dutch]{babel}		% Dutch hyphenation patterns and dutch names 
+\usepackage{soul}				% dingen doorstrepen
+\usepackage[normalem]{ulem}				%dingen dooruniten
+\usepackage{pslatex}			% Times, helvetica and courier
+\usepackage[T1]{fontenc}		% Nicer font-encoding
+\usepackage{hyperref}			% Gives clickable references in pdf-file
+\usepackage{graphicx}			% Used to include .pdf, .jpg and .png-files
+\usepackage{tabularx}			% Used for evenly spread tables
+\usepackage{eso-pic}			% Absolute positioning, used for lines-to-track appendix and front- and backpage
+\usepackage{datetime}			% Used for some data-references
+%\usepackage[font=small,format=plain,labelfont=bf,up,textfont=up]{caption}	% Nicer captions
+\usepackage{nonfloat}			% Captions for non-floating figures and tables
+\usepackage{nextpage}			% Advanced nextpage commands
+\usepackage{keystroke}			% "real" keys
+\usepackage[nottoc]{tocbibind}		% Include Bibliography in ToC
+\usepackage{multirow}			% Span text over multiple rows
+\usepackage{verbatim}			% For comment-environment
+%\usepackage[left=3.5cm, right=2.5cm]{geometry}
+\usepackage{enumitem} % Mogelijkheid tot geen enters in itemize en enurate
+
+%\crefname{equation}{vergelijking}{vergelijkingen}
+%\crefname{table}{tabel}{tabellen}
+%\crefname{figure}{figuur}{figuren}
+
+
+\definecolor{comment}{RGB}{0, 15 , 117}		%Kleur blauw defineren
+\definecolor{keyword}{RGB}{165, 42, 42}		%Kleur rood defineren
+\definecolor{STD}{RGB}{46, 139, 87}			%Kleur groen defineren
+\lstdefinelanguage{VHDL}{
+  morekeywords=[1]{ 		%Defineren van keywords die blauw worden
+    library,use,all,entity,is,port,in,out,end,architecture,of,
+    begin,and,or,not,downto,ALL,signal,type,case,if,elsif,for,when,array,
+    others,loop,process,to
+  },
+  morekeywords=[2]{			%Defineren van keyword die groen worden
+    STD_LOGIC_VECTOR,STD_LOGIC,STD_LOGIC_1164,
+    NUMERIC_STD,STD_LOGIC_ARITH,STD_LOGIC_UNSIGNED,std_logic_vector,unsigned,
+    std_logic
+  },
+  morecomment=[l]--
+}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \footnotesize \ttfamily,
+  keywordstyle = [1]\color{keyword}\bfseries, %Keywords kleuren
+  keywordstyle = [2]\color{STD}\bfseries,	%Keywords kleuren
+  commentstyle = \color{comment}, % Commits kleuren
+  numbers=left,					  % Regel nummering
+  breaklines=true,                % sets automatic line breaking
+  tabsize=4                       % sets default tabsize to 4 spaces
+}
+
+\begin{document}
+
+%% Use Roman numerals for the page numbers of the title pages and table of
+%% contents.
+\frontmatter
+
+\title[Title\\ Midterm report]{EPO-3}
+\author{Projectgroep A1}
+\affiliation{Technische Universiteit Delft} 
+\coverimage{cover/Light-Bulb}
+\makecover
+
+%% Include an optional title page.
+%\input{title}
+
+%\input{preface}
+
+\tableofcontents
+
+%% Use Arabic numerals for the page numbers of the chapters.
+\mainmatter 
+
+\input{samenvatting}
+
+\input{introduction}
+
+\input{Design_specification}
+
+\input{designoverviewandsystemdesign}
+
+\input{DCF_controller}
+
+\input{main_controller}
+
+\input{Alarm}
+
+\input{LCD_controller}
+
+\input{results}
+
+\input{testplan}
+
+\input{projectprocess}
+
+\input{conclusions}
+
+%% Use letters for the chapter numbers of the appendices.
+\appendix
+
+\input{appendix_controller_vhdl}
+\bibliography{references}
+
+\end{document}
