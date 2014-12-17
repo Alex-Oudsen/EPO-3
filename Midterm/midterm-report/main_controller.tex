@@ -1,9 +1,12 @@
 \chapter{Main controller}
 \section{Inleiding}
-De main controller bevat de interface van de wekker. Deze zorgt er voor dat een wekker ingesteld kan worden, aangepast kan worden en uitgezet kan worden. Belangrijk aan elke interface is, dat deze gebruiksvriendelijk is. Dit kan onder andere bereikt worden door een optimum voor het aantal knoppen te bepalen. Te veel knoppen, en de gebruiker weet niet welke knop wat doet, te weinig knoppen, en de gebruiker moet navigeren door nodeloos ingewikkeld menu. \\
+De main controller bevat de interface van de wekker. Deze zorgt er voor dat een wekker ingesteld kan worden, aangepast kan worden en uitgezet kan worden. 
+Belangrijk aan elke interface is dat deze gebruiksvriendelijk is. 
+Dit kan onder andere bereikt worden door een optimum voor het aantal knoppen te bepalen. 
+Te veel knoppen, en de gebruiker weet niet welke knop wat doet, te weinig knoppen, en de gebruiker moet navigeren door een nodeloos ingewikkeld menu. \\
 Daarnaast is er nog een beperkende factor: het aantal pinnen op de chip. \\
-Al deze informatie samengenomen, is besloten dat 4 knoppen voor de interface het meest gebruiksvriendelijke resultaat oplevert. Daarnaast is er nog een knop die slechts gebruikt wordt om een afgaand alarm uit te zetten. \\
-De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd dat dit hierdoor een van de grootste onderdelen van de chip zou kunnen worden.
+Al deze informatie samengenomen is besloten dat 4 knoppen voor de interface het meest gebruiksvriendelijke resultaat oplevert. Daarnaast is er nog een knop die slechts gebruikt wordt om een afgaand alarm uit te zetten. \\
+De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd dat dit hierdoor een van de grootste onderdelen op de chip zou kunnen worden.
 
 \section{Specificaties}
 \subsection{Ingangen}
@@ -131,16 +134,19 @@ menu = menu \\ \hline
 De code voor de controller van de wekker is te vinden in \cref{Ap:code_controller}. Voor de overzicht en het modular opbouwen is de code in vier blokken geschreven.
 \begin{itemize}[nolistsep]
 \item De top entity met de port map \cref{code:controller_ent,code:controller_beh}.
-\item De menu opzichzelf hierin zit het echt logica in verwerkt te vinden in \cref{code:menu_ent,code:menu_beh}.
-\item Het gebruikte geheugen element voor de opslag van 14 bits te vinden in \cref{code:geheugen_ent,code:geheugen_beh}.
-\item De gebruikte buffer is te vinden in \cref{code:buffer_ent,code:buffer_ent}. De buffer regelt het ingangssignaal, en zorgt ervoor dat er maar 1 klokperiode lang een hoog signaal gelezen word
+\item Het menu, hierin zit de echte logica verwerkt. Deze is te vinden in \cref{code:menu_ent,code:menu_beh}.
+\item Het gebruikte geheugen element voor de opslag van 14 bits, te vinden in \cref{code:geheugen_ent,code:geheugen_beh}.
+\item De gebruikte buffer is te vinden in \cref{code:buffer_ent,code:buffer_ent}. De buffer regelt het ingangssignaal, en zorgt ervoor dat er maar 1 klokperiode lang een hoog signaal gelezen word.
 \end{itemize}
-Voor het testen van de code zijn er testbenches gemaakt welke te vind zijn in \cref{code:tb_controller,code:tb_menu,code:tb_geheugen,code:tb_buffer}
-\section{Resultaten}
-Als eerste is een test gedaan door de VHDL code te simuleren met \emph{Modelsim}. Toen bleek dat dit een goed resultaat afleverde, is de code gesynthetiseerd, en is daarmee nog een simulatie gedaan. Toen bleek dat ook dit een goed resultaat afleverde, is de VHDL code geextraheerd, en deze code is opnieuw gesimuleerd. Vervolgens is nog een switch-level simulatie uitgevoerd, en hierna werd de code stabiel verklaard.
+Voor het testen van de code zijn er testbenches gemaakt welke te vind zijn in \cref{code:tb_controller,code:tb_menu,code:tb_geheugen,code:tb_buffer}.
 
 \subsection{Simulatie}
 
-\subsection{Conclusie en discussie}
-De controller werkt op alle gesimuleerde niveau's correct en naar verwachting. De minimale klok periode bedraagt 60ns om gliches te voorkomen bij het optellen en aftrekken van uren en minuten. De controller maakt op dit moment gebruik van 9088 transitoren waarvan er voor de daadwerkelijke schakelingen slechts 2914 worden gebruikt. De controller maakt op dit moment nog gebruik van het binary tel systeem met machten van twee echter bleek dat voor de lcd scherm BCD veel beter werkt dit moet nog worden ge\"{i}mplementeerd.
 
+\subsection{Conclusie en discussie}
+De controller werkt op alle gesimuleerde niveau's naar verwachting. 
+De minimale klok periode bedraagt 60ns om gliches te voorkomen bij het optellen en aftrekken van uren en minuten. 
+De controller maakt op dit moment gebruik van 9088 transitoren waarvan er voor de daadwerkelijke schakelingen slechts 2914 worden gebruikt. 
+De controller maakt op dit moment nog gebruik van het binaire telsysteem (dat gebruik maakt van machten van 2), er bleek echter dat voor de lcd scherm BCD veel beter werkt. Dit moet nog worden geimplementeerd.\\
+
+%Vlak nadat het inputbuffer gemaakt was kwam men er achter dat in plaats van een buffer ook de rising_edge functie gebruikt had kunnen worden.
