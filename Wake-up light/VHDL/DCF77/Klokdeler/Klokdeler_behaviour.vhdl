@@ -53,4 +53,4 @@ begin
 				new_state <= clear;
 		end case;
 	end process;
-end architecture behaviour;
+end behaviour;
