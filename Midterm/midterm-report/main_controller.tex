@@ -56,11 +56,6 @@ Dit alles moet zo gebruiksvriendelijk mogelijk gebeuren.
 \section{Functionaliteit}
 
 \subsection{FSM}
-Wij gebruiken twee fsm een voor de buffer en een voor de menu.
-\subsubsection{Buffer}
-
-
-\subsubsection{Menu}
 In \cref{fig:FSM_controller} staat de gemaakte fsm en in \cref{tab:states_controller} staan de uitgangen per state gespecificeerd.
 
 \begin{figure}[ht!]
@@ -145,4 +140,7 @@ Voor het testen van de code zijn er testbenches gemaakt welke te vind zijn in \c
 Als eerste is een test gedaan door de VHDL code te simuleren met \emph{Modelsim}. Toen bleek dat dit een goed resultaat afleverde, is de code gesynthetiseerd, en is daarmee nog een simulatie gedaan. Toen bleek dat ook dit een goed resultaat afleverde, is de VHDL code geextraheerd, en deze code is opnieuw gesimuleerd. Vervolgens is nog een switch-level simulatie uitgevoerd, en hierna werd de code stabiel verklaard.
 
 \subsection{Simulatie}
+
+\subsection{Conclusie en discussie}
+De controller werkt op alle gesimuleerde niveau's correct en naar verwachting. De minimale klok periode bedraagt 60ns om gliches te voorkomen bij het optellen en aftrekken van uren en minuten. De controller maakt op dit moment gebruik van 9088 transitoren waarvan er voor de daadwerkelijke schakelingen slechts 2914 worden gebruikt. De controller maakt op dit moment nog gebruik van het binary tel systeem met machten van twee echter bleek dat voor de lcd scherm BCD veel beter werkt dit moet nog worden ge\"{i}mplementeerd.
 
