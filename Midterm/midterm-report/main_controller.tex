@@ -11,13 +11,48 @@ De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd d
 \item Klok, dit is een standaard input;
 \item Reset, ook dit is een standaard input;
 \item Knoppen, dit zijn de 4 knoppen die (nadat ze gebufferd zijn) onderdeel zijn van de interface.
+\begin{itemize}[nolistsep]
+\item knoppen[0] = menu
+\item knoppen[1] = set 
+\item knoppen[2] = up
+\item knoppen[3] = down\\
 \end{itemize}
+\end{itemize}
+
+
 
 \subsection{Uitgangen}
 \begin{itemize}[nolistsep]
 \item Wekker, dit is de tijd dat de wekker af moet gaan en de wekkerdata, dus of het licht en geluid aan staan, en of de wekker uberhaupt aanstaat;
-\item Menu-state, dit is de staat in welke de FSM zich op het moment bevindt. Deze informatie wordt doorgevoerd naar het LCD-scherm om zo te kunnen zien waar in het menu men zit.
+\item Menu-state, dit is de staat in welke de FSM zich op het moment bevindt. Deze informatie wordt doorgevoerd naar het LCD-scherm om zo te kunnen zien waar in het menu men zit.\\
 \end{itemize}
+\begin{table}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+Uitgang & Informatie over wat in de uitgang te vinden is \\ \hline
+wekdata & De huidige info over de wekker instellingen uit geheugen \newline
+wekdata[5 down to 0] daarin staan de minuten \newline
+wekdata[10 down to 6] daarin staan de uren \newline
+wekdata[11] geluid bit \newline
+wekdata[12] led bit \newline
+wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
+wekker & Bevat nieuwe informatie over de wekker \newline
+wekdata[5 down to 0] daarin staan de minuten \newline
+wekdata[10 down to 6] daarin staan de uren \newline
+wekdata[11] geluid bit \newline
+wekdata[12] led bit \newline
+wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
+toggle & Deze bit verandert bij veranderingen in de uitgang van wekkerdata \\ \hline
+menu & Deze geeft door aan de in welke state we zitten aan de lcd module \newline
+000 : Het normale scherm weergeven met alarm en wekkertijd weergave state: Rust,Wekkertijd \newline
+001 : Uren aanpassen \newline
+010 : Minuten aanpassen \newline
+011 : Led aanpassen \newline
+100 : Geluid aanpassen \\ \hline
+\end{tabular}
+\caption{Uitgangen van de controller}
+\label{tab:uitgangen_controller}
+\end{table}
 
 \subsection{Gedrag}
 Om te beginnen moet de tijd waarop de wekker af moet gaan ingesteld kunnen worden. Dit wordt gedaan door eerst de huidige wekkertijd weer te geven, vervolgens het uur waarop gewekt moet worden te wijzigen en daarna de minuut. Hierna wordt de huidige tijd weer weergegeven. \\
@@ -27,9 +62,19 @@ Dit alles moet zo gebruiksvriendelijk mogelijk gebeuren.
 \section{Functionaliteit}
 
 \subsection{FSM}
+Wij gebruiken twee fsm een voor de buffer en een voor de menu.
+\subsubsection{Buffer}
+\subsubsection{Menu}
 
 \subsection{VHDL code}
-
+De code voor de controller van de wekker is te vinden in \cref{Ap:code_controller}. Voor de overzicht en het modular opbouwen is de code in vier blokken geschreven.
+\begin{itemize}[nolistsep]
+\item De top entity met de port map \cref{code:controller_ent,code:controller_beh}.
+\item De menu opzichzelf hierin zit het echt logica in verwerkt te vinden in \cref{code:menu_ent,code:menu_beh}.
+\item Het gebruikte geheugen element voor de opslag van 14 bits te vinden in \cref{code:geheugen_ent,code:geheugen_beh}.
+\item De buffer die er voor zorgt dat er maar 1 klok periode input wordt gezien door de menu de code is te vinden in \cref{code:buffer_ent,code:buffer_ent}.
+\end{itemize}
+Voor het testen van de code zijn er testbenches gemaakt welke te vind zijn in \cref{code:tb_controller,code:tb_menu,code:tb_geheugen,code:tb_buffer}
 \section{Resultaten}
 Als eerste is een test gedaan door de VHDL code te simuleren met \emph{Modelsim}. Toen bleek dat dit een goed resultaat afleverde, is de code gesynthetiseerd, en is daarmee nog een simulatie gedaan. Toen bleek dat ook dit een goed resultaat afleverde, is de VHDL code geextraheerd, en deze code is opnieuw gesimuleerd. Vervolgens is nog een switch-level simulatie uitgevoerd, en hierna werd de code stabiel verklaard.
 
