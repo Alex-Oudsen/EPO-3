@@ -6,7 +6,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-architecture behavioural of mod24_teller_tb is
+architecture behaviour of mod24_teller_tb is
 	component mod24_teller is
  		port (clk:	in  std_logic;
 		      clk_in:	in  std_logic;
@@ -32,4 +32,4 @@ begin
 
 count24: mod24_teller port map(clk, clk_in, reset, sync_now, ref, count);
 
-end architecture behavioural;
+end behaviour;

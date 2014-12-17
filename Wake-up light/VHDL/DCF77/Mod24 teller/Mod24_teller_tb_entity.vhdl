@@ -4,4 +4,4 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity mod24_teller_tb is
-end entity mod24_teller_tb;
+end mod24_teller_tb;

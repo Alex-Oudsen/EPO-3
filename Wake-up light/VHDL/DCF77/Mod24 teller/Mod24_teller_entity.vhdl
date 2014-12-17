@@ -10,4 +10,4 @@ entity mod24_teller is
 	  sync_now:	in  std_logic;				-- Enable signaal uit decoder
 	  ref:		in  std_logic_vector(4 downto 0);	-- Tijdreferentie voor uren
 	  count:	out std_logic_vector(4 downto 0));	-- Aantal uren in de huidige tijd
-end entity mod24_teller;
+end mod24_teller;
