@@ -1,2 +1,21 @@
 \chapter{Design specification}
-text text text...
+Het systeem moet aan verschillende specificaties voldoen. Zo zal het een algemene reset moeten bevatten. Als gevolg van het indrukken van de resetknop zullen alle opgeslagen waarden en counters op 'nul' worden gezet. Ook zullen alle signalen 'active high' moeten zijn. De tijd, die intern wordt bijgehouden, zal worden gesynchroniseerd met een zogenaamd DCF signaal.\\
+De wekker zal bediend worden door middel van een menu. dit menu word aangestuurd op basis van 4 knoppen. In dit menu moet de wekkertijd ingesteld moeten worden. Ook moet de wekker en het wekker geluid aan en uit gezet kunnen worden.\\
+De visualisatie van dit menu zal op een LCD weergegeven worden. Als men zich niet in het menu bevindt, zal men alle data verdeeld over het scherm zien. Deze data bestaat uit de actuele tijd, de wekker tijd, de datum en de weekdag. Daarnaast zal op het LCD scherm weergegeven worden of de wekker en het geluid aan staan. Met het knipperen van scheidingsteken tussen uren en minuten zal het passeren van seconden aangegeven worden.\\
+Het systeem zal de volgende ingangen hebben:
+\begin{itemize}[nolistsep]
+\item	DCF-signaal
+\item	36kHz klok
+\item	Reset-knop
+\item	4 menu-knoppen
+\end{itemize}
+
+\noindent
+\\
+Onze chip zal over de volgende uitgangen beschikken:
+\begin{itemize}[nolistsep]
+\item	RGB, een 3-bits uitgang om de ledjes aan te sturen
+\item	Sound, 1 bit om de buzzer aan te sturen
+\item	LCD, een \# bits vector om het scherm aan te sturen
+\item	DCF\_debug, bit om aan te geven of er een DCF-signaal ontvangen wordt.
+\end{itemize}
