@@ -140,13 +140,18 @@ De code voor de controller van de wekker is te vinden in \cref{Ap:code_controlle
 \end{itemize}
 Voor het testen van de code zijn er testbenches gemaakt welke te vind zijn in \cref{code:tb_controller,code:tb_menu,code:tb_geheugen,code:tb_buffer}.
 
-\subsection{Simulatie}
+\section{Testen}
+Om zeker te zijn dat alles goed werkt worden er drie verschillende testen uitgevoerd de eerste is op behavioural niveau hier wordt getest of de basis van de code werkt zoals verwacht. Na een goed en geslaagd resultaat kan de code worden gesynthetiseerd en worden gesimuleerd. Als er geen fouten optreden kan de ontwerp gemaakt worden en daarna geextraheerd worden en nogmaals getest worden. De testen worden uitgevoerd met \emph{Modelsim}.
 
 
+\section{Simulatie}
+De resultaten van de staan in \cref{Ap:sim_controller} de testbench is te lang om in een keer weer tegeven daarom is deze op geknipt in vier stukken. De testbench die gemaakt is voor simulatie staat in \cref{code:tb_controller}
+\section{Resultaten}
+Van \cref{fig:sim_beh_0-2_5} tot en met \cref{fig:sim_ext_7_5-} is te zien dat iedere simulatie tot hetzelde resultaat leid en daarmee succesvol is.
+De minimale klok periode kan afgelezen worden aan de hand van \cref{fig:timing_controller}. Hier uit is op te makken dat deze tenminste 60ns is.
 \subsection{Conclusie en discussie}
 De controller werkt op alle gesimuleerde niveau's naar verwachting. 
 De minimale klok periode bedraagt 60ns om gliches te voorkomen bij het optellen en aftrekken van uren en minuten. 
 De controller maakt op dit moment gebruik van 9088 transitoren waarvan er voor de daadwerkelijke schakelingen slechts 2914 worden gebruikt. 
-De controller maakt op dit moment nog gebruik van het binaire telsysteem (dat gebruik maakt van machten van 2), er bleek echter dat voor de lcd scherm BCD veel beter werkt. Dit moet nog worden geimplementeerd.\\
+De controller maakt op dit moment nog gebruik van het binaire telsysteem (dat gebruik maakt van machten van 2), er bleek echter dat voor de lcd scherm BCD veel beter werkt. Dit moet nog worden geimplementeerd. Vlak nadat het inputbuffer gemaakt was kwam men er achter dat in plaats van een buffer ook de rising\textunderscore edge functie gebruikt had kunnen worden. 
 
-%Vlak nadat het inputbuffer gemaakt was kwam men er achter dat in plaats van een buffer ook de rising_edge functie gebruikt had kunnen worden.
