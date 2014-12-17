@@ -26,7 +26,8 @@ De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd d
 \item Wekker, dit is de tijd dat de wekker af moet gaan en de wekkerdata, dus of het licht en geluid aan staan, en of de wekker uberhaupt aanstaat;
 \item Menu-state, dit is de staat in welke de FSM zich op het moment bevindt. Deze informatie wordt doorgevoerd naar het LCD-scherm om zo te kunnen zien waar in het menu men zit.\\
 \end{itemize}
-\begin{table}
+In \cref{tab:uitgangen_controller} wat voor informatie te vinden is in de uitgangen van de controller.
+\begin{table}[ht!]
 \begin{tabular}{|l|p{10cm}|}
 \hline
 Uitgang & Informatie over wat in de uitgang te vinden is \\ \hline
@@ -36,13 +37,6 @@ wekdata[10 down to 6] daarin staan de uren \newline
 wekdata[11] geluid bit \newline
 wekdata[12] led bit \newline
 wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
-wekker & Bevat nieuwe informatie over de wekker \newline
-wekdata[5 down to 0] daarin staan de minuten \newline
-wekdata[10 down to 6] daarin staan de uren \newline
-wekdata[11] geluid bit \newline
-wekdata[12] led bit \newline
-wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
-toggle & Deze bit verandert bij veranderingen in de uitgang van wekkerdata \\ \hline
 menu & Deze geeft door aan de in welke state we zitten aan de lcd module \newline
 000 : Het normale scherm weergeven met alarm en wekkertijd weergave state: Rust,Wekkertijd \newline
 001 : Uren aanpassen \newline
@@ -53,7 +47,7 @@ menu & Deze geeft door aan de in welke state we zitten aan de lcd module \newlin
 \caption{Uitgangen van de controller}
 \label{tab:uitgangen_controller}
 \end{table}
-
+\newpage
 \subsection{Gedrag}
 Om te beginnen moet de tijd waarop de wekker af moet gaan ingesteld kunnen worden. Dit wordt gedaan door eerst de huidige wekkertijd weer te geven, vervolgens het uur waarop gewekt moet worden te wijzigen en daarna de minuut. Hierna wordt de huidige tijd weer weergegeven. \\
 Daarnaast is een vereiste dat de led uitgezet moet kunnen worden. Afhankelijk van een instelling moet het wake-up-light gedeelte wel of niet aangaan. Hetzelfde geld voor het geluid. \\
@@ -64,15 +58,21 @@ Dit alles moet zo gebruiksvriendelijk mogelijk gebeuren.
 \subsection{FSM}
 Wij gebruiken twee fsm een voor de buffer en een voor de menu.
 \subsubsection{Buffer}
-\subsubsection{Menu}
 
+
+\subsubsection{Menu}
+\begin{figure}[ht!]
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{FSM/controller_fsm.png}
+\label{fig:FSM_controller}
+\caption{FSM diagramma van de menu}
+\end{figure}
 \subsection{VHDL code}
 De code voor de controller van de wekker is te vinden in \cref{Ap:code_controller}. Voor de overzicht en het modular opbouwen is de code in vier blokken geschreven.
 \begin{itemize}[nolistsep]
 \item De top entity met de port map \cref{code:controller_ent,code:controller_beh}.
 \item De menu opzichzelf hierin zit het echt logica in verwerkt te vinden in \cref{code:menu_ent,code:menu_beh}.
 \item Het gebruikte geheugen element voor de opslag van 14 bits te vinden in \cref{code:geheugen_ent,code:geheugen_beh}.
-\item De buffer die er voor zorgt dat er maar 1 klok periode input wordt gezien door de menu de code is te vinden in \cref{code:buffer_ent,code:buffer_ent}.
+\item De gebruikte buffer is te vinden in \cref{code:buffer_ent,code:buffer_ent}. De buffer regelt het ingangssignaal, en zorgt ervoor dat er maar 1 klokperiode lang een hoog signaal gelezen word
 \end{itemize}
 Voor het testen van de code zijn er testbenches gemaakt welke te vind zijn in \cref{code:tb_controller,code:tb_menu,code:tb_geheugen,code:tb_buffer}
 \section{Resultaten}
