@@ -235,6 +235,8 @@ begin
 
 			when minuten_min =>
 				new_state <= minuten_set;
+			when others =>
+				new_state <= rust;
 		end case;
 	end process next_state;
 end behaviour;

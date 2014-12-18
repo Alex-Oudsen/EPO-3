@@ -22,7 +22,6 @@ begin
 	begin
 		case state is
 			when rust =>
-				--knopjes <= "0000";
 				if ((knoppen(0) = '1' xor knoppen(1) = '1') xor (knoppen(2) = '1' xor knoppen(3) = '1')) then
 					new_state <= one;
 					knopjes_temp <= knoppen;
@@ -31,7 +30,6 @@ begin
 					knopjes_temp <= "0000";
 				end if;
 			when zero =>
-				--knopjes <= "0000";
 				knopjes_temp <= "0000";
 				if ((knoppen(0) = '0' and knoppen(1) = '0') and (knoppen(2) = '0' and knoppen(3) = '0')) then
 					new_state <= rust;
@@ -39,10 +37,10 @@ begin
 					new_state <= state;
 				end if;
 			when one =>
-				--knopjes <= knopjes_temp;
-				--knopjes_temp <= knopjes_temp;
 				new_state <= zero;
 				knopjes_temp<="0000";
+			when others =>
+				new_state <= rust;
 		end case;
 		
 	end process actie_uitvoeren;
