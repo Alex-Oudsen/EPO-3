@@ -31,24 +31,24 @@ De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd d
 \end{itemize}
 In \cref{tab:uitgangen_controller} wat voor informatie te vinden is in de uitgangen van de controller.
 \begin{table}[ht!]
-\begin{tabular}{|l|p{10cm}|}
+\caption{Uitgangen van de controller}
+\label{tab:uitgangen_controller}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill} }|l| p{.75\textwidth}|}
 \hline
 Uitgang & Informatie over wat in de uitgang te vinden is \\ \hline
-wekdata & De huidige info over de wekker instellingen uit geheugen \newline
-wekdata[5 down to 0] daarin staan de minuten \newline
-wekdata[10 down to 6] daarin staan de uren \newline
-wekdata[11] geluid bit \newline
-wekdata[12] led bit \newline
-wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
+wekker & De huidige info over de wekker instellingen uit geheugen \newline
+wekker[5 down to 0] daarin staan de minuten \newline
+wekker[10 down to 6] daarin staan de uren \newline
+wekker[11] geluid bit \newline
+wekker[12] led bit \newline
+wekker[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
 menu & Deze geeft door aan de in welke state we zitten aan de lcd module \newline
 000 : Het normale scherm weergeven met alarm en wekkertijd weergave state: Rust,Wekkertijd \newline
 001 : Uren aanpassen \newline
 010 : Minuten aanpassen \newline
 011 : Led aanpassen \newline
 100 : Geluid aanpassen \\ \hline
-\end{tabular}
-\caption{Uitgangen van de controller}
-\label{tab:uitgangen_controller}
+\end{tabular*}
 \end{table}
 \newpage
 \subsection{Gedrag}
@@ -70,62 +70,62 @@ In \cref{fig:FSM_controller} staat de gemaakte fsm en in \cref{tab:states_contro
 \begin{longtable}{|l| p{10cm} |}
 \hline
 Rust, Reset &
-enable ='0' \newline
+enable = '0' \newline
 wekker=wekdata \newline
-menu='000' \\ \hline
+menu= "000" \\ \hline
 Wekker toggle &
-enable ='1' \newline
+enable = '1' \newline
 wekker[12 down to 0]=wekdata[12 down to 0] \newline
-wekker[13]=niet wekdata[13] \newline
-menu = menu \\ \hline
+wekker[13]= niet wekdata[13] \newline
+menu = "000" \\ \hline
 Wekkertijd &
 enable ='0' \newline
 wekker=wekdata \newline
-menu = 000 \\ \hline
+menu = "000" \\ \hline
 Led &
 enable ='0' \newline
 wekker=wekdata \newline
-menu = 011 \\ \hline
+menu = "011" \\ \hline
 Led toggle &
 enable ='1' \newline
 wekker[11 down to 0]=wekdata[11 down to 0]\newline
 wekker[12] = niet wekdata[12] \newline
 wekker[13] = wekdata[13] \newline
-menu = menu \\ \hline
+menu = "011" \\ \hline
 Geluid & 
 enable ='0' \newline
-wekker=wekdata of een mooi getal code \newline
-menu = 100 \\ \hline
+wekker=wekdata \newline
+menu = "100" \\ \hline
 Geluid toggle &
 enable ='1' \newline
 wekker[10 down to 0]=wekdata[10 down to 0] \newline
 wekker[11] = niet wekdata[11] \newline
 wekker[13 downto 12] = wekdata[13 downto 12] \newline
-menu = menu \\ \hline
-Uren set &
+menu = "100" \\ \hline
+Tijd uren &
 enable ='0' \newline
 wekker=wekdata \newline
-menu = 001 \\ \hline
+menu = "001" \\ \hline
 Uren plus &
 enable ='1' \newline
-wekker=wekker+1 \newline
-menu =menu \\ \hline
+wekker=wekdata+1 \newline
+menu = "001" \\ \hline
 Uren min &
 enable ='1' \newline
 wekker=wekdata-1 \newline
-menu = menu \\ \hline
-Minuten set &
+menu = "001" \\ \hline
+Tijd minuten &
 enable ='0' \newline
 wekker=wekdata \newline
-menu = 010 \\ \hline
+menu = "010" \\ \hline
 Minuten plus &
 enable ='1' \newline
-Wektijd=wekdata+1 \newline
-menu = menu \\ \hline
+wekker=wekdata+1 \newline
+menu = "010" \\ \hline
 Minuten min &
 enable ='1' \newline
 wekker=wekdata-1 \newline
-menu = menu \\ \hline
+menu = "010" \\ \hline
 \caption{Uitgangen binnen de state van de controller} 
 \label{tab:states_controller}
 \end{longtable}
