@@ -42,6 +42,6 @@ begin
 	jaren		<=	"00010100" after 0 ns;
 	parity_bits	<=	"111" after 0 ns;
 
-check: parity_check port map(clk, reset, start_xor, minuten, uren, weekdag, dagen, maanden, jaren, parity_bits, sync_now);
+	check: parity_check port map(clk, reset, start_xor, minuten, uren, weekdag, dagen, maanden, jaren, parity_bits, sync_now);
 
 end behaviour;
