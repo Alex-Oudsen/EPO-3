@@ -39,7 +39,11 @@ begin
 		case state is
 			when clear =>			-- Reset state
 				new_h_count <= (others => '0');
-				new_state <= wait_high;
+				if(clk_in = '1') then
+					new_state <= wait_low;
+				else
+					new_state <= wait_high;
+				end if;
 			when wait_high =>		-- Er wordt geteld op de sturende klok
 				if(clk_in = '1') then
 					if(h_count = 23) then
