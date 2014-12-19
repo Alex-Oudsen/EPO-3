@@ -1,0 +1,1 @@
+No. of transistors (total / used):    960/800 = 83.33 %
