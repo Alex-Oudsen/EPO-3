@@ -10,17 +10,17 @@ use ieee.std_logic_unsigned.all;
 
 architecture behaviour of mod24_teller is
 
-type m24_state is (clear, wait_high, wait_low, synchronising);
-signal state, new_state: m24_state;
+	type m24_state is (clear, wait_high, wait_low, synchronising);
+	signal state, new_state: m24_state;
 
-signal h_count, new_h_count: std_logic_vector(4 downto 0);
+	signal h_count, new_h_count: std_logic_vector(4 downto 0);
 
 begin
 	count <= h_count;
 
 	process(clk) is
 	begin
-		if(clk'event and clk = '1') then	-- Opgaande klokflank v.d. systeemklok
+		if(clk'event and clk = '1') then
 			if(reset = '1') then		-- Systeemreset
 				h_count <= (others => '0');
 				state <= clear;
@@ -34,7 +34,7 @@ begin
 		end if;
 	end process;
 
-	process(state, clk_in, sync_now, ref, h_count) is
+	process(state, clk_in, ref, h_count) is
 	begin
 		case state is
 			when clear =>			-- Reset state
@@ -59,11 +59,7 @@ begin
 			when wait_low =>
 				if(clk_in = '0') then
 					new_h_count <= h_count;
-					if(sync_now = '1') then
-						new_state <= synchronising;
-					else
-						new_state <= wait_high;
-					end if;
+					new_state <= wait_high;
 				else
 					new_h_count <= h_count;
 					new_state <= wait_low;

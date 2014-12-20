@@ -8,11 +8,11 @@ use ieee.std_logic_unsigned.all;
 
 architecture behaviour of klokdeler is
 
-type kd_state is (clear, counting, switch);			-- Declaratie van de gebruikte states
-signal state, new_state: kd_state;
+	type kd_state is (clear, counting, switch);		-- Declaratie van de gebruikte states
+	signal state, new_state: kd_state;
 
-signal count, new_count: std_logic_vector(13 downto 0);		-- Voor het tellen tot 32000
-signal temp, new_temp: std_logic;				-- Interne versie van het 1 Hz signaal
+	signal count, new_count: std_logic_vector(13 downto 0);	-- Voor het tellen tot 32000
+	signal temp, new_temp: std_logic;			-- Interne versie van het 1 Hz signaal
 
 begin
 	clk_1hz <= temp;					-- Uitvoeren van het interne 1 Hz signaal
