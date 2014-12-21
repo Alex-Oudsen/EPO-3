@@ -20,10 +20,10 @@ architecture behaviour of mod60_tel_tb is
 		      sync_now:	in  std_logic;
 		      ref:	in  std_logic_vector(5 downto 0);
 		      count:	out std_logic_vector(5 downto 0);
-		      t_clk:	out std_logic);
+		      h_clk:	out std_logic);
 	end component mod60_teller;
 
-	signal clk, clk_in, t_clk, reset, sync_now: std_logic;
+	signal clk, clk_in, h_clk, reset, sync_now: std_logic;
 	signal ref, count: std_logic_vector(5 downto 0);
 
 begin
@@ -37,6 +37,6 @@ begin
 				'1' after 10 ms, '0' after 10020 us;
 	ref		<=	"010111" after 0 ns, "111011" after 6 ms;
 
-	count60: mod60_teller port map(clk, clk_in, reset, sync_now, ref, count, t_clk);
+	count60: mod60_teller port map(clk, clk_in, reset, sync_now, ref, count, h_clk);
 
 end behaviour;

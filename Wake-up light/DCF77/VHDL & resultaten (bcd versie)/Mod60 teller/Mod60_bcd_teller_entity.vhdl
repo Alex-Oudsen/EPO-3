@@ -10,5 +10,5 @@ entity mod60_tel_bcd is
         sync_now:in    std_logic;  -- Enable signaal voor synchronisatie
         ref     :in    std_logic_vector(6 downto 0);	-- Tijdsreferentie
         count   :out   std_logic_vector(6 downto 0);	-- Huidige tellerstand
-	t_clk	:out   std_logic); -- Sturende klok voor volgende teller
+	h_clk	:out   std_logic); -- Sturende klok voor volgende teller
 end mod60_tel_bcd;
