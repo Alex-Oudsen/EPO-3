@@ -112,15 +112,38 @@ begin
             "0000" after 10708 ns,        --FOR DA KNOPSCHEN
             "0100" after 10868 ns,        --led -> led_toggle
             "0000" after 11028 ns,        --FOR DA KNOPSCHEN (led_toggle -> led)
-            "1000" after 11188 ns;        --led -> rust
+            "1000" after 11188 ns,        --led -> rust
+            "0000" after 11348 ns,        --FOR DA KNOPSCHEN
+            "1000" after 11668 ns,        --rust -> wekkertijd
+            "0000" after 11828 ns,        --FOR DA KNOPSCHEN
+            "0100" after 11988 ns,        --wekkertijd -> uren_set
+            "0000" after 12148 ns,        --FOR DA KNOPSCHEN
+            "0010" after 12308 ns,        --uren_set -> uren_plus  
+            "0000" after 12468 ns,        --FOR DA KNOPSHCEN (uren_plus -> uren_set) OUTPUT CHECK
+            "0001" after 12628 ns,        --uren_set -> uren_min
+            "0000" after 12788 ns,        --FOR DA KNOPSCHEN (uren_min -> uren_set)
+            "0100" after 12948 ns,        --uren_set -> minuten_set
+            "0000" after 13108 ns,        --FOR KNOPSCHEN
+            "0010" after 13268 ns,        --minuten_set -> minuten_plus
+            "0000" after 13428 ns,        --FOR KNOP (minuten_plus -> minuten_set)
+            "0001" after 14588 ns,        --minuten_set -> minuten_min
+            "0000" after 13748 ns;        --FOR DA KNOPSHCNE (minuten_min -> minuten_set) OUTPUTCHECK
 
 
+            --Wekdata: van links naar rechts, 3 + 2 + 4 + 3 + 4
     wekdata <= "1111000111011001" after 308 ns, --crit. point HIGH
             "1110000000000000" after 3188 ns, --crit. point LOW
             "1111000111011001" after 4788 ns, --crit. point HIGH
-            "1110000000000000" after 5108 ns;     --crit. point LOW
-    uren <= wekker(12 downto 7);
-    minuten <= wekker(6 downto 0);
+            "111 00 0000 000 0000" after 5108 ns,     --crit. point LOW
+            "111 01 1001 000 0000" after 12308 ns,
+            "111 00 0000 000 0000" after 12628 ns,
+            "111 00 0000 000 1001" after 13108 ns,
+            "111 00 0000 100 0000" after 13588 ns;
+
+
+
+ ---?   uren <= wekker(12 downto 7);
+  ---?  minuten <= wekker(6 downto 0);
 --111 10 0011 101 1001 critical point HIGH
 
 --111 00 0000 000 0000 critical point LOW
