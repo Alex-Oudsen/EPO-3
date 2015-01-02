@@ -9,5 +9,5 @@ entity mod60_clk_bcd is
         reset   :in    std_logic;  -- Systeemreset
         sync_now:in    std_logic;  -- Enable signaal voor synchronisatie
         ref     :in    std_logic_vector(6 downto 0);	-- Tijdsreferentie
-	h_clk	:out   std_logic); -- Sturende klok voor volgende teller
+	m_clk	:out   std_logic); -- Sturende klok voor volgende teller
 end mod60_clk_bcd;

@@ -13,7 +13,7 @@ architecture behaviour_long of autosyncclk_tb is
     		port (clk:		in  std_logic;
 	 	      s_clk:		in  std_logic;
 	  	      reset:		in  std_logic;
-	  	      sync_now:	in  std_logic;
+	  	      sync_now:		in  std_logic;
 		      min_ref:		in  std_logic_vector(5 downto 0);
 		      hr_ref:		in  std_logic_vector(4 downto 0);
 		      minutes:		out std_logic_vector(5 downto 0);
@@ -27,10 +27,10 @@ architecture behaviour_long of autosyncclk_tb is
 begin
 	clk		<=	'1' after 0 ns,		-- Dit genereert een 32 kHz signaal
 				'0' after 15625 ns  when clk /= '0' else '1' after 15625 ns;
-	s_clk		<=	'1' after 0 ns,	-- Dit genereert een 1 Hz signaal
+	s_clk		<=	'1' after 0 ns,		-- Dit genereert een 1 Hz signaal
 				'0' after 500 ms  when s_clk /= '0' else '1' after 500 ms;
 	reset		<=	'1' after 0 ns, '0' after 2 sec;
-	sync_now		<= 	'0' after 0 ns, '1' after 1000000 ms, '0' after 1000001 ms,
+	sync_now	<= 	'0' after 0 ns, '1' after 1000000 ms, '0' after 1000001 ms,
 				'1' after 2500000 ms, '0' after 2500001 ms;
 	min_ref		<=	"001010" after 0 ns, "101101" after 2000 ms;
 	hr_ref		<=	"01010" after 0 ns, "10111" after 2000 ms;
@@ -38,3 +38,4 @@ begin
 	klok: autosyncklok port map(clk, s_clk, reset, sync_now, min_ref, hr_ref, minutes, hours);
 
 end behaviour_long;
+

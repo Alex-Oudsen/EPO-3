@@ -19,10 +19,10 @@ architecture behaviour_bcd_clk of mod60_tel_tb is
 		      reset:    in  std_logic;
 		      sync_now:	in  std_logic;
 		      ref:	in  std_logic_vector(6 downto 0);
-		      h_clk:	out std_logic);
+		      m_clk:	out std_logic);
 	end component mod60_clk_bcd;
 
-	signal clk, clk_in, h_clk, reset, sync_now: std_logic;
+	signal clk, clk_in, m_clk, reset, sync_now: std_logic;
 	signal ref: std_logic_vector(6 downto 0);
 
 begin
@@ -36,6 +36,6 @@ begin
 				'1' after 10 ms, '0' after 10020 us;
 	ref		<=	"0100011" after 0 ns, "1011001" after 6 ms;
 
-	count60: mod60_clk_bcd port map(clk, clk_in, reset, sync_now, ref, h_clk);
+	count60: mod60_clk_bcd port map(clk, clk_in, reset, sync_now, ref, m_clk);
 
 end behaviour_bcd_clk;
