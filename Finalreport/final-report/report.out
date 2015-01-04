@@ -1,0 +1,87 @@
+\BOOKMARK [0][-]{chapter*.1}{Samenvatting}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Introductie}{}% 2
+\BOOKMARK [0][-]{chapter.2}{Ontwerp specificatie}{}% 3
+\BOOKMARK [0][-]{chapter.3}{Systeem overzicht en ontwerp}{}% 4
+\BOOKMARK [0][-]{chapter.4}{DCF controller}{}% 5
+\BOOKMARK [1][-]{section.4.1}{Inleiding}{chapter.4}% 6
+\BOOKMARK [1][-]{section.4.2}{Specificaties}{chapter.4}% 7
+\BOOKMARK [2][-]{subsection.4.2.1}{Ingangen}{section.4.2}% 8
+\BOOKMARK [2][-]{subsection.4.2.2}{Uitgangen}{section.4.2}% 9
+\BOOKMARK [1][-]{section.4.3}{Gedrag}{chapter.4}% 10
+\BOOKMARK [0][-]{chapter.5}{Main controller}{}% 11
+\BOOKMARK [1][-]{section.5.1}{Inleiding}{chapter.5}% 12
+\BOOKMARK [1][-]{section.5.2}{Specificaties}{chapter.5}% 13
+\BOOKMARK [2][-]{subsection.5.2.1}{Ingangen}{section.5.2}% 14
+\BOOKMARK [2][-]{subsection.5.2.2}{Uitgangen}{section.5.2}% 15
+\BOOKMARK [2][-]{subsection.5.2.3}{Gedrag}{section.5.2}% 16
+\BOOKMARK [1][-]{section.5.3}{Functionaliteit}{chapter.5}% 17
+\BOOKMARK [2][-]{subsection.5.3.1}{FSM}{section.5.3}% 18
+\BOOKMARK [2][-]{subsection.5.3.2}{VHDL code}{section.5.3}% 19
+\BOOKMARK [1][-]{section.5.4}{Testen}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.5}{Simulatie}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.6}{Resultaten}{chapter.5}% 22
+\BOOKMARK [2][-]{subsection.5.6.1}{Conclusie en discussie}{section.5.6}% 23
+\BOOKMARK [0][-]{chapter.6}{Alarm}{}% 24
+\BOOKMARK [1][-]{section.6.1}{Inleiding}{chapter.6}% 25
+\BOOKMARK [1][-]{section.6.2}{Specificaties}{chapter.6}% 26
+\BOOKMARK [2][-]{subsection.6.2.1}{Ingangen}{section.6.2}% 27
+\BOOKMARK [2][-]{subsection.6.2.2}{Uitgangen}{section.6.2}% 28
+\BOOKMARK [2][-]{subsection.6.2.3}{Gedrag}{section.6.2}% 29
+\BOOKMARK [1][-]{section.6.3}{Functionaliteit}{chapter.6}% 30
+\BOOKMARK [2][-]{subsection.6.3.1}{FSM}{section.6.3}% 31
+\BOOKMARK [2][-]{subsection.6.3.2}{Code}{section.6.3}% 32
+\BOOKMARK [1][-]{section.6.4}{Resultaten}{chapter.6}% 33
+\BOOKMARK [0][-]{chapter.7}{LCD controller}{}% 34
+\BOOKMARK [1][-]{section.7.1}{Inleiding}{chapter.7}% 35
+\BOOKMARK [1][-]{section.7.2}{Specificaties}{chapter.7}% 36
+\BOOKMARK [2][-]{subsection.7.2.1}{Ingangen}{section.7.2}% 37
+\BOOKMARK [2][-]{subsection.7.2.2}{Uitgangen}{section.7.2}% 38
+\BOOKMARK [2][-]{subsection.7.2.3}{Gedrag}{section.7.2}% 39
+\BOOKMARK [1][-]{section.7.3}{Functionaliteit}{chapter.7}% 40
+\BOOKMARK [2][-]{subsection.7.3.1}{FSM}{section.7.3}% 41
+\BOOKMARK [2][-]{subsection.7.3.2}{VHDL code}{section.7.3}% 42
+\BOOKMARK [1][-]{section.7.4}{Testen}{chapter.7}% 43
+\BOOKMARK [1][-]{section.7.5}{Simulatie}{chapter.7}% 44
+\BOOKMARK [1][-]{section.7.6}{Resultaten}{chapter.7}% 45
+\BOOKMARK [2][-]{subsection.7.6.1}{Conclusie en discussie}{section.7.6}% 46
+\BOOKMARK [0][-]{chapter.8}{Results for total design}{}% 47
+\BOOKMARK [0][-]{chapter.9}{Plan voor het testen van de chip}{}% 48
+\BOOKMARK [1][-]{section.9.1}{FPGA bord}{chapter.9}% 49
+\BOOKMARK [1][-]{section.9.2}{Logic Analyzer}{chapter.9}% 50
+\BOOKMARK [0][-]{chapter.10}{Voortgang van het project}{}% 51
+\BOOKMARK [1][-]{section.10.1}{Inleiding}{chapter.10}% 52
+\BOOKMARK [1][-]{section.10.2}{Werkverdeling}{chapter.10}% 53
+\BOOKMARK [2][-]{subsection.10.2.1}{Module opdracht}{section.10.2}% 54
+\BOOKMARK [2][-]{subsection.10.2.2}{Wake-up light}{section.10.2}% 55
+\BOOKMARK [1][-]{section.10.3}{Samenwerking binnen de groep}{chapter.10}% 56
+\BOOKMARK [1][-]{section.10.4}{Afspraken binnen de groep}{chapter.10}% 57
+\BOOKMARK [0][-]{chapter.11}{Conclusie}{}% 58
+\BOOKMARK [0][-]{appendix.A}{VHDL code}{}% 59
+\BOOKMARK [1][-]{section.A.1}{Top level entity}{appendix.A}% 60
+\BOOKMARK [1][-]{section.A.2}{Behavioural VHDL code controller}{appendix.A}% 61
+\BOOKMARK [1][-]{section.A.3}{Menu entity}{appendix.A}% 62
+\BOOKMARK [1][-]{section.A.4}{Behavioural VHDL code menu}{appendix.A}% 63
+\BOOKMARK [1][-]{section.A.5}{Memory}{appendix.A}% 64
+\BOOKMARK [1][-]{section.A.6}{Behavioural VHDL memory}{appendix.A}% 65
+\BOOKMARK [1][-]{section.A.7}{Entity buffer}{appendix.A}% 66
+\BOOKMARK [1][-]{section.A.8}{Behavioural VHDL buffer}{appendix.A}% 67
+\BOOKMARK [0][-]{appendix.B}{VHDL code}{}% 68
+\BOOKMARK [1][-]{section.B.1}{Testbench VHDL controller}{appendix.B}% 69
+\BOOKMARK [1][-]{section.B.2}{Testbench VHDL menu}{appendix.B}% 70
+\BOOKMARK [1][-]{section.B.3}{Testbench VHDL geheugen}{appendix.B}% 71
+\BOOKMARK [1][-]{section.B.4}{Testbench VHDL buffer}{appendix.B}% 72
+\BOOKMARK [0][-]{appendix.C}{Simulatie resultaten}{}% 73
+\BOOKMARK [1][-]{section.C.1}{Behavoral simulatie}{appendix.C}% 74
+\BOOKMARK [1][-]{section.C.2}{Synthesize simulatie}{appendix.C}% 75
+\BOOKMARK [1][-]{section.C.3}{Extracted simulatie}{appendix.C}% 76
+\BOOKMARK [1][-]{section.C.4}{Timing}{appendix.C}% 77
+\BOOKMARK [0][-]{appendix.D}{VHDL code}{}% 78
+\BOOKMARK [1][-]{section.D.1}{entity alarm-compare}{appendix.D}% 79
+\BOOKMARK [1][-]{section.D.2}{Behavioural alarm-compare}{appendix.D}% 80
+\BOOKMARK [1][-]{section.D.3}{Top entity alarm}{appendix.D}% 81
+\BOOKMARK [1][-]{section.D.4}{Behavioural alarm}{appendix.D}% 82
+\BOOKMARK [1][-]{section.D.5}{Entity alarm-counter}{appendix.D}% 83
+\BOOKMARK [1][-]{section.D.6}{Behavioural alarm-counter}{appendix.D}% 84
+\BOOKMARK [1][-]{section.D.7}{Entity alarm-pwm}{appendix.D}% 85
+\BOOKMARK [1][-]{section.D.8}{Behavioural alarm-pwm}{appendix.D}% 86
+\BOOKMARK [0][-]{appendix*.19}{Bibliografie}{}% 87
