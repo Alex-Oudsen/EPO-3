@@ -9,7 +9,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-architecture behaviour of dcf_counter_tb is
+architecture behaviour_long of dcf_counter_tb is
 	component dcf_counter is
  		port (clk:		in  std_logic;
 		      reset:    	in  std_logic;
@@ -270,4 +270,4 @@ begin
 
 	dcf_count: dcf_counter port map(clk, reset, dcf_rise, dcf_fall, count, new_bit);
 
-end behaviour;
+end behaviour_long;
