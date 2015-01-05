@@ -34,7 +34,7 @@ begin
 			when wekkertijd =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu_signal <= "000";
+				menu_signal <= "101";
 
 			when led =>
 				enable <= '0';

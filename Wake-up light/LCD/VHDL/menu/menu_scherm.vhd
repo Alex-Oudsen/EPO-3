@@ -8,10 +8,6 @@ entity menu_scherm is
         menu    :in    std_logic_vector(2 downto 0);
         x_menu  :out   std_logic_vector(6 downto 0);
         y_menu  :out   std_logic_vector(5 downto 0);
-        c_menu  :out   std_logic_vector(6 downto 0);
-        x_streep:out   std_logic_vector(6 downto 0);
-        y_streep:out   std_logic_vector(5 downto 0);
-        c_streep:out   std_logic_vector(6 downto 0));
+        c_menu  :out   std_logic_vector(6 downto 0));
 end menu_scherm;
-
 

@@ -5,7 +5,7 @@ use IEEE.numeric_Std.all;
 architecture behaviour of buff is
 type fsm_states is (rust, one, zero);
 signal state, new_state : fsm_states;
-signal knopjes_temp : std_logic_vector(3 downto 0);
+signal knoppen_temp : std_logic_vector(3 downto 0);
 begin
 	assign : process(clk, reset) --Daadwerkelijk alles toekennen
 	begin
@@ -15,33 +15,39 @@ begin
 			else
 				state <= rust;
 			end if;
-			knopjes <= knopjes_temp;
+			knoppen_out <= knoppen_temp;
 		end if;
 	end process assign;
-	actie_uitvoeren : process(knoppen,clk, reset, state) --Voer acties uit
+	actie_uitvoeren : process(knoppen_in,clk, reset, state) --Voer acties uit
 	begin
 		case state is
 			when rust =>
-				if ((knoppen(0) = '1' xor knoppen(1) = '1') xor (knoppen(2) = '1' xor knoppen(3) = '1')) then
+				if ((knoppen_in(0) = '1' xor knoppen_in(1) = '1') xor (knoppen_in(2) = '1' xor knoppen_in(3) = '1')) then
 					new_state <= one;
-					knopjes_temp <= knoppen;
+					knoppen_temp <= knoppen_in;
 				else
 					new_state <= state;
-					knopjes_temp <= "0000";
+					knoppen_temp <= "0000";
 				end if;
 			when zero =>
-				knopjes_temp <= "0000";
-				if ((knoppen(0) = '0' and knoppen(1) = '0') and (knoppen(2) = '0' and knoppen(3) = '0')) then
+				knoppen_temp <= "0000";
+				if ((knoppen_in(0) = '0' and knoppen_in(1) = '0') and (knoppen_in(2) = '0' and knoppen_in(3) = '0')) then
 					new_state <= rust;
 				else
 					new_state <= state;
 				end if;
 			when one =>
 				new_state <= zero;
-				knopjes_temp<="0000";
+				knoppen_temp<="0000";
 			when others =>
 				new_state <= rust;
-		end case;
-		
+				knoppen_temp <= "0000";
+		end case;	
 	end process actie_uitvoeren;
 end behaviour;
+
+
+
+
+
+

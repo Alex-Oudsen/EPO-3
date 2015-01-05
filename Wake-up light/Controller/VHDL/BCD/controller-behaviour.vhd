@@ -22,10 +22,10 @@ end component geheugen;
 
 
 component buff is 							--De buffer die speciaal gemaakt is voor de menu met extra eigenschappen
-	port(clk		:in		std_logic;
+	port(clk			:in		std_logic;
         reset		:in		std_logic;
-		knoppen		:in		std_logic_vector(3 downto 0);
-		knopjes		:out	std_logic_vector(3 downto 0));
+		knoppen_in		:in		std_logic_vector(3 downto 0);
+		knoppen_out		:out	std_logic_vector(3 downto 0));
 end component buff;
 
 signal knoppen_buff : std_logic_vector(3 downto 0);
