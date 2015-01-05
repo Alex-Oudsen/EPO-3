@@ -41,10 +41,13 @@ begin
 				knoppen_temp<="0000";
 			when others =>
 				new_state <= rust;
-		end case;
-		
+				knoppen_temp <= "0000";
+		end case;	
 	end process actie_uitvoeren;
 end behaviour;
+
+
+
 
 
 
