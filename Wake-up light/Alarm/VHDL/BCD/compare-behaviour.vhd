@@ -5,7 +5,9 @@ use IEEE.numeric_std.ALL;
 architecture behaviour of compare is
 	type comp_state is (steady, start, final);
 	signal state, new_state: comp_state;
-	signal alarm_uur_l, alarm_uur_h, alarm_min_l, alarm_min_h: std_logic_vector(3 downto 0);
+	signal alarm_uur_l, alarm_min_l: std_logic_vector(3 downto 0);
+	signal alarm_uur_h : std_logic_vector(1 downto 0);
+	signal alarm_min_h : std_logic_vector (2 downto 0);
 begin
 	lbl1: process (clk)
 	begin
@@ -13,9 +15,9 @@ begin
 			if (reset = '1') or (stop_alarm = '1') then
 				state <= steady;
 				alarm_min_l <= std_logic_vector(to_unsigned(0, 4));
-				alarm_min_h <= std_logic_vector(to_unsigned(0, 4));
+				alarm_min_h <= std_logic_vector(to_unsigned(0, 3));
 				alarm_uur_l <= std_logic_vector(to_unsigned(0, 4));
-				alarm_uur_h <= std_logic_vector(to_unsigned(0, 4));
+				alarm_uur_h <= std_logic_vector(to_unsigned(0, 2));
 			else
 				if ((to_integer(unsigned(wekker_min_h)) = 1) and (to_integer(unsigned(wekker_min_l)) > 4)) or (to_integer(unsigned(wekker_min_h)) > 1) then
 					alarm_uur_l <= wekker_uur_l;
@@ -23,11 +25,11 @@ begin
 				else
 					if (to_integer(unsigned(wekker_uur_l)) = 0) and (to_integer(unsigned(wekker_uur_h)) = 0) then
 						alarm_uur_l <= std_logic_vector(to_unsigned(3, 4));
-						alarm_uur_h <= std_logic_vector(to_unsigned(2, 4));
+						alarm_uur_h <= std_logic_vector(to_unsigned(2, 2));
 					else
 						if (to_integer(unsigned(wekker_uur_l)) = 0) then
 							alarm_uur_l <= std_logic_vector(to_unsigned(9, 4));
-							alarm_uur_h <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_uur_h)) - 1 , 4));
+							alarm_uur_h <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_uur_h)) - 1 , 2));
 						else
 							alarm_uur_l <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_uur_l)) - 1 , 4));
 							alarm_uur_h <= wekker_uur_h;
@@ -36,19 +38,19 @@ begin
 				end if;
 				if (to_integer(unsigned(wekker_min_l)) > 4) and (to_integer(unsigned(wekker_min_h)) > 0) then
 					alarm_min_l <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_min_l)) - 5 , 4));
-					alarm_min_h <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_min_h)) - 1 , 4));
+					alarm_min_h <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_min_h)) - 1 , 3));
 				elsif (to_integer(unsigned(wekker_min_l)) > 4) and (to_integer(unsigned(wekker_min_h)) = 0) then
 					alarm_min_l <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_min_l)) - 5 , 4));
-					alarm_min_h <= std_logic_vector(to_unsigned(5, 4));
+					alarm_min_h <= std_logic_vector(to_unsigned(5, 3));
 				elsif (to_integer(unsigned(wekker_min_l)) < 5) and (to_integer(unsigned(wekker_min_h)) = 0) then
 					alarm_min_l <= std_logic_vector(to_unsigned(5 + to_integer(unsigned(wekker_min_l)), 4));
-					alarm_min_h <= std_logic_vector(to_unsigned(4, 4));
+					alarm_min_h <= std_logic_vector(to_unsigned(4, 2));
 				elsif (to_integer(unsigned(wekker_min_l)) < 5) and (to_integer(unsigned(wekker_min_h)) = 1) then
 					alarm_min_l <= std_logic_vector(to_unsigned(5 + to_integer(unsigned(wekker_min_l)), 4));
-					alarm_min_h <= std_logic_vector(to_unsigned(5, 4));
+					alarm_min_h <= std_logic_vector(to_unsigned(5, 2));
 				else
 					alarm_min_l <= std_logic_vector(to_unsigned(5 + to_integer(unsigned(wekker_min_l)), 4));
-					alarm_min_h <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_min_h)) - 1 , 4));
+					alarm_min_h <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_min_h)) - 1 , 3));
 				end if;
 				state <= new_state;
 			end if;
@@ -84,14 +86,4 @@ begin
 		end case;
 	end process;
 end behaviour;
-
-
-
-
-
-
-
-
-
-
 
