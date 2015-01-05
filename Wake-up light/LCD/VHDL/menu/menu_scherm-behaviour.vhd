@@ -3,24 +3,18 @@ use IEEE.std_logic_1164.ALL;
 
 architecture behaviour of menu_scherm is
 
-type menu_state is (steady, uren, uren_ready, minuten, minuten_ready, licht, licht_ready, geluid, geluid_ready);
+type menu_state is (steady, schrijven, ready_state);
 signal state, new_state: menu_state;
+signal buf, new_buf: std_logic_vector (2 downto 0);
 
-constant x_pos_menu: std_logic_vector (6 downto 0) := "0011001";				-- x-positie voor het balkje menu
-constant y_pos_menu: std_logic_vector (5 downto 0) := "110101";				-- y-positie voor het balkje menu
-constant c_tijd_aanp: std_logic_vector (6 downto 0) := "0101100";			-- "wekkertijd aanpassen"
-constant c_licht_aanp: std_logic_vector (6 downto 0) := "1011100";			-- "licht aanpassen"
-constant c_geluid_aanp: std_logic_vector (6 downto 0) := "0110110";		-- "geluid aanpassen"
-constant x_pos_uren: std_logic_vector (6 downto 0) := "1010101";			-- x-positie voor het streepje onder het uur
-constant y_pos_uren: std_logic_vector (5 downto 0) := "010101";				-- y-positie voor het streepje onder het uur
-constant c_kort: std_logic_vector (6 downto 0) := "0000111";					-- char "streepje"
-constant x_pos_min: std_logic_vector (6 downto 0) := "1010101";				-- x-positie voor het streepje onder de minuten
-constant y_pos_min: std_logic_vector (5 downto 0) := "010101";				-- y-positie voor het streepje onder de minuten
-constant x_pos_licht: std_logic_vector (6 downto 0) := "1010101";			-- x-positie voor het streepje onder het licht
-constant y_pos_licht: std_logic_vector (5 downto 0) := "010101";			-- y-positie voor het streepje onder het licht
-constant c_lang: std_logic_vector (6 downto 0) := "0000111";					-- char "streepje"
-constant x_pos_geluid: std_logic_vector (6 downto 0) := "1010101";		-- x-positie voor het streepje onder het geluid
-constant y_pos_geluid: std_logic_vector (5 downto 0) := "010101";			-- y-positie voor het streepje onder het geluid
+constant x_pos_menu: std_logic_vector (6 downto 0) := "0011001";				-- x-positie voor menu
+constant y_pos_menu: std_logic_vector (5 downto 0) := "110101";				-- y-positie voor menu
+constant c_0: std_logic_vector (6 downto 0) := "0101010";	-- leeg
+constant c_1: std_logic_vector (6 downto 0) := "0100110"; -- uren aanpassen
+constant c_2: std_logic_vector (6 downto 0) := "0100111"; -- minuten aanpassen
+constant c_3: std_logic_vector (6 downto 0) := "0101001"; -- licht aanpassen
+constant c_4: std_logic_vector (6 downto 0) := "0101000"; -- geluid aanpassen
+
 
 begin
 
@@ -31,133 +25,66 @@ lbl1: process(clk)
 				state <= steady;
 			else
 				state <= new_state;
+				buf <= new_buf;
 			end if;
 		end if;
 	end process;
 
 
-lbl2: process (state, menu, ready)
+lbl2: process (state, menu, ready, buf)
 begin
 	case state is
 		when steady =>
-			x_menu <= "0000000";
-			y_menu <= "000000";
+			x_menu <= x_pos_menu;
+			y_menu <= y_pos_menu;
 			c_menu <= "0000000";
-			x_streep <= "0000000";
-			y_streep <= "000000";
-			c_streep <= "0000000";
-			if (menu = "001") then
-				new_state <= uren;
-			elsif (menu = "010") then
-				new_state <= minuten;
-			elsif (menu = "011") then
-				new_state <= licht;
-			elsif (menu = "100") then
-				new_state <= geluid; 
+			new_buf <= buf;
+			if (menu /= buf) then
+				new_state <= schrijven;
 			else
 				new_state <= steady;
 			end if;
-		when uren =>
+		when schrijven =>
 			x_menu <= x_pos_menu;
 			y_menu <= y_pos_menu;
-			c_menu <= c_tijd_aanp;
-			x_streep <= x_pos_uren;
-			y_streep <= y_pos_uren;
-			c_streep <= c_kort;
+			case menu is
+				when "001" =>
+					c_menu <= c_1;
+					new_buf <= "001";
+				when "010" =>
+					c_menu <= c_2;
+					new_buf <= "010";
+				when "011" =>
+					c_menu <= c_3;
+					new_buf <= "011";
+				when "100" =>
+					c_menu <= c_4;
+					new_buf <= "100";
+				when "000" =>
+					c_menu <= c_0;
+					new_buf <= "000";
+				when others =>
+					c_menu <= c_0;
+					new_buf <= buf;
+			end case;
 			if (ready = '1') then
-				new_state <= uren_ready;
+				new_state <= ready_state;
 			else
-				new_state <= uren;
+				new_state <= schrijven;
 			end if;
-		when uren_ready =>
+		when ready_state =>
 			x_menu <= x_pos_menu;
 			y_menu <= y_pos_menu;
-			c_menu <= c_tijd_aanp;
-			x_streep <= x_pos_uren;
-			y_streep <= y_pos_uren;
-			c_streep <= c_kort;
+			c_menu <= "0000000";
+			new_buf <= buf;
 			if (ready = '0') then
 				new_state <= steady;
 			else
-				new_state <= uren_ready;
+				new_state <= ready_state;
 			end if;
-		when minuten =>
-			x_menu <= x_pos_menu;
-			y_menu <= y_pos_menu;
-			c_menu <= c_tijd_aanp;
-			x_streep <= x_pos_min;
-			y_streep <= y_pos_min;
-			c_streep <= c_kort;
-			if (ready = '1') then
-				new_state <= minuten_ready;
-			else
-				new_state <= minuten;
-			end if;
-		when minuten_ready =>
-			x_menu <= x_pos_menu;
-			y_menu <= y_pos_menu;
-			c_menu <= c_tijd_aanp;
-			x_streep <= x_pos_min;
-			y_streep <= y_pos_min;
-			c_streep <= c_kort;
-			if (ready = '0') then
-				new_state <= steady;
-			else
-				new_state <= minuten_ready;
-			end if;
-		when licht =>
-			x_menu <= x_pos_menu;
-			y_menu <= y_pos_menu;
-			c_menu <= c_licht_aanp;
-			x_streep <= x_pos_licht;
-			y_streep <= y_pos_licht;
-			c_streep <= c_lang;
-			if (ready = '1') then
-				new_state <= licht_ready;
-			else
-				new_state <= licht;
-			end if;
-		when licht_ready =>
-			x_menu <= x_pos_menu;
-			y_menu <= y_pos_menu;
-			c_menu <= c_licht_aanp;
-			x_streep <= x_pos_licht;
-			y_streep <= y_pos_licht;
-			c_streep <= c_lang;
-			if (ready = '0') then
-				new_state <= steady;
-			else
-				new_state <= licht_ready;
-			end if;
-		when geluid =>
-			x_menu <= x_pos_menu;
-			y_menu <= y_pos_menu;
-			c_menu <= c_geluid_aanp;
-			x_streep <= x_pos_geluid;
-			y_streep <= y_pos_geluid;
-			c_streep <= c_lang;
-			if (ready = '1') then
-				new_state <= geluid_ready;
-			else
-				new_state <= geluid;
-			end if;
-		when geluid_ready =>
-			x_menu <= x_pos_menu;
-			y_menu <= y_pos_menu;
-			c_menu <= c_geluid_aanp;
-			x_streep <= x_pos_geluid;
-			y_streep <= y_pos_geluid;
-			c_streep <= c_lang;
-			if (ready = '0') then
-				new_state <= steady;
-			else
-				new_state <= geluid_ready;
-			end if;
-	end case;
-end process;
+	end case;	
+ end process;
 
 end behaviour;
-
-
 
 
