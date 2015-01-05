@@ -5,8 +5,8 @@ architecture behaviour of buff_tb is
 component buff is
 	port(clk			:in		std_logic;
         reset		:in		std_logic;
-		knoppen		:in		std_logic_vector(3 downto 0);
-		knopjes		:out	std_logic_vector(3 downto 0));
+		knoppen_in		:in		std_logic_vector(3 downto 0);
+		knoppen_out		:out	std_logic_vector(3 downto 0));
 end component buff;
 
 signal  clk,enable,reset		:	std_logic;
@@ -29,3 +29,18 @@ begin
 
 	buff_pm: buff port map(clk,reset,knoppen,knoppjes);
 end behaviour;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
