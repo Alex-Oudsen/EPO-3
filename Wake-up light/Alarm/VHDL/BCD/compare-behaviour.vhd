@@ -44,10 +44,10 @@ begin
 					alarm_min_h <= std_logic_vector(to_unsigned(5, 3));
 				elsif (to_integer(unsigned(wekker_min_l)) < 5) and (to_integer(unsigned(wekker_min_h)) = 0) then
 					alarm_min_l <= std_logic_vector(to_unsigned(5 + to_integer(unsigned(wekker_min_l)), 4));
-					alarm_min_h <= std_logic_vector(to_unsigned(4, 2));
+					alarm_min_h <= std_logic_vector(to_unsigned(4, 3));
 				elsif (to_integer(unsigned(wekker_min_l)) < 5) and (to_integer(unsigned(wekker_min_h)) = 1) then
 					alarm_min_l <= std_logic_vector(to_unsigned(5 + to_integer(unsigned(wekker_min_l)), 4));
-					alarm_min_h <= std_logic_vector(to_unsigned(5, 2));
+					alarm_min_h <= std_logic_vector(to_unsigned(5, 3));
 				else
 					alarm_min_l <= std_logic_vector(to_unsigned(5 + to_integer(unsigned(wekker_min_l)), 4));
 					alarm_min_h <= std_logic_vector(to_unsigned(to_integer(unsigned(wekker_min_h)) - 1 , 3));
@@ -86,4 +86,7 @@ begin
 		end case;
 	end process;
 end behaviour;
+
+
+
 
