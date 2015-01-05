@@ -1,0 +1,27 @@
+\chapter{DCF controller}
+\section{Inleiding}
+De basis van onze wekker wordt gelegd door een klok. Uit het onderdeel, genaamd DCF-controller,  komt verschillende data, als de tijd, de datum en het weeknummer. Van de tijd uitgang wordt verwacht dat deze gesynchroniseerd met het DCF-signaal is, maar mocht het signaal uitvallen moet de tijd door blijven tellen.
+
+\section{Specificaties}
+\subsection{Ingangen}
+Dit onderdeel maakt gebruik van de volgende ingangen:
+\newline
+\begin{itemize}[nolistsep]
+\item Reset, standaard input.
+\item Klok, standaard input.
+\item DCF, signaal van 'logische' pulsen.
+\end{itemize}
+\noindent
+\\
+\subsection{Uitgangen}
+Dit onderdeel heeft de volgende uitgangen:
+\begin{itemize}[nolistsep]
+\item Uren, een binaire vector van 6 bits.
+\item minuten, een binaire vector van 7 bits.
+\item clk, een clk die elke seconde een puls geeft.
+\item debug\_led, een signaal dat een logische 1 doorgeeft zodra er een dcf signaal wordt ontvangen.
+\end{itemize}
+
+\section{Gedrag}
+
+Een van de eigenschappen van deze klok zal zijn dat hij gesynchroniseerd wordt met een zogenaamd DCF-signaal. Dit is een signaal dat in duitsland verzonden wordt en allerlei informatie bevat, als de actuele tijd en de datum. Wij zullen meerdere van deze elementen gebruiken in onze wekker.  Al deze data wordt verzonden door middel van een pulssignaal. Vanuit Duitland wordt elke seconde een puls van 100 of 200 ms verstuurd, zodat respectievelijk een 0-bit en een 1-bit doorgegeven wordt. Dit resulteert in een totaal van 59 bits, gevolgt door een seconde ‘rust’, dat elke minuut opnieuw verzonden wordt. De uren en minuten van dit signaal zullen gebruikt worden om de tijd van een interne klok bij te werken. Daarnaast zal de dag van de week, de dag van de maand, de maand en het jaar doorgegeven naar de andere onderdelen van de wekker doorgegeven.

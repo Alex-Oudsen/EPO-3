@@ -1,0 +1,1 @@
+No. of transistors (total / used):    1008/800 = 79.37 %

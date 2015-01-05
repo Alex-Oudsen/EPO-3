@@ -1,0 +1,1 @@
+No. of transistors (total / used):    1920/1274 = 66.35 %

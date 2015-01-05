@@ -1,0 +1,1 @@
+No. of transistors (total / used):    5560/2186 = 39.32 %

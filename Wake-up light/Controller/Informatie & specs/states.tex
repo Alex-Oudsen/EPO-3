@@ -1,0 +1,178 @@
+\documentclass[a4paper, oneside, 10pt]{article}
+
+\usepackage{verbatim}
+\usepackage[hidelinks]{hyperref}
+\usepackage[dutch]{babel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+%\usepackage[table]{xcolor}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+%\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{longtable}			% Table is te groot
+\usepackage{listings}			% Used to include VHDL-code and fragments
+\usepackage[dutch]{babel}		% Dutch hyphenation patterns and dutch names 
+\usepackage{soul}				% dingen doorstrepen
+\usepackage[normalem]{ulem}				%dingen dooruniten
+\usepackage{pslatex}			% Times, helvetica and courier
+\usepackage[T1]{fontenc}		% Nicer font-encoding
+\usepackage{hyperref}			% Gives clickable references in pdf-file
+\usepackage{graphicx}			% Used to include .pdf, .jpg and .png-files
+\usepackage{tabularx}			% Used for evenly spread tables
+\usepackage{eso-pic}			% Absolute positioning, used for lines-to-track appendix and front- and backpage
+\usepackage{datetime}			% Used for some data-references
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=up]{caption}	% Nicer captions
+\usepackage{nonfloat}			% Captions for non-floating figures and tables
+\usepackage{nextpage}			% Advanced nextpage commands
+\usepackage{keystroke}			% "real" keys
+\usepackage[nottoc]{tocbibind}		% Include Bibliography in ToC
+\usepackage{multirow}			% Span text over multiple rows
+\usepackage{verbatim}			% For comment-environment
+\usepackage[left=3.5cm, right=2.5cm]{geometry}
+\usepackage{enumitem} % Mogelijkheid tot geen enters in itemize en enurate
+
+\crefname{equation}{vergelijking}{vergelijkingen}
+\crefname{table}{tabel}{tabellen}
+\crefname{figure}{figuur}{figuren}
+
+
+\definecolor{comment}{RGB}{0, 15 , 117}		%Kleur blauw defineren
+\definecolor{keyword}{RGB}{165, 42, 42}		%Kleur rood defineren
+\definecolor{STD}{RGB}{46, 139, 87}			%Kleur groen defineren
+\lstdefinelanguage{VHDL}{
+  morekeywords=[1]{ 		%Defineren van keywords die blauw worden
+    library,use,all,entity,is,port,in,out,end,architecture,of,
+    begin,and,or,not,downto,ALL,signal,type,case,if,elsif,for,when,array,
+    others,loop,process,to
+  },
+  morekeywords=[2]{			%Defineren van keyword die groen worden
+    STD_LOGIC_VECTOR,STD_LOGIC,STD_LOGIC_1164,
+    NUMERIC_STD,STD_LOGIC_ARITH,STD_LOGIC_UNSIGNED,std_logic_vector,unsigned,
+    std_logic
+  },
+  morecomment=[l]--
+}
+\lstdefinestyle{vhdl}{
+  language     = VHDL,
+  basicstyle   = \footnotesize \ttfamily,
+  keywordstyle = [1]\color{keyword}\bfseries, %Keywords kleuren
+  keywordstyle = [2]\color{STD}\bfseries,	%Keywords kleuren
+  commentstyle = \color{comment}, % Commits kleuren
+  numbers=left,					  % Regel nummering
+  breaklines=true,                % sets automatic line breaking
+  tabsize=4                       % sets default tabsize to 4 spaces
+}
+
+
+\title{\textbf{States controller met alle uitgangen gedefineerd}}	
+
+\author{
+Gemaakt door leden van projectgroep A1\\
+\begin{tabular}{c | l}
+Rens Hamburger & 4292936 \\
+\end{tabular}
+}
+
+\date{\today\\ Version 1.0} 
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\section{Entity}
+\scriptsize 
+ \lstinputlisting [style= VHDL]{menu-ent.vhd}
+ \normalsize
+\section{Ingangen en uitgangen}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+Knoppen & knoppen[0] =menu \newline
+knoppen[1] = set \newline
+knoppen[2] = up\newline
+knoppen[3] = down \\ \hline
+wekdata & De huidige info over de wekker instellingen uit geheugen \newline
+wekdata[5 down to 0] daarin staan de minuten \newline
+wekdata[10 down to 6] daarin staan de uren \newline
+wekdata[11] geluid bit \newline
+wekdata[12] led bit \newline
+wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
+wekker & Bevat nieuwe informatie over de wekker \newline
+wekdata[5 down to 0] daarin staan de minuten \newline
+wekdata[10 down to 6] daarin staan de uren \newline
+wekdata[11] geluid bit \newline
+wekdata[12] led bit \newline
+wekdata[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
+toggle & Deze bit verandert bij veranderingen in de uitgang van wekkerdata \\ \hline
+menu & Deze geeft door aan de in welke state we zitten aan de lcd module \newline
+000 : Het normale scherm weergeven met alarm en wekkertijd weergave state: Rust,Wekkertijd \newline
+001 : Uren aanpassen \newline
+010 : Minuten aanpassen \newline
+011 : Led aanpassen \newline
+100 : Geluid aanpassen \\ \hline
+\end{tabular}
+\section{States}
+\begin{longtable}{|l| p{10cm} |}
+\hline
+Rust, Reset &
+enable ='0' \newline
+wekker=wekdata \newline
+menu='000' \\ \hline
+Wekker toggle &
+enable ='1' \newline
+wekker[12 down to 0]=wekdata[12 down to 0] \newline
+wekker[13]=niet wekdata[13] \newline
+menu = menu \\ \hline
+Wekkertijd &
+enable ='0' \newline
+wekker=wekdata \newline
+menu = 000 \\ \hline
+Led &
+enable ='0' \newline
+wekker=wekdata \newline
+menu = 011 \\ \hline
+Led toggle &
+enable ='1' \newline
+wekker[11 down to 0]=wekdata[11 down to 0]\newline
+wekker[12] = niet wekdata[12] \newline
+wekker[13] = wekdata[13] \newline
+menu = menu \\ \hline
+Geluid & 
+enable ='0' \newline
+wekker=wekdata of een mooi getal code \newline
+menu = 100 \\ \hline
+Geluid toggle &
+enable ='1' \newline
+wekker[10 down to 0]=wekdata[10 down to 0] \newline
+wekker[11] = niet wekdata[11] \newline
+wekker[13 downto 12] = wekdata[13 downto 12] \newline
+menu = menu \\ \hline
+Uren set &
+enable ='0' \newline
+wekker=wekdata \newline
+menu = 001 \\ \hline
+Uren plus &
+enable ='1' \newline
+wekker=wekker+1 \newline
+menu =menu \\ \hline
+Uren min &
+enable ='1' \newline
+wekker=wekdata-1 \newline
+menu = menu \\ \hline
+Minuten set &
+enable ='0' \newline
+wekker=wekdata \newline
+menu = 010 \\ \hline
+Minuten plus &
+enable ='1' \newline
+Wektijd=wekdata+1 \newline
+menu = menu \\ \hline
+Minuten min &
+enable ='1' \newline
+wekker=wekdata-1 \newline
+menu = menu \\ \hline
+\end{longtable}
+
+
+\end{document}
