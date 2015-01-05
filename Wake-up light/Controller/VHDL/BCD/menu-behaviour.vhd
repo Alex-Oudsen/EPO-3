@@ -240,21 +240,3 @@ begin
 		end case;
 	end process next_state;
 end behaviour;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
