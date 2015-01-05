@@ -14,18 +14,18 @@ architecture behaviour of parity_check is
 	type checks is (clear, check, output);
 	signal state, new_state: checks;
 
-	signal m_par, new_m_par: std_logic; -- parity minuten (correct = 1)
-	signal h_par, new_h_par: std_logic; -- parity uren (correct = 1)
-	signal d_par, new_d_par: std_logic; -- parity datum (correct = 1)
+	signal m_par, new_m_par: std_logic; -- parity minuten (correct = 0)
+	signal h_par, new_h_par: std_logic; -- parity uren (correct = 0)
+	signal d_par, new_d_par: std_logic; -- parity datum (correct = 0)
 
 begin
 	process(clk) is
 	begin
 		if(clk'event and clk = '1') then
 			if(reset = '1') then		-- Systeemreset
-				m_par <= '0';
-				h_par <= '0';
-				d_par <= '0';
+				m_par <= '1';
+				h_par <= '1';
+				d_par <= '1';
 				state <= clear;
 			else
 				m_par <= new_m_par;
@@ -40,9 +40,9 @@ begin
 	begin
 		case state is
 			when clear =>				-- Dit is de reset state
-				new_m_par <= '0';
-				new_h_par <= '0';
-				new_d_par <= '0';
+				new_m_par <= '1';
+				new_h_par <= '1';
+				new_d_par <= '1';
 
 				sync_now <= '0';
 				if(start_xor = '1') then
@@ -73,7 +73,7 @@ begin
 				new_h_par <= h_par;
 				new_d_par <= d_par;
 
-				if(m_par = '1' and h_par = '1' and d_par = '1') then
+				if(m_par = '0' and h_par = '0' and d_par = '0') then
 					sync_now <= '1';	-- Parity is correct
 				else
 					sync_now <= '0';	-- Parity is niet correct
