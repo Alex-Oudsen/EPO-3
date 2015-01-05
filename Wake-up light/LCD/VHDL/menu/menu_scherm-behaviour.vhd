@@ -14,6 +14,7 @@ constant c_1: std_logic_vector (6 downto 0) := "0100110"; -- uren aanpassen
 constant c_2: std_logic_vector (6 downto 0) := "0100111"; -- minuten aanpassen
 constant c_3: std_logic_vector (6 downto 0) := "0101001"; -- licht aanpassen
 constant c_4: std_logic_vector (6 downto 0) := "0101000"; -- geluid aanpassen
+constant c_5: std_logic_vector (6 downto 0) := "0101011"; -- tijd aanpassen
 
 
 begin
@@ -63,6 +64,9 @@ begin
 				when "000" =>
 					c_menu <= c_0;
 					new_buf <= "000";
+				when "101" =>
+					c_menu <= c_5;
+					new_buf <= "101"
 				when others =>
 					c_menu <= c_0;
 					new_buf <= buf;
