@@ -1,11 +1,35 @@
-Plan van Aanpak/ProjPlanNL.aux
-Plan van Aanpak/ProjPlanNL.log
-Plan van Aanpak/ProjPlanNL.synctex.gz
-Plan van Aanpak/ProjPlanNL.toc
-Midterm/midterm-report/FSM/Thumbs.db
-Midterm/midterm-report/report.toc
-Midterm/midterm-report/report.synctex.gz
-Midterm/midterm-report/report.pdf
-Midterm/midterm-report/report.out
-Midterm/midterm-report/report.log
-Midterm/midterm-report/report.aux
+*_cfg.vhd
+*_EXTR.vhd
+*_SYNTH.vhd
+*.aux
+*.bak
+*.bsf
+*.cmd
+*.cmp
+*.db
+*.ddc
+*.def
+*.done
+*.dpf
+*.ini
+*.log
+*.lst
+*.mess
+*.mr
+*.plt
+*.qpf
+*.qsf
+*.res
+*.rpt
+*.sin
+*.sls
+*.summary
+*.svf
+*.synctex.gz
+*.tcl
+*.toc
+*.out
+*.vhd~
+*.vhd_
+*.wlf
+transcript
