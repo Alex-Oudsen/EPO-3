@@ -342,6 +342,7 @@
                 \color{tudelft-cyan}\LARGE\@author
             \end{minipage}
         };
+
         %% Draw the back box in cyan.
         \fill[fill=tudelft-cyan](back top left) rectangle (back bottom right);
         %% Print the affiliation.
