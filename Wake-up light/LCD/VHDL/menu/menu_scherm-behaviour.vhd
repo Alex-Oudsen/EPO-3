@@ -6,7 +6,7 @@ architecture behaviour of menu_scherm is
 type menu_state is (steady, schrijven, ready_state);
 signal state, new_state: menu_state;
 signal buf, new_buf: std_logic_vector (2 downto 0);
-signal alarm, alarm_buf: std_logic;
+signal alarm_buf: std_logic;
 
 constant x_pos_menu: std_logic_vector (6 downto 0) := "0011001";	-- x-positie voor menu
 constant y_pos_menu: std_logic_vector (5 downto 0) := "110101";		-- y-positie voor menu
@@ -76,9 +76,9 @@ begin
 					new_buf <= "101";
 				when others =>
 					if (alarm = '1') then
-						c_menu <= c_0);
+						c_menu <= c_0;
 					else
-						c_menu <= c_6);
+						c_menu <= c_6;
 					end if;
 					new_buf <= buf;
 			end case;
@@ -101,5 +101,6 @@ begin
  end process;
 
 end behaviour;
+
 
 
