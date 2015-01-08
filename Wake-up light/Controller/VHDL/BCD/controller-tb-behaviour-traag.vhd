@@ -20,7 +20,7 @@ signal wekker		:	std_logic_vector (15 downto 0);
 
 begin
 	clk		<=	'1' after 0 ns,
-			'0' after 40 ns when clk /= '0' else '1' after 40 ns;		--31250
+			'0' after 15625 ns when clk /= '0' else '1' after 15625 ns;		--32kHz
 
 	reset	<=	'1' after 0 ns,		--knoppen(0) = menu
 			'0' after 50000 ns;		--knoppen(1) = set
