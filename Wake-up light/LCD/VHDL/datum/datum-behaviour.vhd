@@ -16,27 +16,15 @@ architecture behaviour of datum is
 	constant x_rust : std_logic_vector (6 downto 0) := "0000000" ; 
 	constant y_rust : std_logic_vector (5 downto 0) := "000000" ; 
 
-	constant x_1 : std_logic_vector (6 downto 0) := "1001110" ; 
-	constant y_1 : std_logic_vector (5 downto 0) := "101010" ; 
+	constant y_1		: std_logic_vector (5 downto 0) := "011011" ;
 
-	constant x_2 : std_logic_vector (6 downto 0) := "1000110" ; 
-	constant y_2 : std_logic_vector (5 downto 0) := "111001" ; 
-	
-	constant x_3 : std_logic_vector (6 downto 0) := "1001011" ;  
-	constant y_3 : std_logic_vector (5 downto 0) := "011100" ; 
-
-	constant x_4 : std_logic_vector (6 downto 0) := "1010101" ; 
-	constant y_4 : std_logic_vector (5 downto 0) := "010101" ; 	
-
-	constant x_5 : std_logic_vector (6 downto 0) := "0101011" ; 
-	constant y_5 : std_logic_vector (5 downto 0) := "101010" ; 
-
-	constant x_6 : std_logic_vector (6 downto 0) := "0111001" ; 
-	constant y_6 : std_logic_vector (5 downto 0) := "001100" ; 
-
-	constant x_7 : std_logic_vector (6 downto 0) := "0101110" ; 
-	constant y_7 : std_logic_vector (5 downto 0) := "111000" ; 
-
+	constant x_1 : std_logic_vector (6 downto 0) := "0010101" ; 
+	constant x_2 : std_logic_vector (6 downto 0) := "0101100" ; 	
+	constant x_3 : std_logic_vector (6 downto 0) := "0110010" ;  
+	constant x_4 : std_logic_vector (6 downto 0) := "0111100" ; 
+	constant x_5 : std_logic_vector (6 downto 0) := "1000010" ; 
+	constant x_6 : std_logic_vector (6 downto 0) := "1001100" ; 
+	constant x_7 : std_logic_vector (6 downto 0) := "1010010" ; 
 
 -- Constantes voor getallen 0 tot 9
 	constant char_rust : std_logic_vector(6 downto 0) :="0000000";
@@ -236,14 +224,14 @@ begin
 				data_buffer(2) <= dagvdmaand(2);
 				data_buffer(3) <= dagvdmaand(3);
 				x <= x_2;
-				y <= y_2;			
+				y <= y_1;			
 			when "011" => 
 				data_buffer(0) <= maand(4);
 				data_buffer(1) <= '0';
 				data_buffer(2) <= '0';
 				data_buffer(3) <= '0';
 				x <= x_3;
-				y <= y_3;
+				y <= y_1;
 
 			when "100" => 
 				data_buffer(0) <= maand(0);
@@ -251,21 +239,21 @@ begin
 				data_buffer(2) <= maand(2);
 				data_buffer(3) <= maand(3);
 				x <= x_4;
-				y <= y_4;
+				y <= y_1;
 			when "101" => 
 				data_buffer(0) <= jaar(4);
 				data_buffer(1) <= jaar(5);
 				data_buffer(2) <= jaar(6);
 				data_buffer(3) <= jaar(7);
 				x <= x_5;
-				y <= y_5;
+				y <= y_1;
 			when "110" => 
 				data_buffer(0) <= jaar(0);
 				data_buffer(1) <= jaar(1);
 				data_buffer(2) <= jaar(2);
 				data_buffer(3) <= jaar(3);
 				x <= x_6;
-				y <= y_6;
+				y <= y_1;
 
 			when "000" => 
 				data_buffer(0) <= dagvdweek(0);
@@ -273,7 +261,7 @@ begin
 				data_buffer(2) <= dagvdweek(2);
 				data_buffer(3) <= '0';
 				x <= x_7;
-				y <= y_7;
+				y <= y_1;
 			when others =>
 				data_buffer(0) <= '0';
 				data_buffer(1) <= '0';
@@ -286,6 +274,9 @@ begin
 		
 
 end  behaviour;
+
+
+
 
 
 
