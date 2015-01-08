@@ -66,7 +66,7 @@ begin
 					new_buf <= "000";
 				when "101" =>
 					c_menu <= c_5;
-					new_buf <= "101"
+					new_buf <= "101";
 				when others =>
 					c_menu <= c_0;
 					new_buf <= buf;
