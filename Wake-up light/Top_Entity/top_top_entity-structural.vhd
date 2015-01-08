@@ -53,8 +53,8 @@ end component;
 component lcd_top is
     	port (	clk		: in	std_logic;
 		reset		: in	std_logic;
-		uren		: in 	std_logic_vector(4 downto 0);
-		minuten 	: in 	std_logic_vector(5 downto 0);
+		uren		: in 	std_logic_vector(5 downto 0);
+		minuten 	: in 	std_logic_vector(6 downto 0);
 		dagvdweek	: in 	std_logic_vector (2 downto 0);
 		dagvdmaand 	: in 	std_logic_vector (5 downto 0);
 		maand		: in 	std_logic_vector (4 downto 0);
@@ -62,23 +62,30 @@ component lcd_top is
 		dcf_debug	: in   	std_logic;
 		menu		: in 	std_logic_vector (2 downto 0);
 		geluid_signaal	: in   	std_logic;
-       	data_out  	: out   std_logic_vector(6 downto 0);
+		licht_signaal : in	std_logic;
+		wektijd_uren: in	std_logic_vector (5 downto 0);
+		wektijd_minuten:in	std_logic_vector (6 downto 0);
+       	data_out  	: out   std_logic_vector (6 downto 0);
        	clk_out   	: out   std_logic);
 end component;
 
 --signalen
-signal clk, reset, clk_1hz, dcf_led, dcf_in	:	std_logic;
+signal clk, reset, clk_1hz, dcf_led, dcf_in, date_ready:	std_logic;
 signal tijd_tijd_tijd : std_logic_vector (12 downto 0);
 signal wekkeur : std_logic_vector (15 downto 0);
-signal dagvdweek : std_logic_vector
+signal weekday : std_logic_vector (2 downto 0);
+signal dag_maand : std_logic_vector (5 downto 0);
+signal month	:	std_logic_vector (4 downto 0);
+signal year		:	std_logic_vector (7 downto 0);
+signal
 
 begin
 --port maps
 	alarm_1 : alarm port map (clk, reset => reset, clk_1hz);
-	compare_1 : compare port map (clk, reset, );
+	compare_1 : compare port map (clk, reset, tijd_tijd_tijd(10 downto 7), tijd_tijd_tijd(12 downto 11), tijd_tijd_tijd(3 downto 0), tijd_tijd_tijd(6 downto 4), wekkeur(10 downto 7), wekkeur(12 downto 11), wekkeur(3 downto 0), wekkeur(6 downto 4), knoppen(5), );
 	kontroller_1 : controller port map (clk => clk, reset => reset, knoppen => knoppen, );
-	dcf_1 : dcf77_bcd port map (clk, reset, dcf_in, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), , , , , ,);
-	lcd_toppie : lcd_top port map (clk, reset, );
+	dcf_1 : dcf77_bcd port map (clk, reset, dcf_in, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), weekday, dag_maand, month, year, date_ready); --klaar
+	lcd_toppie : lcd_top port map (clk, reset, tijd_tijd_tijd(12 downto 7), tijd_tijd_tijd(6 downto 0), weekday, dag_maand, month, year, dcf);
 end structural;
 
 
