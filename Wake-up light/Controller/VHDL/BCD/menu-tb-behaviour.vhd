@@ -1,152 +1,100 @@
---In case of doubt, blame Kevin.
---
---In case of no-doubt, follow the following procedure:
---Assume the state of no-mind using ancient Japanese techniques,
---If that does not take away no-doubt, beat the shit out of a brick (or stone) wall;
---If that does not work, acquaintance one´s face with a heavy metal object, preferably a chair.
-
---Then, blame Kevin.
+--In case of doubt, blame Kevin
 
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 use IEEE.Numeric_Std.all;
 
-architecture behaviour of menu_test is
-component menu is        --component initialiseren, met de volgende in/uitgangen:
-    port(clk        :in        std_logic;
-        reset        :in        std_logic;
-        knoppen        :in        std_logic_vector    (3 downto 0);    --dit zijn de fysieke knoppen
-        wekdata        :in        std_logic_vector    (15 downto 0);    --komt bij het register vandaan
-        enable        :out    std_logic;
-        wekker        :out    std_logic_vector    (15 downto 0);
-        menu_signal    :out    std_logic_vector    (2 downto 0)); --voor de LCD'
-end component menu;
+architecture behaviour of controller_tb is
+component controller is
+	port(clk    :in    std_logic;
+        reset  :in    std_logic;
+        knoppen:in    std_logic_vector(3 downto 0);
+        wekker :out   std_logic_vector(15 downto 0);
+        menu_state   :out   std_logic_vector(2 downto 0));
+end component controller;
 
-signal clk, reset, enable    :    std_logic;
-signal menu_signal            :    std_logic_vector (2 downto 0);
-signal knoppen,minuten_enkel,uren_enkel            :    std_logic_vector (3 downto 0);        --signalen voor de port map
-signal wekdata, wekker        :    std_logic_vector (15 downto 0);
---signal uren            :    std_logic_vector (5 downto 0);
---signal minute            :    std_logic_vector (6 downto 0);
-signal uren_dubdle        :    std_logic_vector (1 downto 0);
-signal minuten_duble        :    std_logic_vector (2 downto 0);
+signal clk, reset	 						:	std_logic;
+signal menu_signal							:	std_logic_vector(2 downto 0);
+signal knoppen								: std_logic_vector (3 downto 0);
+signal wekker		:	std_logic_vector (15 downto 0);
 
 begin
-    clk        <=    '1' after 0 ns,
-            '0' after 80 ns when clk /= '0' else '1' after 80 ns;
+	clk		<=	'1' after 0 ns,
+			'0' after 40 ns when clk /= '0' else '1' after 40 ns;		--31250
 
-    reset    <=    '1' after 0 ns,            --knoppen(0) = menu;
-            '0' after 62 ns;            --knoppen(1) = set;
-                                        --knoppen(2) = up;
-    knoppen <=    "0000" after 0 ns,        --knoppen(3) = down.
-            "0100" after 308 ns,        --state rust -> wekker_toggle
-            "0000" after 468 ns,        --FOR DA KNOPJES & wekker_toggle > rust)
+	reset	<=	'1' after 0 ns,		--knoppen(0) = menu
+			'0' after 128 ns;		--knoppen(1) = set
+									--knoppen(2) = up
+	knoppen <=	"0000" after 0 ns,	--knoppen(3) = down
+			"0010" after 128 ns,	--rust -> wekker_toggle	
+			"0000" after 208 ns,	--knoppen(3) = down	
+			"0001" after 608 ns,	--rust -> wekkertijd
+			"0000" after 688 ns,	--knoppen(3) = down
+			"0001" after 848 ns,	--wekkertijd -> rust
+			"0000" after 928 ns,	--knoppen(3) = down
+			"0001" after 1088 ns,	--rust -> wekkertijd
+			"0000" after 1168 ns,	--knoppen(3) = down
+			"0010" after 1328 ns,	--wekkertijd -> uren_set
+			"0000" after 1408 ns,	--knoppen(3) = down
+			"0100" after 1568 ns,	--uren_set -> uren_plus
+			"0000" after 1648 ns,	--knoppen(3) = down
+			"1000" after 2008 ns,	--uren_set -> uren_min
+			"0000" after 2088 ns,	--uren_min -> uren_set
+			"0001" after 2248 ns,	--uren_set -> rust
+			"0000" after 2328 ns,	--knoppen(3) = down
+			"0001" after 2488 ns,	--rust -> wekkertijd
+			"0000" after 2568 ns,	--knoppen(3) = down
+			"0010" after 2768 ns,	--wekkertijd -> uren_set
+			"0000" after 2808 ns,	--knoppen(3) = down
+			"0010" after 2968 ns,	--uren_set -> minuten_set
+			"0000" after 3048 ns,	--knoppen(3) = down
+			"0100" after 3208 ns,	--minuten_set -> minuten_plus
+			"0000" after 3288 ns,	--minuten_plus -> minuten_set
+			"1000" after 3448 ns,	--minuten_set -> minuten_min
+			"0000" after 3528 ns,	--minuten_min -> minuten_set
+			"0001" after 3688 ns,	--minuten_set -> rust
+			"0000" after 3768 ns,	--knoppen(3) = down
+			"0001" after 3928 ns,	--rust -> wekkertijd
+			"0000" after 4008 ns,	--knoppen(3) = down
+			"0010" after 4168 ns,	--wekkertijd -> uren_set
+			"0000" after 4248 ns,	--knoppen(3) = down
+			"0010" after 4408 ns,	--uren_set -> minuten_set
+			"0000" after 4488 ns,	--knoppen(3) = down
+			"0010" after 4648 ns,	--minuten_set -> rust
+			"0000" after 4728 ns,	--knoppen(3) = down
+			"0001" after 4888 ns,	--rust -> wekkertijd
+			"0000" after 4968 ns,	--knoppen(3) = down
+			"1000" after 5128 ns,	--wekkertijd -> led
+			"0000" after 5208 ns,	--knoppen(3) = down
+			"0001" after 5368 ns,	--led -> rust
+			"0000" after 5448 ns,	--knoppen(3) = down
+			"0001" after 5608 ns,	--rust -> wekkertijd
+			"0000" after 5688 ns,	--knoppen(3) = down
+			"0100" after 5848 ns,	--wekkertijd -> geluid
+			"0000" after 6128 ns,	--knoppen(3) = down
+			"0100" after 6288 ns,	--geluid -> led
+			"0000" after 6368 ns,	--knoppen(3) = down
+			"0100" after 6528 ns,	--led -> wekkertijd
+			"0000" after 6608 ns,	--knoppen(3) = down
+			"1000" after 6768 ns,	--wekkertijd -> led
+			"0000" after 6848 ns,	--knoppen(3) = down
+			"1000" after 7008 ns,	--led -> geluid
+			"0000" after 7088 ns,	--knoppen(3) = down
+			"1000" after 7248 ns,	--geluid -> wekkertijd
+			"0000" after 7328 ns,	--knoppen(3) = down
+			"1000" after 7488 ns,	--wekkertijd -> led
+			"0000" after 7568 ns,	--knoppen(3) = down
+			"0010" after 7728 ns,	--led -> led_toggle
+			"0000" after 7808 ns,	--led_toggle -> led
+			"1000" after 7968 ns,	--led -> geluid
+			"0000" after 8048 ns,	--knoppen(3) = down
+			"0010" after 8208 ns,	--geluid -> geluid_toggle
+			"0000" after 8288 ns,	--geluid_toggle -> geluid
+			"0001" after 8448 ns,	--geluid -> rust
+			"0000" after 8528 ns; 	--done, done, done;			
 
-            "1000" after 628 ns,        --rust -> wekkertijd
-            "0000" after 788 ns,        --FOR DA KNOPJES
-            "1000" after 948 ns,        --wekkertijd -> rust
-            "0000" after 1108 ns,        --FOR DA KNOPJES
-
-            "1000" after 1268 ns,        --rust -> wekkertijd
-            "0000" after 1428 ns,        --FOR DA KNOPJES
-            "0100" after 1588 ns,        --wekkertijd -> tijd_uren
-            "0000" after 1748 ns,        --FOR DA KNOPJES
-            "1000" after 1908 ns,        --tijd_uren -> rust
-            "0000" after 2068 ns,        --FOR DA KNOPJES
-
-            "1000" after 2228 ns,        --rust -> wekkertijd
-            "0000" after 2388 ns,        --FOR DA KNOPJES
-            "0100" after 2548 ns,        --wekkertijd -> tijd_uren
-            "0000" after 2708 ns,        --FOR DA KNOPJES
-            "0010" after 2868 ns,        --tijd_uren -> uren_plus (critical high)    OUTPUT_CHECK
-            "0000" after 3028 ns,        --FOR DA KNOPJESCH (uren_plus -> tijd_uren)
-            "0001" after 3188 ns,        --tijd_uren -> uren_min     (critical low)        OUTPUT_CHECK
-            "0000" after 3348 ns,        --FOR DA KNOPJES (uren_min -> tijd_uren)
-            "1000" after 3508 ns,        --tijd_uren -> rust
-            "0000" after 3668 ns,        --FOR DA KNOPJES
-            "1000" after 3828 ns,        --rust -> wekkertijd
-            "0000" after 3988 ns,        --FOR DA KNOPJES
-            "0100" after 4148 ns,        --wekkertijd -> tijd_uren
-            "0000" after 4308 ns,        --FOR DA KNOPJESCH
-            "0100" after 4468 ns,        --tijd_uren -> tijd_minuten
-            "0000" after 4628 ns,        --FOR DA KNOPJESCH
-            "0010" after 4788 ns,        --tijd_minuten -> minuten_plus        OUTPUT_CHECK
-            "0000" after 4948 ns,        --FOR DA KNOPJES (minuten_plus -> tijd_minuten)
-            "0001" after 5108 ns,        --tijd_minuten -> minuten_min        OUTPUT_CHECK
-            "0000" after 5268 ns,        --FOR DA KNOPJES (min_min -> tijd_min)
-            "1000" after 5428 ns,        --minuten_min -> rust
-            "0000" after 5588 ns,        --FOR DA KNOPJES
-            "1000" after 5748 ns,        --rust -> wekkertijd
-            "0000" after 5908 ns,        --FOR DA KNOPJES
-            "0100" after 6068 ns,        --wekkertijd -> tijd_uren
-            "0000" after 6228 ns,        --FOR DA KNOPJES
-            "0100" after 6388 ns,        --tijd_uren -> tijd_minuten
-            "0000" after 6548 ns,        --FOR DA KNOPJES
-            "0100" after 6708 ns,        --tijd_minuten -> rust
-            "0000" after 6868 ns,        --FOR DA KNOPJES
-
-            "1000" after 7028 ns,        --rust -> wekkertijd
-            "0000" after 7188 ns,        --FOR DA KNOPJES
-            "0010" after 7348 ns,        --wekkertijd -> geluid
-            "0000" after 7508 ns,        --FOR DA KNOPJES
-            "0010" after 7668 ns,        --geluid -> licht
-            "0000" after 7828 ns,        --FOR DA KNOPJESCH
-            "0010" after 7988 ns,        --licht -> wekkertijd
-            "0000" after 8148 ns,        --FOR DA KNOPJESCH
-            "0001" after 8308 ns,        --wekkertijd -> licht
-            "0000" after 8468 ns,        --FOR DA KNOPJESCH
-            "0001" after 8626 ns,        --licht -> geluid
-            "0000" after 8788 ns,        --FOR DA KNOPJESCH
-            "0001" after 8948 ns,        --geluid -> wekkertijd
-            "0000" after 9108 ns,        --FOR DA KNOPSCHEN
-
-            "0010" after 9268 ns,        --wekkertijd -> geluid
-            "0000" after 9428 ns,        --FOR DA KNOPSCHEN
-            "0100" after 9588 ns,        --geluid -> geluid_toggle
-            "0000" after 9748 ns,        --FOR DA KNOPSCHEN (geluid_toggle -> geluid)
-            "1000" after 9908 ns,        --geluid -> rust
-            "0000" after 10068 ns,        --FOR DA KNOPSCHEN
-            "1000" after 10228 ns,        --rust -> wekkertijd
-            "0000" after 10388 ns,        --FOR DA KNOPSCHEN
-            "0001" after 10548 ns,        --wekkertijd -> led
-            "0000" after 10708 ns,        --FOR DA KNOPSCHEN
-            "0100" after 10868 ns,        --led -> led_toggle
-            "0000" after 11028 ns,        --FOR DA KNOPSCHEN (led_toggle -> led)
-            "1000" after 11188 ns,        --led -> rust
-            "0000" after 11348 ns,        --FOR DA KNOPSCHEN
-            "1000" after 11668 ns,        --rust -> wekkertijd
-            "0000" after 11828 ns,        --FOR DA KNOPSCHEN
-            "0100" after 11988 ns,        --wekkertijd -> uren_set
-            "0000" after 12148 ns,        --FOR DA KNOPSCHEN
-            "0010" after 12308 ns,        --uren_set -> uren_plus  
-            "0000" after 12468 ns,        --FOR DA KNOPSHCEN (uren_plus -> uren_set) OUTPUT CHECK
-            "0001" after 12628 ns,        --uren_set -> uren_min
-            "0000" after 12788 ns,        --FOR DA KNOPSCHEN (uren_min -> uren_set)
-            "0100" after 12948 ns,        --uren_set -> minuten_set
-            "0000" after 13108 ns,        --FOR KNOPSCHEN
-            "0010" after 13268 ns,        --minuten_set -> minuten_plus
-            "0000" after 13428 ns,        --FOR KNOP (minuten_plus -> minuten_set)
-            "0001" after 14588 ns,        --minuten_set -> minuten_min
-            "0000" after 13748 ns;        --FOR DA KNOPSHCNE (minuten_min -> minuten_set) OUTPUTCHECK
-
-
-            --Wekdata: van links naar rechts, 3 + 2 + 4 + 3 + 4
-    wekdata <= "1111000111011001" after 308 ns, --crit. point HIGH
-            "1110000000000000" after 3188 ns, --crit. point LOW
-            "1111000111011001" after 4788 ns, --crit. point HIGH
-            "111 00 0000 000 0000" after 5108 ns,     --crit. point LOW
-            "111 01 1001 000 0000" after 12308 ns,
-            "111 00 0000 000 0000" after 12628 ns,
-            "111 00 0000 000 1001" after 13108 ns,
-            "111 00 0000 100 0000" after 13588 ns;
-
-
-
- ---?   uren <= wekker(12 downto 7);
-  ---?  minuten <= wekker(6 downto 0);
---111 10 0011 101 1001 critical point HIGH
-
---111 00 0000 000 0000 critical point LOW
-
-    menu_pm: menu port map(clk, reset, knoppen, wekdata, enable, wekker, menu_signal); --de daadwerkelijke port map
+	controller_pm: controller port map(clk, reset, knoppen, wekker,menu_signal);
 end architecture;
+
+
+
