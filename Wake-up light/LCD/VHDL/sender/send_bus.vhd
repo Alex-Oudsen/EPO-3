@@ -28,10 +28,14 @@ entity send_bus is
 	y_in_4:in std_logic_vector(5 downto 0);
 	c_in_4:in std_logic_vector(6 downto 0);
 	ready_4:out std_logic);
-	--x_in_5:in std_logic_vector(6 downto 0);
-	--y_in_5:in std_logic_vector(5 downto 0);
-	--c_in_5:in std_logic_vector(6 downto 0);
-	--ready_5:out std_logic);
+	x_in_5:in std_logic_vector(6 downto 0);
+	y_in_5:in std_logic_vector(5 downto 0);
+	c_in_5:in std_logic_vector(6 downto 0);
+	ready_5:out std_logic);
+	x_in_6:in std_logic_vector(6 downto 0);
+	y_in_6:in std_logic_vector(5 downto 0);
+	c_in_6:in std_logic_vector(6 downto 0);
+	ready_6:out std_logic);
 end send_bus;
 
 
