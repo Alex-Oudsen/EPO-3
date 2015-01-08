@@ -1,0 +1,1 @@
+Gebruik in TeXworks/MikTex onder het menu bestand -> Verwijder hulpbestanden... voordat je het verslag pusht.

@@ -1,0 +1,99 @@
+\documentclass[dutch, oneside]{tudelft-report}
+\usepackage{cleveref}
+\usepackage[dutch]{babel}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}	
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+
+\usepackage{datetime}					% Used for some data-references
+\usepackage{eso-pic}						% Absolute positioning, used for lines-to-track appendix and front- and backpage
+\usepackage{keystroke}					% "Real" keys
+\usepackage{longtable}					% Table is te groot
+\usepackage{nameref}					% For displaying a sections name AND number
+\usepackage{nextpage}					% Advanced nextpage commands
+\usepackage{nonfloat}					% Captions for non-floating figures and tables
+\usepackage[normalem]{ulem}				% Dingen dooruniten
+\usepackage[nottoc]{tocbibind}				% Include Bibliography in ToC
+\usepackage{pslatex}						% Times, helvetica and courier
+\usepackage{soul}						% Dingen doorstrepen
+\usepackage[T1]{fontenc}					% Nicer font-encoding
+\usepackage{tabularx}					% Used for evenly spread tables
+\usepackage{tikz}						% Voor fsm
+\usepackage{verbatim}					% For comment-environment
+\usepackage{xcolor}						% For adding colored text
+
+\definecolor{comment}{RGB}{0, 15 , 117}		% Kleur blauw defineren
+\definecolor{keyword}{RGB}{165, 42, 42}		% Kleur rood defineren
+\definecolor{STD}{RGB}{46, 139, 87}			% Kleur groen defineren
+
+\lstdefinelanguage{VHDL}{
+	morekeywords=[1]{ 					% Defineren van keywords die blauw worden
+		ALL, all, and, architecture, array,
+		begin, case, downto, else, elsif,
+		entity, end, for, if, in, is, library,
+		loop, not, of, or, others, out,
+		port, process, signal, then,
+		to, type, use, when
+},
+	morekeywords=[2]{					% Defineren van keyword die groen worden
+    		NUMERIC_STD, numeric_std,
+		STD_LOGIC_1164, std_logic_1164,
+		STD_LOGIC_ARITH, std_logic_arith,
+		STD_LOGIC_UNSIGNED, std_logic_unsigned,
+		STD_LOGIC_VECTOR, std_logic_vector,
+		STD_LOGIC, std_logic,
+		UNSIGNED, unsigned
+},
+	morecomment=[l]--
+}
+
+\lstdefinestyle{vhdl}{
+  language		= VHDL,
+  basicstyle   	= \footnotesize \ttfamily,
+  keywordstyle 	= [1]\color{keyword}\bfseries, 	% Keywords kleuren (rood)
+  keywordstyle 	= [2]\color{STD}\bfseries,		% Keywords kleuren (groen)
+  commentstyle	= \color{comment},			% Comments kleuren (blauw)
+  numbers		= left,					% Regel nummering
+  breaklines	= true,               			% sets automatic line breaking
+  tabsize		= 4                       			% sets default tabsize to 4 spaces
+}
+
+\begin{document}
+
+\frontmatter							% To use Roman numeral page numbers (title pages and table of contents)
+\title[Extreme Winterslaap Interrupter\\ Final report\\ \\ 14-01-2015]{EPO-3}
+\author{Projectgroep A1}
+\affiliation{Technische Universiteit Delft} 
+\coverimage{Cover/Lightbulb}
+\makecover
+
+\input{Opening/Samenvatting}
+\tableofcontents
+
+\mainmatter							% To use Arabic numeral page numbers (all main chapters)
+\input{Opening/Inleiding}
+\input{Opening/Specificaties}
+\input{Opening/Overzicht_en_ontwerp}
+
+\input{DCF77/DCF77}
+\input{Main_controller/Main_controller}
+\input{Alarm/Alarm}
+\input{LCD_controller/LCD_controller}
+
+\input{Afsluiting/Resultaten}
+\input{Afsluiting/Testplan}
+\input{Afsluiting/Projectproces}
+\input{Afsluiting/Conclusies}
+
+\appendix								% To use letters as chapter numbers (appendices)
+\input{Appendices/VHDL}
+\input{Appendices/Simulaties}
+\bibliography{Referenties}
+
+\end{document}

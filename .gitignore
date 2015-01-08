@@ -3,6 +3,8 @@
 *_SYNTH.vhd
 *.aux
 *.bak
+*.bbl
+*.blg
 *.bsf
 *.cmd
 *.cmp
@@ -25,6 +27,7 @@
 *.sls
 *.summary
 *.svf
+*.synctex
 *.synctex.gz
 *.tcl
 *.toc
@@ -32,4 +35,5 @@
 *.vhd~
 *.vhd_
 *.wlf
+Report.txt
 transcript
