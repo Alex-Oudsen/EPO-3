@@ -38,7 +38,7 @@ constant char_9 : std_logic_vector(6 downto 0) := "0001011";
 type states is (rust, char_0_state,char_1_state, char_2_state, char_3_state, dubbele_punt);
 signal state, new_state : states;
 signal hz_state, new_hz_state : std_logic;
-signal ready_sig : std_logic;
+signal ready_sig, new_ready_sig : std_logic;
 --signal minuten_tijd, new_minuten_tijd : unsigned(5 downto 0);
 --signal uren_tijd, new_uren_tijd : unsigned(4 downto 0);
 --signal minner : unsigned(5 downto 0);
@@ -59,7 +59,7 @@ begin
 			lsb_minuten <= new_lsb_minuten;
 			hz_state <= new_hz_state;
 			punt <= new_punt;
-			ready_sig <= ready;
+			ready_sig <= new_ready_sig;
 		end if;
 	end if;
 end process;
@@ -71,7 +71,7 @@ begin
 			x <= "0000000";
 			y <= "000000";
 			c <= "0000000";
-			--ready_sig <= ready;
+			new_ready_sig <= ready;
 			--minner <= "000000";
 			new_punt <= punt;
 			if (minuten(0) /= lsb_minuten) then
@@ -100,6 +100,7 @@ begin
 		when dubbele_punt =>
 			--new_minuten_tijd <= minuten_tijd;
 			--new_uren_tijd <= uren_tijd;
+			new_ready_sig <= ready;
 			new_lsb_minuten <= lsb_minuten;
 			new_hz_state <= hz_sig;
 			--minner <= "000000";
@@ -145,6 +146,7 @@ begin
 		when char_0_state =>
 			--new_minuten_tijd <= minuten_tijd;
 			new_lsb_minuten <= lsb_minuten;
+			new_ready_sig <= ready;
 			new_hz_state <= hz_sig;
 			x <= char_0_x;
 			y <= char_0_y;
@@ -178,6 +180,7 @@ begin
 			--new_minuten_tijd <= minuten_tijd;
 			--new_uren_tijd <= uren_tijd;
 			new_lsb_minuten <= lsb_minuten;
+			new_ready_sig <= ready;
 			new_hz_state <= hz_sig;
 			x <= char_1_x;
 			y <= char_1_y;
@@ -221,6 +224,7 @@ begin
 			--new_uren_tijd <= uren_tijd;
 			--new_hz_state <= hz_sig;
 			new_lsb_minuten <= lsb_minuten;
+			new_ready_sig <= ready;
 			x <= char_2_x;
 			y <= char_2_y;
 			new_punt <= punt;
@@ -262,6 +266,7 @@ begin
 			--new_uren_tijd <= uren_tijd;
 			new_lsb_minuten <= lsb_minuten;
 			new_hz_state <= hz_sig;
+			new_ready_sig <= ready;
 			x <= char_3_x;
 			y <= char_3_y;
 			new_punt <= punt;
@@ -305,6 +310,7 @@ begin
 			--new_uren_tijd <= unsigned(uren);
 			new_lsb_minuten <= lsb_minuten;
 			new_hz_state <= hz_sig;
+			new_ready_sig <= ready;
 			new_state <= rust;
 			new_punt <= punt;
 			--minner <= "000000";
@@ -314,6 +320,9 @@ begin
 	end case;
 end process;
 end behaviour;
+
+
+
 
 
 
