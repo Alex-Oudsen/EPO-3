@@ -4,20 +4,19 @@ library IEEE;
 use IEEE.std_logic_1164.ALL;
 use IEEE.Numeric_Std.all;
 
-architecture behaviour of top_top_tb is
-component top_top_entity is
-	port (	clk		:	in	std_logic;
-		reset		:	in	std_logic;
-		knoppen		:	in	std_logic_vector (4 downto 0);
-		dcf		:	in	std_logic;
-		data_out	:	out	std_logic_vector(6 downto 0);
-        	clk_out   	:	out	std_logic);
-end component top_top_entity;
+architecture behaviour of controller_tb is
+component controller is
+	port(clk    :in    std_logic;
+        reset  :in    std_logic;
+        knoppen:in    std_logic_vector(3 downto 0);
+        wekker :out   std_logic_vector(15 downto 0);
+        menu_state   :out   std_logic_vector(2 downto 0));
+end component controller;
 
-signal clk, reset,dcf		:	std_logic;
-signal menu_signal		:	std_logic_vector(2 downto 0);
-signal knoppen			:	std_logic_vector (3 downto 0);
-signal wekker			:	std_logic_vector (15 downto 0);
+signal clk, reset	 						:	std_logic;
+signal menu_signal							:	std_logic_vector(2 downto 0);
+signal knoppen								: std_logic_vector (3 downto 0);
+signal wekker		:	std_logic_vector (15 downto 0);
 
 begin
 	clk		<=	'1' after 0 ns,
@@ -94,7 +93,7 @@ begin
 			"0001" after 3300000 ns,	--geluid -> rust
 			"0000" after 3331250 ns; 	--done, done, done;			
 
-	controller_pm: top_top_entity port map(clk, reset, knoppen, wekker,menu_signal);
+	controller_pm: controller port map(clk, reset, knoppen, wekker,menu_signal);
 end architecture;
 
 
