@@ -3,7 +3,7 @@
 --In case of no-doubt, follow the following procedure:
 --Assume the state of no-mind using ancient Japanese techniques,
 --If that does not take away no-doubt, beat the shit out of a brick (or stone) wall;
---If that does not work, acquaintance oneï¿½s face with a heavy metal object, preferably a chair.
+--If that does not work, acquaintance ones face with a heavy metal object, preferably a chair.
 
 --Then, blame Kevin.
 
