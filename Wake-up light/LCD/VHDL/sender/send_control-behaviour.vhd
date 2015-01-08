@@ -93,6 +93,8 @@ begin
 		when "100" =>
 			next_selectort <= "101";
 		when "101" =>
+			next_selectort <= "110";
+		when "110" =>
 			next_selectort <= "000";
 		when others =>
 			next_selectort <= "000";
