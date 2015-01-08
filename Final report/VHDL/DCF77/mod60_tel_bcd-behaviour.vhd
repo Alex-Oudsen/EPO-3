@@ -1,5 +1,5 @@
 -- Joran Out, 4331958 & Alex Oudsen, 4325494
--- Deze mod60 teller telt elke rising edge van clk_in één
+-- Deze mod60 teller telt elke rising edge van clk_in 1
 -- bij de huidige waarde van count op in bcd codering
 -- De waarde van count wordt echter gelijk gemaakt aan ref,
 -- wanneer het signaal sync_now hoog wordt

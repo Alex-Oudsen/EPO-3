@@ -1,106 +1,187 @@
 \chapter[VHDL code]{Vhdl code}
-\label{Ap:code_controller}
+\section{Vhdl code van het DCF77 blok}
+\label{Ap:DCF_code}
+\subsection{Klokdeler}
+\label{code:klokdeler}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/klokdeler.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/klokdeler-behaviour.vhd}
+\normalsize
+\subsection{Mod24 (uren) teller}
+\label{code:mod24_tel}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod24_tel_bcd.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod24_tel_bcd-behaviour.vhd}
+\normalsize
+\subsection{Mod60 (minuten) teller}
+\label{code:mod60_tel}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_tel_bcd.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_tel_bcd-behaviour.vhd}
+\normalsize
+\subsection{Mod60 (seconden) teller}
+\label{code:mod60_clk}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_clk_bcd.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_clk_bcd-behaviour.vhd}
+\normalsize
+\subsection{Autonome synchroniseerbare klok}
+\label{code:ausy_klok}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/ausy_klok_bcd.vhd}
+\hrule 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/ausy_klok_bcd-structure.vhd}
+\normalsize
+\subsection{Edge detector}
+\label{code:edge_detector}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/edge_detector.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/edge_detector-behaviour.vhd}
+\normalsize
+\subsection{DCF counter}
+\label{code:dcf_counter}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_counter.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_counter-behaviour.vhd}
+\normalsize
+\subsection{DCF decoder}
+\label{code:dcf_decoder}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_decoder.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_decoder-behaviour.vhd}
+\normalsize
+\subsection{Parity check}
+\label{code:parity_check}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/parity_check.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/parity_check-behaviour.vhd}
+\normalsize
+\subsection{Synctime}
+\label{code:synctime}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/synctime.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/synctime-structure.vhd}
+\normalsize
+\subsection{DCF77 (top-level)}
+\label{code:dcf77_ent}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_bcd.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_bcd-structure.vhd}
+\normalsize
+
 \section{VHDL code controller}
+\label{Ap:code_controller}
 \subsection{Top level entity}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/controller-entity.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/controller-entity.vhd}
+\normalsize
 \label{code:controller_ent}
 \subsection{Behavioural VHDL code controller}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/controller-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/controller-behaviour.vhd}
+\normalsize
 \label{code:controller_beh}
 \subsection{Menu entity}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/menu-entity.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/menu-entity.vhd}
+\normalsize
 \label{code:menu_ent}
 \subsection{Behavioural VHDL code menu}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/menu-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/menu-behaviour.vhd}
+\normalsize
 \label{code:menu_beh}
 \subsection{Memory}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/geheugen-entity.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/geheugen-entity.vhd}
+\normalsize
 \label{code:geheugen_ent}
 \subsection{Behavioural VHDL memory}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/geheugen-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/geheugen-behaviour.vhd}
+\normalsize
 \label{code:geheugen_beh}
 \subsection{Entity buffer}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/buffer-entity.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/buffer-entity.vhd}
+\normalsize
 \label{code:buffer_ent}
 \subsection{Behavioural VHDL buffer}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/buffer-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/buffer-behaviour.vhd}
+\normalsize
 \label{code:buffer_beh}
 \section{Testbenchs voor de controller}
 \subsection{VHDL controller}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/controller-tb-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/controller-tb-behaviour.vhd}
+\normalsize
 \label{code:tb_controller}
 \subsection{Testbench VHDL menu}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/menu-tb-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/menu-tb-behaviour.vhd}
+\normalsize
 \label{code:tb_menu}
 \subsection{Testbench VHDL geheugen}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/geheugen-tb-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/geheugen-tb-behaviour.vhd}
+\normalsize
 \label{code:tb_geheugen}
 \subsection{Testbench VHDL buffer}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/controller/buff-tb-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/controller/buff-tb-behaviour.vhd}
+\normalsize
 \label{code:tb_buffer}
+
 \section{Vhdl code van het alarm}
 \label{Ap:code_alarm}
 \subsection{Entity alarm-compare}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/alarm/compare.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/alarm/compare.vhd}
+\normalsize
 \label{code:ent_alarm_compare}
 \subsection{Behavioural alarm-compare}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/alarm/compare-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/alarm/compare-behaviour.vhd}
+\normalsize
 \label{code:beh_alarm_compare}
 \subsection{Top entity alarm}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/alarm/alarm.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/alarm/alarm.vhd}
+\normalsize
 \label{code:ent_alarm}
 \subsection{Behavioural alarm}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/alarm/alarm-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/alarm/alarm-behaviour.vhd}
+\normalsize
 \label{code:beh_alarm}
 \subsection{Entity alarm-counter}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/alarm/counter.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/alarm/counter.vhd}
+\normalsize
 \label{code:ent_alarm_counter}
 \subsection{Behavioural alarm-counter}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/alarm/counter-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/alarm/counter-behaviour.vhd}
+\normalsize
 \label{code:beh_alarm_counter}
 \subsection{Entity alarm-pwm}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/alarm/pwm.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/alarm/pwm.vhd}
+\normalsize
 \label{code:ent_alarm_pwm}
 \subsection{Behavioural alarm-pwm}
 \scriptsize 
- \lstinputlisting [style= VHDL]{vhdl/alarm/pwm-behaviour.vhd}
- \normalsize
+\lstinputlisting [style= VHDL]{vhdl/alarm/pwm-behaviour.vhd}
+\normalsize
 \label{code:beh_alarm_pwm}
