@@ -4,30 +4,38 @@ use ieee.std_logic_arith.all;
 
 architecture behaviour of datum is 
 
+--component f_edge_detect is 
+--	port (
+--		clk 	: in std_logic;
+--		signal_in : in std_logic;
+--		signal_out : out std_logic
+--		); 
+--end component; 
+
 --Constantes voor posities X-Y 
 	constant x_rust : std_logic_vector (6 downto 0) := "0000000" ; 
 	constant y_rust : std_logic_vector (5 downto 0) := "000000" ; 
 
-	constant x_1 : std_logic_vector (6 downto 0) := "1000110" ; 
+	constant x_1 : std_logic_vector (6 downto 0) := "1001110" ; 
 	constant y_1 : std_logic_vector (5 downto 0) := "101010" ; 
 
 	constant x_2 : std_logic_vector (6 downto 0) := "1000110" ; 
-	constant y_2 : std_logic_vector (5 downto 0) := "101010" ; 
+	constant y_2 : std_logic_vector (5 downto 0) := "111001" ; 
 	
-	constant x_3 : std_logic_vector (6 downto 0) := "1001010" ;  
-	constant y_3 : std_logic_vector (5 downto 0) := "101010" ; 
+	constant x_3 : std_logic_vector (6 downto 0) := "1001011" ;  
+	constant y_3 : std_logic_vector (5 downto 0) := "011100" ; 
 
-	constant x_4 : std_logic_vector (6 downto 0) := "1000100" ; 
-	constant y_4 : std_logic_vector (5 downto 0) := "101010" ; 	
+	constant x_4 : std_logic_vector (6 downto 0) := "1010101" ; 
+	constant y_4 : std_logic_vector (5 downto 0) := "010101" ; 	
 
-	constant x_5 : std_logic_vector (6 downto 0) := "1010010" ; 
+	constant x_5 : std_logic_vector (6 downto 0) := "0101011" ; 
 	constant y_5 : std_logic_vector (5 downto 0) := "101010" ; 
 
-	constant x_6 : std_logic_vector (6 downto 0) := "1010010" ; 
-	constant y_6 : std_logic_vector (5 downto 0) := "101010" ; 
+	constant x_6 : std_logic_vector (6 downto 0) := "0111001" ; 
+	constant y_6 : std_logic_vector (5 downto 0) := "001100" ; 
 
-	constant x_7 : std_logic_vector (6 downto 0) := "1010010" ; 
-	constant y_7 : std_logic_vector (5 downto 0) := "101010" ; 
+	constant x_7 : std_logic_vector (6 downto 0) := "0101110" ; 
+	constant y_7 : std_logic_vector (5 downto 0) := "111000" ; 
 
 
 -- Constantes voor getallen 0 tot 9
@@ -58,19 +66,19 @@ architecture behaviour of datum is
 	type states is (rust, selectdata, cdvdw, cgetal);
 	
 	signal state, next_state 		: states;
-	signal x_buf 					: std_logic_vector(6 downto 0);
-	signal y_buf 					: std_logic_vector(5 downto 0);
 	signal positie, new_positie		: unsigned ( 2 downto 0);
 	signal data_buffer				: std_logic_vector(3 downto 0); 
-	signal start, finish : std_logic;
+	signal start, finish, ready_buf1, ready_buf2 : std_logic;
 	
 	
 begin
 --proces FSM	
-	
-	process (clk, reset)
+		
+	process (clk, reset, ready_buf1, new_positie, next_state)
 	begin 
 		if (rising_edge (clk)) then
+			ready_buf2<=ready_buf1;
+
 			if (reset='1') then 
 				positie <= (others => '0');
 				state<= selectdata;
@@ -81,14 +89,16 @@ begin
 		end if;		
 	end process;
 
-	process (state, ready_buf, tijd_uren, positie, data_buffer)
+	process (state, ready_buf2, ready, tijd_uren, positie, data_buffer)
 		
 	begin 
 		case(state) is
 			
 			when rust => 
+				ready_buf1<=ready;
 				c <= char_rust;
-				
+				new_positie <= (others => '0'); 
+
 				if (tijd_uren = "00000" ) then 
 					next_state <= selectdata;
 				else 
@@ -109,8 +119,10 @@ begin
 --				end if;
 												
 			when selectdata =>
+				ready_buf1<=ready;
 				c <= char_rust; -- maak uitgang C in rust stand, 
-				
+				new_positie <= positie; 
+
 				-- indien positie tot 7 is geteld, ga naar sreset (rust) state. 		
 				if (positie = 7 ) then 
 					if (tijd_uren = "00000") then 
@@ -128,6 +140,7 @@ begin
 			
 			-- state om character voor dag van de week te schrijven
 			when cdvdw =>
+				ready_buf1<=ready;
 				case (data_buffer) is 
 					when "0001" => 
 						c <= char_ma; 
@@ -148,15 +161,23 @@ begin
 				end case; 
 				
 				-- indien de slave-select laag wordt, dan positie+1 en terug naar state select data
-				if (falling_edge(ready_buf)) then 
+				if (ready_buf2 = '1') then 
+					if(ready = '0') then
 					new_positie <= positie + 1;
-					next_state <= selectdata;	
-				else 
+					next_state <= selectdata;
+					else 
 					next_state <= cdvdw;
+					new_positie <= positie; 
+					end if;
+				else 
+					next_state <= cgetal;
+					new_positie <= positie; 
+
 				end if;
 				
 				-- state voor character om getallen te schrijven voor datum 
 			when cgetal =>		
+				ready_buf1<=ready;
 				case (data_buffer) is 
 					when "0000" => 
 						c <= char_0; 
@@ -182,18 +203,26 @@ begin
 						c <= char_rust;
 				end case; 		
 	
-				if (falling_edge(ready_buf)) then 
+				if (ready_buf2 = '1') then 
+					if(ready = '0') then
 					new_positie <= positie + 1;
 					next_state <= selectdata;
+					else 
+					next_state <= cgetal;
+					new_positie <= positie; 
+					end if;
 				else 
-					next_state <= cdvdw;
+					next_state <= cgetal;
+					new_positie <= positie; 
+
 				end if;
 	end case;
 	end process;
  				
-	process (positie) 
+	process (positie, dagvdmaand, maand, jaar, dagvdweek) 
 	begin
 		case positie is 
+
 			when "001" => 
 				data_buffer(0) <= dagvdmaand(4);
 				data_buffer(1) <= dagvdmaand(5);
@@ -201,14 +230,13 @@ begin
 				data_buffer(3) <= '0';
 				x <= x_1;
 				y <= y_1;
-				
 			when "010" => 
 				data_buffer(0) <= dagvdmaand(0);
 				data_buffer(1) <= dagvdmaand(1);
 				data_buffer(2) <= dagvdmaand(2);
 				data_buffer(3) <= dagvdmaand(3);
 				x <= x_2;
-				y <= y_2;
+				y <= y_2;			
 			when "011" => 
 				data_buffer(0) <= maand(4);
 				data_buffer(1) <= '0';
@@ -216,6 +244,7 @@ begin
 				data_buffer(3) <= '0';
 				x <= x_3;
 				y <= y_3;
+
 			when "100" => 
 				data_buffer(0) <= maand(0);
 				data_buffer(1) <= maand(1);
@@ -228,8 +257,8 @@ begin
 				data_buffer(1) <= jaar(5);
 				data_buffer(2) <= jaar(6);
 				data_buffer(3) <= jaar(7);
-				x_buf <= x_5;
-				y_buf <= y_5;
+				x <= x_5;
+				y <= y_5;
 			when "110" => 
 				data_buffer(0) <= jaar(0);
 				data_buffer(1) <= jaar(1);
@@ -237,7 +266,8 @@ begin
 				data_buffer(3) <= jaar(3);
 				x <= x_6;
 				y <= y_6;
-			when "111" => 
+
+			when "000" => 
 				data_buffer(0) <= dagvdweek(0);
 				data_buffer(1) <= dagvdweek(1);
 				data_buffer(2) <= dagvdweek(2);
@@ -254,7 +284,43 @@ begin
 		end case; 
 	end process;
 		
+
 end  behaviour;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
