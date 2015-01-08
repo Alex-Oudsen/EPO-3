@@ -9,7 +9,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-architecture structure of dcf77_bcd is
+architecture structure of dcf77_bcd_entity is
 	component synctime is
     		port(clk:	in  std_logic;
 	  	     reset:    	in  std_logic;

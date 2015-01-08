@@ -3,7 +3,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity dcf77_bcd is
+entity dcf77_bcd_entity is
     port (clk:	    	in  std_logic;
 	  reset:    	in  std_logic;
 	  dcf_in:   	in  std_logic;
@@ -16,4 +16,4 @@ entity dcf77_bcd is
 	  month:    	out std_logic_vector(4 downto 0);
 	  year:	    	out std_logic_vector(7 downto 0);
 	  date_ready:	out std_logic);
-end dcf77_bcd;
+end dcf77_bcd_entity;
