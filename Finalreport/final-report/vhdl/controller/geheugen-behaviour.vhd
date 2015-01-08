@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.ALL;
 
 architecture behaviour of geheugen is
-signal wek_opslag,wek_temp : std_logic_vector(13 downto 0 );
+signal wek_opslag,wek_temp : std_logic_vector(15 downto 0 );
 begin
 assign : process(clk,reset,wek_temp,wek_in)
 begin

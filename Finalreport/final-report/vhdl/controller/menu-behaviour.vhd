@@ -5,8 +5,6 @@ use IEEE.numeric_Std.all;
 architecture behaviour of menu is
 type fsm_states is (rust, wekkertijd, led, led_toggle, geluid, geluid_toggle, wekker_toggle, uren_set, uren_plus, uren_min, minuten_set, minuten_plus, minuten_min);
 signal state, new_state : fsm_states;
-signal uren_tmp : std_logic_vector (4 downto 0);
-signal minuten_tmp : std_logic_vector (5 downto 0);
 begin
 	assign : process(clk, reset) --Daadwerkelijk alles toekennen
 	begin
@@ -29,14 +27,14 @@ begin
 
 			when wekker_toggle =>
 				enable <= '1';
-				wekker(12 downto 0) <= wekdata(12 downto 0);
-				wekker(13) <= not wekdata(13);
+				wekker(14 downto 0) <= wekdata(14 downto 0);
+				wekker(15) <= not wekdata(15);
 				menu_signal <= "000";
 
 			when wekkertijd =>
 				enable <= '0';
 				wekker <= wekdata;
-				menu_signal <= "000";
+				menu_signal <= "101";
 
 			when led =>
 				enable <= '0';
@@ -45,9 +43,9 @@ begin
 
 			when led_toggle =>
 				enable <= '1';
-				wekker(11 downto 0) <= wekdata(11 downto 0);
-				wekker(12) <= not wekdata(12);
-				wekker(13) <= wekdata(13);
+				wekker(13 downto 0) <= wekdata(13 downto 0);
+				wekker(14) <= not wekdata(14);
+				wekker(15) <= wekdata(15);
 				menu_signal <= "011";
 
 			when geluid =>
@@ -57,9 +55,9 @@ begin
 
 			when geluid_toggle =>
 				enable <= '1';
-				wekker(10 downto 0) <= wekdata(10 downto 0);
-				wekker(11) <= not wekdata(11);
-				wekker(13 downto 12) <= wekdata(13 downto 12);
+				wekker(12 downto 0) <= wekdata(12 downto 0);
+				wekker(13) <= not wekdata(13);
+				wekker(15 downto 14) <= wekdata(15 downto 14);
 				menu_signal <= "100";
 
 			when uren_set =>
@@ -69,25 +67,37 @@ begin
 
 			when uren_plus =>
 				enable <= '1';
-				menu_signal <= "101"; --let op dit is alleen gedaan voor testen
-				if (to_integer(unsigned(wekdata(10 downto 6)))) < 23 then
-					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) + 1, 5));
+				menu_signal <= "101";
+				if wekdata(12 downto 7) = "100011" then --23
+					wekker(12 downto 7) <= "000000"; --Bij de 23 uur weer opnieuw beginnen
 				else
-					wekker(10 downto 6) <= "00000";
+					if (wekdata(10 downto 7) = "1001") then --Bij x9 uur 1 op tellen bij de x en enkele weer terug naar 0
+						wekker(10 downto 7) <= "0000";
+						wekker(12 downto 11) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(12 downto 11))) + 1 , 2));
+					else
+						wekker(10 downto 7) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 7))) + 1 , 4)); -- 1 minuut erbij optellen
+						wekker(12 downto 11) <= wekdata(12 downto 11); -- Tientallen blijven constant
+					end if;
 				end if;
-				wekker(13 downto 11) <= wekdata(13 downto 11);
-				wekker(5 downto 0) <= wekdata(5 downto 0);
+				wekker(15 downto 13) <= wekdata(15 downto 13); -- Af
+				wekker(6 downto 0) <= wekdata(6 downto 0); --Af
 
 			when uren_min =>
-				enable <= '1';
-				menu_signal <= "110"; --let op dit is alleen gedaan voor testen
-				if (to_integer(unsigned(wekdata(10 downto 6)))) > 0 then
-					wekker(10 downto 6) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 6))) - 1, 5));
+				if wekdata(12 downto 7) = "000000" then
+					wekker(12 downto 7) <= "100011"; --23
 				else
-					wekker(10 downto 6) <= "10111";
+					if wekdata(10 downto 7) = "0000" then
+						wekker(10 downto 7) <= "1001";
+						wekker(12 downto 11) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(12 downto 11))) - 1 , 2));
+					else
+						wekker(10 downto 7) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(10 downto 7))) - 1 , 4));
+						wekker(12 downto 11) <= wekdata(12 downto 11);
+					end if;
 				end if;
-				wekker(13 downto 11) <= wekdata(13 downto 11);
-				wekker(5 downto 0) <= wekdata(5 downto 0);
+				wekker(15 downto 13) <= wekdata(15 downto 13);
+				wekker(6 downto 0) <= wekdata(6 downto 0);
+				enable <= '1';
+				menu_signal <= "101";
 
 			when minuten_set =>
 				enable <= '0';
@@ -96,23 +106,35 @@ begin
 
 			when minuten_plus =>
 				enable <= '1';
-				if (to_integer(unsigned(wekdata(5 downto 0)))) < 59 then
-					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(5 downto 0))) + 1, 6));
+				if wekdata(6 downto 0) = "1011001" then --59
+					wekker(6 downto 0) <= "0000000"; --Bij de 59 minuten gaan weer op nieuw beginnen
 				else
-					wekker(5 downto 0) <= "000000";
+					if wekdata(3 downto 0) = "1001" then --Bij x9 minuten 1 op tellen bij de x en enkele weer terug naar 0
+						wekker(3 downto 0) <= "0000";
+						wekker(6 downto 4) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(6 downto 4))) + 1 , 3));
+					else
+						wekker(3 downto 0) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(3 downto 0))) + 1 , 4)); -- 1 minuut erbij optellen
+						wekker(6 downto 4) <= wekdata(6 downto 4); -- Tientallen blijven constant
+					end if;
 				end if;
-				menu_signal <= "111"; --let op dit is alleen gedaan voor testen
-				wekker(13 downto 6) <= wekdata(13 downto 6);
+				menu_signal <= "111";
+				wekker(15 downto 7) <= wekdata(15 downto 7); --Af
 
 			when minuten_min =>
 				enable <= '1';
-				if (to_integer(unsigned(wekdata(5 downto 0)))) > 0 then
-					wekker(5 downto 0) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(5 downto 0))) - 1, 6));
+				if wekdata (6 downto 0) = "0000000" then
+					wekker(6 downto 0) <= "1011001"; --59
 				else
-					wekker(5 downto 0) <= "111011";
+					if wekdata(3 downto 0) = "0000" then --Bij x0 minuten 1 van de tientallen afhalen en de enkele getal op 9 zetten
+						wekker(3 downto 0) <= "1001"; --9
+						wekker(6 downto 4) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(6 downto 4))) - 1 , 3));
+					else
+						wekker(3 downto 0) <= std_logic_vector(to_unsigned(to_integer(unsigned(wekdata(3 downto 0))) - 1 , 4));
+						wekker(6 downto 4) <= wekdata(6 downto 4);
+					end if;
 				end if;
-				menu_signal <= "111"; --let op dit is alleen gedaan voor testen
-				wekker(13 downto 6) <= wekdata(13 downto 6);
+				menu_signal <= "111";
+				wekker(15 downto 7) <= wekdata(15 downto 7); --Af
 		end case;
 	end process actie_uitvoeren;
 	
@@ -213,6 +235,26 @@ begin
 
 			when minuten_min =>
 				new_state <= minuten_set;
+			when others =>
+				new_state <= rust;
 		end case;
 	end process next_state;
 end behaviour;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -29,7 +29,7 @@ begin
 				enable <= '1';
 				wekker(14 downto 0) <= wekdata(14 downto 0);
 				wekker(15) <= not wekdata(15);
-				menu_signal <= "000";
+				menu_signal <= "111";
 
 			when wekkertijd =>
 				enable <= '0';
