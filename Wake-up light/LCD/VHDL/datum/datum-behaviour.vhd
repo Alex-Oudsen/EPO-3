@@ -216,21 +216,21 @@ begin
 				data_buffer(1) <= dagvdmaand(5);
 				data_buffer(2) <= '0';
 				data_buffer(3) <= '0';
-				x <= x_1;
+				x <= x_2;
 				y <= y_1;
 			when "010" => 
 				data_buffer(0) <= dagvdmaand(0);
 				data_buffer(1) <= dagvdmaand(1);
 				data_buffer(2) <= dagvdmaand(2);
 				data_buffer(3) <= dagvdmaand(3);
-				x <= x_2;
+				x <= x_3;
 				y <= y_1;			
 			when "011" => 
 				data_buffer(0) <= maand(4);
 				data_buffer(1) <= '0';
 				data_buffer(2) <= '0';
 				data_buffer(3) <= '0';
-				x <= x_3;
+				x <= x_4;
 				y <= y_1;
 
 			when "100" => 
@@ -238,21 +238,21 @@ begin
 				data_buffer(1) <= maand(1);
 				data_buffer(2) <= maand(2);
 				data_buffer(3) <= maand(3);
-				x <= x_4;
+				x <= x_5;
 				y <= y_1;
 			when "101" => 
 				data_buffer(0) <= jaar(4);
 				data_buffer(1) <= jaar(5);
 				data_buffer(2) <= jaar(6);
 				data_buffer(3) <= jaar(7);
-				x <= x_5;
+				x <= x_6;
 				y <= y_1;
 			when "110" => 
 				data_buffer(0) <= jaar(0);
 				data_buffer(1) <= jaar(1);
 				data_buffer(2) <= jaar(2);
 				data_buffer(3) <= jaar(3);
-				x <= x_6;
+				x <= x_7;
 				y <= y_1;
 
 			when "000" => 
@@ -260,7 +260,7 @@ begin
 				data_buffer(1) <= dagvdweek(1);
 				data_buffer(2) <= dagvdweek(2);
 				data_buffer(3) <= '0';
-				x <= x_7;
+				x <= x_1;
 				y <= y_1;
 			when others =>
 				data_buffer(0) <= '0';
@@ -274,6 +274,9 @@ begin
 		
 
 end  behaviour;
+
+
+
 
 
 
