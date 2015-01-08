@@ -20,16 +20,14 @@ signal wekker		:	std_logic_vector (15 downto 0);
 
 begin
 	clk		<=	'1' after 0 ns,
-			'0' after 40 ns when clk /= '0' else '1' after 40 ns;
+			'0' after 40 ns when clk /= '0' else '1' after 40 ns;		--31250
 
 	reset	<=	'1' after 0 ns,		--knoppen(0) = menu
-			'0' after 124 ns;		--knoppen(1) = set
+			'0' after 128 ns;		--knoppen(1) = set
 									--knoppen(2) = up
 	knoppen <=	"0000" after 0 ns,	--knoppen(3) = down
-			"0010" after 128 ns,	--rust -> wekker_toggle
-			"0000" after 208 ns,	--knoppen(3) = down
-			"0010" after 368 ns,	--wekker_toggle -> rust
-			"0000" after 448 ns,	--knoppen(3) = down
+			"0010" after 128 ns,	--rust -> wekker_toggle	
+			"0000" after 208 ns,	--knoppen(3) = down	
 			"0001" after 608 ns,	--rust -> wekkertijd
 			"0000" after 688 ns,	--knoppen(3) = down
 			"0001" after 848 ns,	--wekkertijd -> rust
