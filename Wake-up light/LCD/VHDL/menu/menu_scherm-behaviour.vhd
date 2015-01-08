@@ -6,15 +6,17 @@ architecture behaviour of menu_scherm is
 type menu_state is (steady, schrijven, ready_state);
 signal state, new_state: menu_state;
 signal buf, new_buf: std_logic_vector (2 downto 0);
+signal alarm, alarm_buf: std_logic;
 
-constant x_pos_menu: std_logic_vector (6 downto 0) := "0011001";				-- x-positie voor menu
-constant y_pos_menu: std_logic_vector (5 downto 0) := "110101";				-- y-positie voor menu
-constant c_0: std_logic_vector (6 downto 0) := "0101010";	-- leeg
+constant x_pos_menu: std_logic_vector (6 downto 0) := "0011001";	-- x-positie voor menu
+constant y_pos_menu: std_logic_vector (5 downto 0) := "110101";		-- y-positie voor menu
+constant c_0: std_logic_vector (6 downto 0) := "0101010";	-- leeg, alarm aan
 constant c_1: std_logic_vector (6 downto 0) := "0100110"; -- uren aanpassen
 constant c_2: std_logic_vector (6 downto 0) := "0100111"; -- minuten aanpassen
 constant c_3: std_logic_vector (6 downto 0) := "0101001"; -- licht aanpassen
 constant c_4: std_logic_vector (6 downto 0) := "0101000"; -- geluid aanpassen
 constant c_5: std_logic_vector (6 downto 0) := "0101011"; -- tijd aanpassen
+constant c_6: std_logic_vector (6 downto 0) := "0101100"; -- leeg, alarm uit
 
 
 begin
@@ -27,19 +29,24 @@ lbl1: process(clk)
 			else
 				state <= new_state;
 				buf <= new_buf;
+				alarm_buf <= alarm;
 			end if;
 		end if;
 	end process;
 
 
-lbl2: process (state, menu, ready, buf)
+lbl2: process (state, menu, ready, buf, alarm, alarm_buf)
 begin
 	case state is
 		when steady =>
 			x_menu <= x_pos_menu;
 			y_menu <= y_pos_menu;
-			c_menu <= "0000000";
 			new_buf <= buf;
+			if (alarm /= alarm_buf) then
+				new_state <= schrijven;
+			else
+				new_state <= steady;
+			end if;
 			if (menu /= buf) then
 				new_state <= schrijven;
 			else
@@ -68,7 +75,11 @@ begin
 					c_menu <= c_5;
 					new_buf <= "101";
 				when others =>
-					c_menu <= c_0;
+					if (alarm = '1') then
+						c_menu <= c_0);
+					else
+						c_menu <= c_6);
+					end if;
 					new_buf <= buf;
 			end case;
 			if (ready = '1') then
