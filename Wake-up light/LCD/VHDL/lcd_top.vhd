@@ -16,7 +16,8 @@ entity lcd_top is
 		dcf_debug	: in   	std_logic;
 		menu		: in 	std_logic_vector (2 downto 0);
 		geluid_signaal	: in   	std_logic;
-		
+	       	data_out  	: out   std_logic_vector(6 downto 0);
+	       	clk_out   	: out   std_logic;
 end dcf77_bcd;
 
 

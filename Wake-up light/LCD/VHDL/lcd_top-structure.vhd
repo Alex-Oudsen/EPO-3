@@ -129,18 +129,18 @@ end tijd;
 
 
 
-	signal sync, s_clk: std_logic;
-	signal minuut: std_logic_vector(6 downto 0);
-	signal uur: std_logic_vector(5 downto 0);
-
-begin
-	date_ready <= sync;
-	clk_1hz <= s_clk;
-
-	sytime: synctime			port map(clk, reset, dcf_in, dcf_led, sync, minuut, uur, weekday, day, month, year);
-	divide: klokdeler    			port map(clk, reset, s_clk);
-	r_time: ausy_klok_bcd			port map(clk, s_clk, reset, sync, minuut, uur, minutes, hours);
-
+--	signal sync, s_clk: std_logic;
+--	signal minuut: std_logic_vector(6 downto 0);
+--	signal uur: std_logic_vector(5 downto 0);
+--
+--begin
+--	date_ready <= sync;
+--	clk_1hz <= s_clk;
+--
+--	sytime: synctime			port map(clk, reset, dcf_in, dcf_led, sync, minuut, uur, weekday, day, month, year);
+--	divide: klokdeler    			port map(clk, reset, s_clk);
+--	r_time: ausy_klok_bcd			port map(clk, s_clk, reset, sync, minuut, uur, minutes, hours);
+--
 end structure;
 
 
