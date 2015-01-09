@@ -25,6 +25,7 @@
 *.rpt
 *.sin
 *.sls
+*.*~
 *.summary
 *.svf
 *.synctex
