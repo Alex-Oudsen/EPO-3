@@ -3,17 +3,17 @@ use IEEE.std_logic_1164.ALL;
 use IEEE.std_logic_arith.all;
 
 architecture behaviour of wektijd is
-constant char_0_x : std_logic_vector(6 downto 0) := "0000001";
-constant char_0_y : std_logic_vector(5 downto 0) := "000001";
+constant char_0_x : std_logic_vector(6 downto 0) := "1011100";
+constant char_0_y : std_logic_vector(5 downto 0) := "010010";
 
-constant char_1_x : std_logic_vector(6 downto 0) := "0000011";
-constant char_1_y : std_logic_vector(5 downto 0) := "000011";
+constant char_1_x : std_logic_vector(6 downto 0) := "1100010";
+constant char_1_y : std_logic_vector(5 downto 0) := "010010";
 
-constant char_2_x : std_logic_vector(6 downto 0) := "0000101";
-constant char_2_y : std_logic_vector(5 downto 0) := "000101";
+constant char_2_x : std_logic_vector(6 downto 0) := "1101010";
+constant char_2_y : std_logic_vector(5 downto 0) := "010010";
 
-constant char_3_x : std_logic_vector(6 downto 0) := "0001001";
-constant char_3_y : std_logic_vector(5 downto 0) := "001001";
+constant char_3_x : std_logic_vector(6 downto 0) := "1110000";
+constant char_3_y : std_logic_vector(5 downto 0) := "010010";
 
 --Characters
 constant char_0 : std_logic_vector(6 downto 0) := "0000000";

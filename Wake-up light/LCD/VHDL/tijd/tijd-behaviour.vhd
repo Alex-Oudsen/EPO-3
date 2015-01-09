@@ -4,23 +4,23 @@ use IEEE.std_logic_arith.all;
 
 architecture behaviour of tijd is
 --Constants declaration
-constant dubbele_punt_x : std_logic_vector(6 downto 0) := "0010001";
-constant dubbele_punt_y : std_logic_vector(5 downto 0) := "010001";
+constant dubbele_punt_x : std_logic_vector(6 downto 0) := "0110101";
+constant dubbele_punt_y : std_logic_vector(5 downto 0) := "000110";
 constant dubbele_punt_c_aan : std_logic_vector(6 downto 0) := "0000001";
 constant dubbele_punt_c_uit : std_logic_vector(6 downto 0) := "0000010";
 
 --Posities
-constant char_0_x : std_logic_vector(6 downto 0) := "0000001";
-constant char_0_y : std_logic_vector(5 downto 0) := "000001";
+constant char_0_x : std_logic_vector(6 downto 0) := "0010101";
+constant char_0_y : std_logic_vector(5 downto 0) := "000011";
 
-constant char_1_x : std_logic_vector(6 downto 0) := "0000011";
+constant char_1_x : std_logic_vector(6 downto 0) := "0100101";
 constant char_1_y : std_logic_vector(5 downto 0) := "000011";
 
-constant char_2_x : std_logic_vector(6 downto 0) := "0000101";
-constant char_2_y : std_logic_vector(5 downto 0) := "000101";
+constant char_2_x : std_logic_vector(6 downto 0) := "0111000";
+constant char_2_y : std_logic_vector(5 downto 0) := "000011";
 
-constant char_3_x : std_logic_vector(6 downto 0) := "0001001";
-constant char_3_y : std_logic_vector(5 downto 0) := "001001";
+constant char_3_x : std_logic_vector(6 downto 0) := "1001000";
+constant char_3_y : std_logic_vector(5 downto 0) := "000011";
 
 --Characters
 constant char_0 : std_logic_vector(6 downto 0) := "0001100";
