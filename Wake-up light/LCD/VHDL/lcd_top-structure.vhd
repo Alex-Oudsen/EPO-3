@@ -73,8 +73,8 @@ architecture structure of lcd_top is
 	component tijd is
    		port( 	clk  			: in    std_logic;
         		reset			: in    std_logic;
-			uren			: in 	std_logic_vector(5 downto 0);
-			minuten 		: in 	std_logic_vector(6 downto 0);
+			uren			: in 	std_logic_vector(6 downto 0);
+			minuten 		: in 	std_logic_vector(7 downto 0);
 			x    			: out   std_logic_vector(6 downto 0);
         		y    			: out   std_logic_vector(5 downto 0);
         		c    			: out   std_logic_vector(6 downto 0);
