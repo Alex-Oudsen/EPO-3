@@ -25,6 +25,7 @@
 *.rpt
 *.sin
 *.*~
+*.*_
 *.sls
 *.summary
 *.svf
@@ -33,8 +34,6 @@
 *.tcl
 *.toc
 *.out
-*.vhd~
-*.vhd_
 *.wlf
 Report.txt
 transcript
