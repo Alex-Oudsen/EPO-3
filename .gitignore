@@ -24,6 +24,7 @@
 *.res
 *.rpt
 *.sin
+*.*~
 *.sls
 *.summary
 *.svf
