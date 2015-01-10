@@ -5,8 +5,8 @@ architecture behaviour of licht is
 type licht_state is (steady, aan, uit, uit_ready, aan_ready);
 signal state, new_state: licht_state;
 
-constant x_pos: std_logic_vector (6 downto 0) := "0001100";
-constant y_pos: std_logic_vector (5 downto 0) := "010100";
+constant x_pos: std_logic_vector (6 downto 0) := "0000001";
+constant y_pos: std_logic_vector (5 downto 0) := "001100";
 constant c_aan: std_logic_vector (6 downto 0) := "0100010";
 constant c_uit: std_logic_vector (6 downto 0) := "0100011";
 

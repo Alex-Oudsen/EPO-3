@@ -6,8 +6,8 @@ type dcf_state is (steady, aan, aan_ready, uit, uit_ready);
 signal state, new_state: dcf_state;
 signal buf: std_logic;
 
-constant x_pos: std_logic_vector (6 downto 0) := "1101100";
-constant y_pos: std_logic_vector (5 downto 0) := "101010";
+constant x_pos: std_logic_vector (6 downto 0) := "0000001";
+constant y_pos: std_logic_vector (5 downto 0) := "000001";
 constant c_aan: std_logic_vector (6 downto 0) := "0100100";
 constant c_uit: std_logic_vector (6 downto 0) := "0100101";
 
