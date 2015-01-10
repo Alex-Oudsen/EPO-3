@@ -1,3 +1,5 @@
+--Rens Hamburger 4292936
+--Het portmappen van gebruikte componenten voor de complete controller
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 
@@ -29,7 +31,6 @@ component buff is 							--De buffer die speciaal gemaakt is voor de menu met ex
 end component buff;
 
 signal knoppen_buff : std_logic_vector(3 downto 0);
---signal menu_state 		: std_logic_vector(2 downto 0);
 signal wekdata_men,wekker_men : std_logic_vector(15 downto 0);
 signal write_enable : std_logic;
 

@@ -1,3 +1,8 @@
+-- Kevin Hill 4287592  & Rens Hamburger 4292936
+-- FSM is voor het overzicht in drie processen verwerkt
+-- 1ste process zorgt ervoor dat alles op de opgande klokflank gebeurt, en gaat naar de nieuwe state toe (of de reset-state)
+-- 2de process voert de state uit
+-- 3de process bepalen van de nieuwe state
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 use IEEE.numeric_Std.all;
@@ -29,7 +34,7 @@ begin
 				enable <= '1';
 				wekker(14 downto 0) <= wekdata(14 downto 0);
 				wekker(15) <= not wekdata(15);
-				menu_signal <= "111";
+				menu_signal <= "000";
 
 			when wekkertijd =>
 				enable <= '0';
@@ -240,21 +245,3 @@ begin
 		end case;
 	end process next_state;
 end behaviour;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

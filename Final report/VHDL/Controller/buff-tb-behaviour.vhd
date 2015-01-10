@@ -1,3 +1,5 @@
+-- Rens Hamburger 4292936
+-- Testbench om de buffer te testen
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 

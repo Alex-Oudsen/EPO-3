@@ -1,5 +1,5 @@
---In case of doubt, blame Kevin
-
+-- Kevin Hill 4287592  & Rens Hamburger 4292936
+-- Testbench voor de controller met gebruik van de buffer en geheugen element
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 use IEEE.Numeric_Std.all;

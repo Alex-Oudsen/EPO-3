@@ -1,3 +1,5 @@
+-- Rens Hamburger 4292936
+-- Testbench voor de 16 bit geheugen element met een positief enable signaal
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 
