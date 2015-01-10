@@ -14,6 +14,7 @@ entity lcd_top is
 		maand		: in 	std_logic_vector (4 downto 0);
 		jaar 		: in 	std_logic_vector (7 downto 0);
 		dcf_debug	: in   	std_logic;
+		alarm		: in	std_logic;
 		menu		: in 	std_logic_vector (2 downto 0);
 		geluid_signaal	: in   	std_logic;
 		licht_signaal	: in	std_logic;
