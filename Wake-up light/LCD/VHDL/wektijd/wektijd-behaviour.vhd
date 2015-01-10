@@ -31,7 +31,7 @@ constant char_9 : std_logic_vector(6 downto 0) := "0001001";
 type states is (rust, char_0_state,char_1_state, char_2_state, char_3_state);
 signal state, new_state : states;
 
-signal ready_sig : std_logic;
+signal ready_sig, new_ready_sig : std_logic;
 --signal minuten_tijd, new_minuten_tijd : unsigned(6 downto 0);
 --signal uren_tijd, new_uren_tijd : unsigned(5 downto 0);
 
@@ -50,7 +50,7 @@ begin
 			state <= new_state;
 			--minuten_tijd <= new_minuten_tijd;
 			--uren_tijd <= new_uren_tijd;
-			ready_sig <= ready;
+			ready_sig <= new_ready_sig;
 		end if;
 	end if;
 end process;
@@ -59,6 +59,7 @@ process(ready, wektijd_uren, wektijd_min, state)--process voor rekenen
 begin
 	case(state) is
 		when rust =>
+			new_ready_sig <= ready;
 			x <= "0000000";
 			y <= "000000";
 			c <= "0000000";
@@ -72,6 +73,7 @@ begin
 				new_state <= rust;
 			end if;
 		when char_0_state =>
+			new_ready_sig <= ready;
 			--new_minuten_tijd <= minuten_tijd;
 			x <= char_0_x;
 			y <= char_0_y;
@@ -99,6 +101,7 @@ begin
 			end if;
 				
 		when char_1_state =>
+			new_ready_sig <= ready;
 			--new_minuten_tijd <= minuten_tijd;
 			--new_uren_tijd <= uren_tijd;
 			x <= char_1_x;
@@ -138,6 +141,7 @@ begin
 					c <= char_0;
 			end case;
 		when char_2_state =>
+			new_ready_sig <= ready;
 			--new_uren_tijd <= uren_tijd;
 			x <= char_2_x;
 			y <= char_2_y;
@@ -174,6 +178,7 @@ begin
 			end if;
 			
 		when char_3_state =>
+			new_ready_sig <= ready;
 			--new_minuten_tijd <= minuten_tijd;
 			--new_uren_tijd <= uren_tijd;
 			x <= char_3_x;
@@ -213,6 +218,7 @@ begin
 				--ready_sig <= ready;
 			end if;
 		when others =>
+			new_ready_sig <= ready;
 			--new_minuten_tijd <= unsigned(wektijd_min);
 			--new_uren_tijd <= unsigned(wektijd_uren);
 			new_state <= rust;
