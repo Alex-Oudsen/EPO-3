@@ -87,7 +87,7 @@ begin
 				c <= char_rust;
 				new_positie <= (others => '0'); 
 
-				if (tijd_uren = "00000" ) then 
+				if (tijd_uren = "000000" ) then 
 					next_state <= selectdata;
 				else 
 					next_state <= rust;
@@ -113,7 +113,7 @@ begin
 
 				-- indien positie tot 7 is geteld, ga naar sreset (rust) state. 		
 				if (positie = 7 ) then 
-					if (tijd_uren = "00000") then 
+					if (tijd_uren = "000000") then 
 						next_state <= selectdata; 
 					else 
 						next_state <= rust; 
