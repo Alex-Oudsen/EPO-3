@@ -1,26 +1,28 @@
 \chapter{DCF controller}
 \section{Inleiding}
-De basis van onze wekker wordt gelegd door een klok. Uit het onderdeel, genaamd DCF-controller,  komt verschillende data, als de tijd, de datum en het weeknummer. Van de tijd uitgang wordt verwacht dat deze gesynchroniseerd met het DCF-signaal is, maar mocht het signaal uitvallen moet de tijd door blijven tellen.
+De basis van onze wekker wordt gelegd door een klok. Uit dit onderdeel, genaamd DCF-controller,  komt verschillende data, als de tijd, de datum en het weeknummer. Van de tijd uitgang wordt verwacht dat deze gesynchroniseerd met het DCF-signaal is, maar mocht het signaal uitvallen moet de tijd door blijven tellen.\\ \emph{\color{red} \#\# stukje over DCF77 \#\#}
 
 \section{Specificaties}
+In deze sectie zullen we de in- en uitgangen van de DCF-controller in een overzicht weergeven. Doordat het totale systeem met dit onderdeel start, bevat dit blok enkel standaard ingangen en een ingang van buitenaf. De uitgangen uren en minuten worden doorgestuurd naar de main-controller. De clk van 1 Hz zal in verschillende onderdelen worden gebruikt. De debug\_led zal rechtstreeks op het LCD worden weergegeven.
 \subsection{Ingangen}
-Dit onderdeel maakt gebruik van de volgende ingangen:
-\newline
+Dit onderdeel maakt gebruik van de volgende ingangen: 
+
 \begin{itemize}[nolistsep]
 \item Reset, standaard input.
 \item Klok, standaard input.
 \item DCF, signaal van 'logische' pulsen.
 \end{itemize}
 \noindent
-\\
+
 \subsection{Uitgangen}
 Dit onderdeel heeft de volgende uitgangen:
 \begin{itemize}[nolistsep]
-\item Uren, een binaire vector van 6 bits.
-\item minuten, een binaire vector van 7 bits.
+\item Uren, een BCD vector van 6 bits.
+\item minuten, een BCD vector van 7 bits.
 \item clk, een clk die elke seconde een puls geeft.
 \item debug\_led, een signaal dat een logische 1 doorgeeft zodra er een dcf signaal wordt ontvangen.
 \end{itemize}
+
 
 \section{Gedrag}
 
