@@ -1,3 +1,6 @@
+--Rens Hamburger 4292936
+--Buffer die zorgt dat we maar 1 periode lang een hoog signaal ontvangen van een knop
+--Voorkomt ook dat een gebruiker twee knoppen tegelijk kan indrukken wat mogelijk voor voor onverwacht gedrag
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 use IEEE.numeric_Std.all;
