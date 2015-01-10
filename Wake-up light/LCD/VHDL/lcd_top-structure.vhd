@@ -73,8 +73,8 @@ architecture structure of lcd_top is
 	component tijd is
    		port( 	clk  			: in    std_logic;
         		reset			: in    std_logic;
-			uren			: in 	std_logic_vector(6 downto 0);
-			minuten 		: in 	std_logic_vector(7 downto 0);
+			uren			: in 	std_logic_vector(5 downto 0);
+			minuten 		: in 	std_logic_vector(6 downto 0);
 			x    			: out   std_logic_vector(6 downto 0);
         		y    			: out   std_logic_vector(5 downto 0);
         		c    			: out   std_logic_vector(6 downto 0);
@@ -88,6 +88,7 @@ architecture structure of lcd_top is
 		        reset   		: in    std_logic;
 		        ready   		: in    std_logic;
 		        menu    		: in    std_logic_vector(2 downto 0);
+				alarm			: in 	std_logic;
 		        x_menu 			: out   std_logic_vector(6 downto 0);
 		        y_menu  		: out   std_logic_vector(5 downto 0);	
 		        c_menu  		: out   std_logic_vector(6 downto 0)
@@ -122,7 +123,7 @@ architecture structure of lcd_top is
 			clk			: in 	std_logic;
 			reset			: in 	std_logic;
 			ready			: in 	std_logic;
-			tijd_uren 		: in 	std_logic_vector (6 downto 0); 
+			tijd_uren 		: in 	std_logic_vector (5 downto 0); 
 			dagvdweek		: in 	std_logic_vector (2 downto 0);
 			dagvdmaand 		: in 	std_logic_vector (5 downto 0);
 			maand			: in 	std_logic_vector (4 downto 0);
@@ -165,7 +166,7 @@ begin
 	sbus: send_bus			port map(clk, reset, sel, x_f, y_f, c_f, x_0, y_0, c_0, ready_tijd, x_1, y_1, c_1, ready_menu, x_2, y_2, c_2, ready_geluid, x_3, y_3, c_3, ready_dcf, x_4, y_4, c_4, ready_datum, x_5, y_5, c_5, ready_wek, x_6, y_6, c_6, ready_licht);
 	lbl_tijd: tijd			port map(clk, reset, uren, minuten, x_0, y_0, c_0, ready_tijd, sec);
 	scontrol: send_control		port map(clk, reset, data_out, clk_out, sel, x_f, y_f, c_f);
-	mscherm: menu_scherm		port map(clk, reset, ready_menu, menu, x_1, y_1, c_1);
+	mscherm: menu_scherm		port map(clk, reset, ready_menu, menu, alarm, x_1, y_1, c_1);
 	gel: geluid			port map(clk, reset, ready_geluid, menu, geluid_signaal, x_2, y_2, c_2);
 	leddcf: dcf_lcd			port map(clk, reset, ready_dcf, dcf_debug, x_3, y_3, c_3);
 	lcddat: datum			port map(clk, reset, ready_datum, uren, dagvdweek, dagvdmaand, maand, jaar, x_4, y_4, c_4);
@@ -173,6 +174,9 @@ begin
 	lichtje: licht			port map(clk, reset, ready_licht, menu, licht_signaal, x_6, y_6, c_6);
 
 end structure;
+
+
+
 
 
 

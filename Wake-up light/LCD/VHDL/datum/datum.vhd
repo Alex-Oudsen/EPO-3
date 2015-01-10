@@ -6,7 +6,7 @@ entity datum is
 		clk			: in std_logic;
 		reset			: in std_logic;
 		ready			: IN std_logic;
-		tijd_uren 			: IN std_logic_vector (4 downto 0); 
+		tijd_uren 			: IN std_logic_vector (5 downto 0); 
 		dagvdweek			: IN std_logic_vector (2 downto 0);
 		dagvdmaand 			: IN std_logic_vector (5 downto 0);
 		maand			: IN std_logic_vector (4 downto 0);

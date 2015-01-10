@@ -6,7 +6,7 @@ entity menu_scherm is
         reset   :in    std_logic;
         ready   :in    std_logic;
         menu    :in    std_logic_vector(2 downto 0);
-	alarm	:in    std_logic;
+		alarm	:in    std_logic;
         x_menu  :out   std_logic_vector(6 downto 0);
         y_menu  :out   std_logic_vector(5 downto 0);
         c_menu  :out   std_logic_vector(6 downto 0));
