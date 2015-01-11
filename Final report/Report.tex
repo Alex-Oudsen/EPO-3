@@ -29,20 +29,20 @@
 \usepackage{verbatim}					% For comment-environment
 \usepackage{xcolor}						% For adding colored text
 
-\definecolor{comment}{RGB}{0, 15 , 117}		% Kleur blauw defineren
-\definecolor{keyword}{RGB}{165, 42, 42}		% Kleur rood defineren
-\definecolor{STD}{RGB}{46, 139, 87}			% Kleur groen defineren
+\definecolor{comment}{RGB}{0, 15 , 117}		% Kleur blauw definiëren
+\definecolor{keyword}{RGB}{165, 42, 42}		% Kleur rood definiëren
+\definecolor{STD}{RGB}{46, 139, 87}			% Kleur groen definiëren
 
 \lstdefinelanguage{VHDL}{
-	morekeywords=[1]{ 					% Defineren van keywords die blauw worden
+	morekeywords=[1]{ 					% Definiëren van keywords die blauw worden
 		ALL, all, and, architecture, array,
-		begin, case, downto, else, elsif,
-		entity, end, for, if, in, is, library,
-		loop, not, of, or, others, out,
-		port, process, signal, then,
-		to, type, use, when, map, component
+		begin, case, component, downto,
+		else, elsif, entity, end, for, if, in, is,
+		library, loop, map, not, of, or, others,
+		out, port, process, signal, then,
+		to, type, use, when
 },
-	morekeywords=[2]{					% Defineren van keyword die groen worden
+	morekeywords=[2]{					% Definiëren van keywords die groen worden
     		NUMERIC_STD, numeric_std,
 		STD_LOGIC_1164, std_logic_1164,
 		STD_LOGIC_ARITH, std_logic_arith,
