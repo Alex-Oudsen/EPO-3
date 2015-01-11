@@ -104,7 +104,7 @@ dagvdweek <= "000" after 000 ns;
 dagvdmaand <= "000000" after 0 ns;	
 maand <= "00101" after 0 ns;
 jaar <= "00001111" after 0 ns;
-dcf_bebug <= '1' after 0 ns,
+dcf_debug <= '1' after 0 ns,
 							'0' after 450 ns,
 							'1' after 850 ns,
 							'0' after 1050 ns,
