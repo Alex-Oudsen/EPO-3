@@ -58,8 +58,6 @@ begin
 			lsb_minuten <= '0';
 		else
 			state <= new_state;
-			--minuten_tijd <= new_minuten_tijd;
-			--uren_tijd <= new_uren_tijd;
 			lsb_minuten <= new_lsb_minuten;
 			hz_state <= new_hz_state;
 			punt <= new_punt;
@@ -77,18 +75,11 @@ begin
 			c <= "0000000";
 			new_ready_sig <= ready;
 			new_hz_state <= hz_sig;
-			--minner <= "000000";
 			new_punt <= punt;
 			if (minuten(0) /= lsb_minuten) then
-				--new_minuten_tijd <= unsigned(minuten);
-				--new_uren_tijd <= unsigned(uren);
 				new_lsb_minuten <= minuten(0);
-				
 				new_state <= char_0_state;
 			elsif(hz_state /= hz_sig) then
-				
-				--new_minuten_tijd <= unsigned(minuten);
-				--new_uren_tijd <= unsigned(uren);
 				new_lsb_minuten <= minuten(0);
 				if(hz_sig = '1') then
 					new_state <= dubbele_punt;
@@ -96,10 +87,7 @@ begin
 					new_state <= rust;
 				end if;
 			else
-				--new_minuten_tijd <= unsigned(minuten);
-				--new_uren_tijd <= unsigned(uren);
 				new_lsb_minuten <= minuten(0);
-				new_hz_state <= hz_sig;
 				new_state <= rust;
 			end if;
 		when dubbele_punt =>
@@ -149,13 +137,12 @@ begin
 				end if;
 			end if;
 		when char_0_state =>
-			--new_minuten_tijd <= minuten_tijd;
 			new_lsb_minuten <= lsb_minuten;
 			new_ready_sig <= ready;
 			new_hz_state <= hz_sig;
+			new_punt <= punt;
 			x <= char_0_x;
 			y <= char_0_y;
-			new_punt <= punt;
 			case(uren(5 downto 4)) is
 				when "00" =>
 					c <= char_0;
@@ -168,40 +155,28 @@ begin
 			end case;
 			if(ready = '0') then
 				if(ready_sig = '1') then
-					--ready_sig<= '0';
-					--new_uren_tijd <= uren_tijd - minner(4 downto 0);
 					new_state <= char_1_state;
 				else
-					--ready_sig <= ready;
 					new_state <= char_0_state;
-					--new_uren_tijd <= uren_tijd;
 				end if;
 			else
-				--new_uren_tijd <= uren_tijd;
-				--ready_sig <= ready;
 				new_state <= char_0_state;
 			end if;
 		when char_1_state =>
-			--new_minuten_tijd <= minuten_tijd;
-			--new_uren_tijd <= uren_tijd;
 			new_lsb_minuten <= lsb_minuten;
 			new_ready_sig <= ready;
 			new_hz_state <= hz_sig;
 			x <= char_1_x;
 			y <= char_1_y;
 			new_punt <= punt;
-			--minner <= "000000";
 			if(ready = '0') then
 				if(ready_sig = '1') then
-					--ready_sig<= '0';
 					new_state <= char_2_state;
 				else
-					--ready_sig <= ready;
 					new_state <= char_1_state;
 				end if;
 			else
 				new_state <= char_1_state;
-				--ready_sig <= ready;
 			end if;
 			case (uren(3 downto 0)) is 
 				when "0001" =>
@@ -226,7 +201,6 @@ begin
 					c <= char_0;
 			end case;
 		when char_2_state =>
-			--new_uren_tijd <= uren_tijd;
 			new_hz_state <= hz_sig;
 			new_lsb_minuten <= lsb_minuten;
 			new_ready_sig <= ready;
@@ -251,31 +225,21 @@ begin
 			end case;
 			if(ready = '0') then
 				if(ready_sig = '1') then
-					--ready_sig<= '0';
-					--new_minuten_tijd <= minuten_tijd - minner;
 					new_state <= char_3_state;
 				else
-					--ready_sig <= ready;
-					--new_minuten_tijd <= minuten_tijd;
 					new_state <= char_2_state;
 				end if;
 			else
-				--new_state <= char_2_state;
-				--new_minuten_tijd <= minuten_tijd;
-				--ready_sig <= ready;
 				new_state <= char_2_state;
 			end if;
 			
 		when char_3_state =>
-			--new_minuten_tijd <= minuten_tijd;
-			--new_uren_tijd <= uren_tijd;
 			new_lsb_minuten <= lsb_minuten;
 			new_hz_state <= hz_sig;
 			new_ready_sig <= ready;
 			x <= char_3_x;
 			y <= char_3_y;
 			new_punt <= punt;
-			--minner <= "000000";
 			case(minuten(3 downto 0)) is
 				when "0001" =>
 					c <= char_1;
@@ -300,25 +264,19 @@ begin
 			end case;
 			if(ready = '0') then
 				if(ready_sig = '1') then
-					--ready_sig<= '0';
 					new_state <= rust;
 				else
-					--ready_sig <= ready;
 					new_state <= char_3_state;
 				end if;
 			else
 				new_state <= char_3_state;
-				--ready_sig <= ready;
 			end if;
 		when others =>
-			--new_minuten_tijd <= unsigned(minuten);
-			--new_uren_tijd <= unsigned(uren);
 			new_lsb_minuten <= lsb_minuten;
 			new_hz_state <= hz_sig;
 			new_ready_sig <= ready;
 			new_state <= rust;
 			new_punt <= punt;
-			--minner <= "000000";
 			x <= "0000000";
 			y <= "000000";
 			c <= "0000000";
