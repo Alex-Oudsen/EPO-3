@@ -22,11 +22,12 @@ signal minuten :  std_logic_vector(6 downto 0);
 signal x    :   std_logic_vector(6 downto 0);
 signal y    :   std_logic_vector(5 downto 0);
 signal c    :   std_logic_vector(6 downto 0);
+signal menu : std_logic_vector(2 downto 0);
 signal ready:    std_logic;
 signal hz_sig: std_logic;
 
 begin
-lb1 : tijd port map(clk, reset, ready, menu, uren, minuten, x, y, c);
+lb1 : wektijd port map(clk, reset, ready, menu, uren, minuten, x, y, c);
 
 clk <= '1' after 0 ns,
 '0' after 100 ns when clk /= '0' else '1' after 100 ns;
