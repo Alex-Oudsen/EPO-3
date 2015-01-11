@@ -10,7 +10,7 @@ In dit onderdeel, genaamd DCF77,  wordt de basis van de wekker gelegd, door vers
 \end{figure}
 
 \section{Specificaties}
-In deze sectie worden de in- en uitgangen van de DCF-controller overzichtelijk weergeven. Doordat dit onderdeel aan het begin staat van het totale systeem, bevat dit blok enkel standaard ingangen en een ingang van buitenaf met het DCF77 signaal. De uitgangen uren en minuten worden doorgestuurd naar de main-controller. De clk van 1 Hz zal in verschillende onderdelen worden gebruikt, zowel binnen als buiten het DCF77 blok. De datum en het signaal dcf\_led zullen rechtstreeks op het LCD scherm worden weergegeven. Enkele signalen zijn in BCD (Binairy Coded Decimal). Meer informatie over BCD is te vinden op ~\cite{BCDinfo}.
+In deze sectie worden de in- en uitgangen van de DCF-controller overzichtelijk weergeven. Doordat dit onderdeel aan het begin staat van het totale systeem, bevat dit blok enkel standaard ingangen en een ingang van buitenaf met het DCF77 signaal. De uitgangen uren en minuten worden doorgestuurd naar de main-controller. De clk van 1 Hz zal in verschillende onderdelen worden gebruikt, zowel binnen als buiten het DCF77 blok. De datum en het signaal dcf\_led zullen rechtstreeks op het LCD scherm worden weergegeven. Enkele signalen zijn in BCD (Binairy Coded Decimal). Meer informatie over BCD is te vinden op de website van Technology UK ~\cite{BCDinfo}.
 
 \subsection{Ingangen}
 Dit onderdeel maakt gebruik van de volgende ingangen: 
@@ -58,6 +58,21 @@ Het DCF blok dient volgens de specificaties een tijd- en dagstempel te genereren
 \end{figure}
 
 \subsection{FSM diagrammen}
+Het opdelen van het grote DCF77 blok in subblokken is bijzonder nuttig, maar nog niet voldoende om direct een implementatie in VHDL te kunnen maken. Daarom wordt voor alle subblokken op het laagste abstractieniveau een FSM diagram gemaakt, waarin globaal wordt aangegeven wat er wanneer dient te gebeuren binnen elk van deze blokken. Er zijn in totaal acht verschillende subblokken te ontwerpen. Dit betekent dat er ook acht verschillende FSM diagrammen dienen te worden getekend. Bij wijze van voorbeeld wordt hier het FSM diagram van de parity\_check besproken. Alle acht FSM diagrammen zijn terug te vinden in \cref{Ap: dcf_fsm} als \cref{fig: edge_detector} t/m \cref{fig: uren_teller}.\\
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[keepaspectratio=true,scale=0.7]{Figuren/DCF77/FSM_parity_check}
+\captionsetup{justification=centering}\caption{FSM diagram van het subblok parity check}
+\label{fig: parity_check2}
+\end{center}
+\end{figure}
+
+\noindent In \cref{fig: parity_check2} is het FSM diagram van de parity check nogmaals weergegeven. Zoals te zien is, begint deze na een reset altijd in de clear state. In tegenstelling tot wat je zou verwachten, worden in deze state de drie bits die het resultaat van de drie parity checks bevatten, niet op een logische 0, maar op een logische 1 gezet. Dit is zo, omdat in het DCF77 signaal gebruik wordt gemaakt van even parity. Dit betekent dat een parity bit een logische 0 bevat, wanneer de bijbehorende bitreeks een even aantal logische enen bevat. Een xor operatie met deze bitreeks + de bijbehorende parity bit zal dus 0 opleveren wanneer de parity bit correct is. In de reset ga je er echter juist vanuit dat de parity nog niet correct is. Wanneer dit door de decoder wordt aangegeven met het signaal start\_xor, zal de state van het subblok parity\_check naar check gaan.\\
+
+\noindent In de state check worden vervolgens, door middel van herhaalde xor operaties, de daadwerkelijke parity checks uitgevoerd. \'E\'en check controleert de minuten, een tweede controleert de uren en de derde controleert de volledige datum (inclusief dag van de week). Onafhankelijk van het resultaat van deze drie parity checks, zal het subblok vervolgens gelijk naar de state output gaan.\\
+
+\noindent In de state output worden dan de resultaten van de drie parity checks bij elkaar genomen. Dit gebeurt, om zo een strengere controle op de correctheid van de ontvangen bits te verkrijgen. Bovendien is op deze manier slechts \'e\'en signaal nodig dat aangeeft of de ontvangen tijd en datum correct zijn. Alleen als alle parity checks kloppen, zal het uitgangssignaal sync\_now hoog worden gemaakt. Hiermee worden vervolgens de tijd en datum vrijgegeven voor verder gebruik in de wekker. Ten slotte zal het subblok direct na het uitzenden van een puls op het sync\_now signaal weer teruggaan naar de state clear, zodat deze klaar staat om de volende minuut weer de parity checks uit te voeren. De cirkel is nu rond.
 
 \subsection{VHDL code}
 
