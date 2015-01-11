@@ -18,6 +18,8 @@ signal clk, reset,dcf		:	std_logic;
 signal menu_signal		:	std_logic_vector(2 downto 0);
 signal knoppen			:	std_logic_vector (3 downto 0);
 signal wekker			:	std_logic_vector (15 downto 0);
+signal d_out			:	std_logic_vector(6 downto 0);
+signal klok_out			:	std_logic;
 
 begin
 	clk		<=	'1' after 0 ns,
@@ -230,7 +232,7 @@ begin
 			-- Bits 45 t/m 49 vormen de maand (12)
 			-- Bits 50 t/m 57 vormen het jaar (binnen een eeuw) (14)
 			-- Bits 58 is parity bit over bits 36 t/m 57 (1)
-	controller_pm: top_top_entity port map(clk, reset, knoppen,dcf, wekker,menu_signal);
+	controller_pm: top_top_entity port map(clk, reset, knoppen,dcf,data_out,clk_out);
 end architecture;
 
 
