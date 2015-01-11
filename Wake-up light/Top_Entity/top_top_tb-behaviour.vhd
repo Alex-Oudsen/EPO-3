@@ -44,7 +44,7 @@ begin
 			"00000" after 550000 ns,	--knoppen(3) = down
 			"00100" after 612500 ns,	--uren_set -> uren_plus
 			"00000" after 643750 ns,	--knoppen(3) = down
-			"01000" after 748375 ns,	--uren_set -> uren_min
+			"11000" after 748375 ns,	--uren_set -> uren_min
 			"00000" after 815625 ns,	--uren_min -> uren_set
 			"00001" after 878125 ns,	--uren_set -> rust
 			"00000" after 909375 ns,	--knoppen(3) = down
