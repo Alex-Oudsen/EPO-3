@@ -83,11 +83,11 @@ signal year		:	std_logic_vector (7 downto 0);
 
 begin
 --port maps
-	alarm_1 : alarm port map (clk, reset => reset, clk_1hz, licht_sg, pwm_signal);
+	alarm_1 : alarm port map (clk, reset, clk_1hz, licht_sg, pwm_signal);
 
 	compare_1 : compare port map (clk, reset, tijd_tijd_tijd(10 downto 7), tijd_tijd_tijd(12 downto 11), tijd_tijd_tijd(3 downto 0), tijd_tijd_tijd(6 downto 4), wekkeur(10 downto 7), wekkeur(12 downto 11), wekkeur(3 downto 0), wekkeur(6 downto 4), knoppen(5), buzzer, led_lamp);
 
-	kontroller_1 : controller port map (clk => clk, reset => reset, knoppen => knoppen, wekkeur(15 downto 0), menu_plek);
+	kontroller_1 : controller port map (clk, reset, knoppen, wekkeur(15 downto 0), menu_plek);
 
 	dcf_1 : dcf77_bcd port map (clk, reset, dcf_in, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), weekday, dag_maand, month, year, date_ready);
 
