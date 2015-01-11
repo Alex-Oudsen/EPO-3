@@ -76,16 +76,17 @@ begin
 			y <= "000000";
 			c <= "0000000";
 			new_ready_sig <= ready;
+			new_hz_state <= hz_sig;
 			--minner <= "000000";
 			new_punt <= punt;
 			if (minuten(0) /= lsb_minuten) then
 				--new_minuten_tijd <= unsigned(minuten);
 				--new_uren_tijd <= unsigned(uren);
 				new_lsb_minuten <= minuten(0);
-				new_hz_state <= hz_sig;
+				
 				new_state <= char_0_state;
 			elsif(hz_state /= hz_sig) then
-				new_hz_state <= hz_sig;
+				
 				--new_minuten_tijd <= unsigned(minuten);
 				--new_uren_tijd <= unsigned(uren);
 				new_lsb_minuten <= minuten(0);
@@ -226,7 +227,7 @@ begin
 			end case;
 		when char_2_state =>
 			--new_uren_tijd <= uren_tijd;
-			--new_hz_state <= hz_sig;
+			new_hz_state <= hz_sig;
 			new_lsb_minuten <= lsb_minuten;
 			new_ready_sig <= ready;
 			x <= char_2_x;
