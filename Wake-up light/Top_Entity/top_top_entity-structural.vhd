@@ -53,7 +53,6 @@ end component;
 component lcd_top is
     	port (	clk		: in	std_logic;
 		reset			: in	std_logic;
-		ready 			: in 	std_logic;
 		uren			: in 	std_logic_vector(5 downto 0);
 		minuten 		: in 	std_logic_vector(6 downto 0);
 		dagvdweek		: in 	std_logic_vector (2 downto 0);
@@ -91,7 +90,7 @@ begin
 
 	dcf_1 : dcf77_bcd port map (clk, reset, dcf_in, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), weekday, dag_maand, month, year, date_ready);
 
-	lcd_toppie : lcd_top port map (clk, reset, date_ready, tijd_tijd_tijd(12 downto 7), tijd_tijd_tijd(6 downto 0), weekday, dag_maand, month, year, dcf_led, wekkeur(15), menu_plek, wekkeur(13), wekkeur(14), clk_1hz, wekkeur(12 downto 7), wekkeur(6 downto 0), data_out, clk_out);
+	lcd_toppie : lcd_top port map (clk, reset, tijd_tijd_tijd(12 downto 7), tijd_tijd_tijd(6 downto 0), weekday, dag_maand, month, year, dcf_led, wekkeur(15), menu_plek, wekkeur(13), wekkeur(14), clk_1hz, wekkeur(12 downto 7), wekkeur(6 downto 0), data_out, clk_out);
 
 -- AND port
 	licht_sg <= (lichtje AND wekkeur(15));
