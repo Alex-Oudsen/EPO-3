@@ -1,10 +1,12 @@
-\chapter{LCD controller}
+%\chapter{LCD controller}
 \section{Inleiding}
 
-
 \section{Specificaties}
-\subsection{Ingangen}
-\begin{itemize}[nolistsep]
+
+\subsection{Entity}
+\textbf{Ingangen:}
+
+\begin{itemize}
 \item Klok, dit is een standaard input;
 \item Reset, ook dit is een standaard input;
 \item Menu vanaf de main controller;
@@ -12,13 +14,48 @@
 \item Wektijd vanaf de main controller;
 \end{itemize}
 
+\textbf{Uitgangen:}
+\begin{itemize}
+\item Data: dit is een lijn voor het versturen van de x en y coordinaten naar het LCD scherm;
+\item SCK, is een klok. Werkt in combinatie met de data lijn. Werkt als een soort spi;
+\end{itemize}
 
-
-\subsection{Uitgangen}
-\begin{itemize}[nolistsep]
+\subsection{}
+\begin{itemize}
 \item Data, dit is een lijn voor het versturen van de x en y coordinaten naar het LCD scherm;
 \item SCK, is een klok. Werkt in combinatie met de data lijn. Werkt als een soort spi;
 \end{itemize}
+
+
+
+\begin{center}
+\label{table:uitgangen}
+\begin{tabular}{| l | l | p{4.5cm} |}
+\hline
+\textbf{Naam} & \textbf{Type} & \textbf{Functie} \\ \hline
+clk           				& in std$\_$logic           									& Klok             \\ \hline
+reset         			& in std$\_$logic           									& Reset            \\ \hline
+ready					& in std$\_$logic 											&  \\ \hline
+uren						&in std$\_$logic$\_$vector(5 downto 0) 		&data signaal met actuele uren afkomstig van DCF \\ \hline
+minuten				&in std$\_$logic$\_$vector(6 downto 0) 		&data signaal met actuele minuten afkomstig van DCF \\ \hline
+dagvdweek			&in std$\_$logic$\_$vector(2 downto 0)			&data signaal met de actuele dag afkomstig van DCF\\ \hline
+dagvdmaand		&in std$\_$logic$\_$vector(5 downto 0) 		&data signaal met de actuele dag van de maand afkomstig van DCF \\ \hline
+maand					&in std$\_$logic$\_$vector(4 downto 0) 		&data signaal met de actuele maand afkomstig van DCF  \\ \hline
+jaar						&in std$\_$logic$\_$vector(7 downto 0)	 		&data signaal met het actuele jaar afkomstig van DCF  \\ \hline
+dcf$\_$debug		&in std$\_$logic 												& ????  \\ \hline
+menu					&in std$\_$logic$\_$vector(2 downto 0)			&data signaal die de actuele menu state weergeeft \\ \hline
+geluid$\_$signaal 		&in std$\_$logic 		 										&buffer signaal dat weergeeft of geluidsfunctie in of uitgeschakeld is \\ \hline
+licht$\_$signaal 	&in std$\_$logic 		 										&buffer signaal dat weergeeft of lichtfunctie in of uitgeschakeld is  \\ \hline 
+wektijd$\_$uren 	& in std$\_$logic$\_$vector(5 downto 0)		&data signaal met ingestelde wektijd uren \\ \hline 
+wektijd$\_$min 	&in std$\_$logic$\_$vector(6 downto 0) 		&data signaal met ingestelde wektijd minuten \\ \hline 
+data$\_$out 		&in std$\_$logic$\_$vector(6 downto 0) 		&data signaal dat de x,y,c informatie doorgeeft aan de microcontroller \\ \hline 
+clk$\_$out 			&in std$\_$logic 		 										&clock om microcontroller clock mee te synchroniseren \\ \hline 
+
+
+\end{tabular}
+\end{center}
+
+
 \subsection{Gedrag}
 
 \section{Functionaliteit}
