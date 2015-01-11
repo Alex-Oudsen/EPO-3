@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.ALL;
 
 architecture behaviour of lcd_top_tb is
-	component
+	component lcd_top is
     	port (	clk		: in	std_logic;
 							reset		: in	std_logic;
 							uren		: in 	std_logic_vector(5 downto 0);
@@ -49,7 +49,7 @@ minuten <= "0000000" after 0 ns,
 					"0000110" after 650 ns,
 					"0000111" after 750 ns,
 					"0001000" after 850 ns,
-					"0001001" after 950 na,
+					"0001001" after 950 ns,
 					"0001010" after 1050 ns,
 					"0001011" after 1150 ns,
 					"0001100" after 1250 ns,
@@ -67,7 +67,7 @@ minuten <= "0000000" after 0 ns,
 					"0011000"after 2450 ns,
 					"0011001"after 2550 ns,
 					"0011010"after 2650 ns,
-					"0011011"after 2750 ns
+					"0011011"after 2750 ns,
 					"0011100" after 2850 ns,
 					"0011101"after 2950 ns,
 					"0011110"after 3050 ns,
@@ -109,7 +109,7 @@ minuten <= "0000000" after 0 ns,
 					"0000110" after 6650 ns,
 					"0000111" after 6750 ns,
 					"0001000" after 6850 ns,
-					"0001001" after 6950 na,
+					"0001001" after 6950 ns,
 					"0001010" after 7050 ns,
 					"0001011" after 7150 ns,
 					"0001100" after 7250 ns,
@@ -127,7 +127,7 @@ minuten <= "0000000" after 0 ns,
 					"0011000"after 8450 ns,
 					"0011001"after 8550 ns,
 					"0011010"after 8650 ns,
-					"0011011"after 8750 ns
+					"0011011"after 8750 ns,
 					"0011100" after 8850 ns,
 					"0011101"after 8950 ns,
 					"0011110"after 9050 ns,
@@ -162,7 +162,7 @@ minuten <= "0000000" after 0 ns,
 					"0111011" after 11950 ns,
 					"0000000" after 12050 ns;	
 dagvdweek <= "111" after 0 ns;
-dagvdmaand <= "01011" after 0 ns;	
+dagvdmaand <= "001011" after 0 ns;	
 maand <= "00001" after 0 ns;
 jaar <= "00001111" after 0 ns;
 dcf_debug <= '1' after 0 ns,
@@ -214,6 +214,7 @@ hz_1 <= '1' after 0 ns,
 				'0' after 100 ns when hz_1 /= '0' else '1' after 100 ns;
 wektijd_uren <= "000000" after 0  ns,
 								"000001" after 6050 ns;
-wektijd_minuten <= 	"0001111" after 0 ns,
+wektijd_min <= 	"0001111" after 0 ns,
 										"0011110" after 6050 ns;
+end architecture;
 
