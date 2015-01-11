@@ -11,6 +11,6 @@ entity top_top_entity is
 			dcf			:	in	std_logic;
 			data_out	:	out	std_logic_vector(6 downto 0);
 			buzzer		:	out std_logic;
-			led-lamp	:	out std_logic;
+			led_lamp	:	out std_logic;
         	clk_out   	:	out	std_logic);
 end top_top_entity;
