@@ -26,6 +26,8 @@ lbl1: process(clk)
 		if (clk'event and clk='1') then
 			if reset = '1' then
 				state <= steady;
+				buf <= "000";
+				alarm_buf <= '0';
 			else
 				state <= new_state;
 				buf <= new_buf;
@@ -41,6 +43,7 @@ begin
 		when steady =>
 			x_menu <= x_pos_menu;
 			y_menu <= y_pos_menu;
+			c_menu <= "0000000";
 			new_buf <= buf;
 			if (alarm /= alarm_buf) then
 				new_state <= schrijven;
