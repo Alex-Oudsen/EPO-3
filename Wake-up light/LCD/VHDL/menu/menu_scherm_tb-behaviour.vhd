@@ -7,6 +7,7 @@ component menu_scherm
         reset   :in    std_logic;
         ready   :in    std_logic;
         menu    :in    std_logic_vector(2 downto 0);
+	alarm	:in    std_logic;
         x_menu  :out   std_logic_vector(6 downto 0);
         y_menu  :out   std_logic_vector(5 downto 0);
         c_menu  :out   std_logic_vector(6 downto 0));
@@ -16,9 +17,10 @@ signal clk, reset, ready: std_logic;
 signal menu: std_logic_vector (2 downto 0);
 signal x_menu, c_menu: std_logic_vector (6 downto 0);
 signal y_menu: std_logic_vector (5 downto 0);
+signal alarm : std_logic;
 
 begin
-lbl1: menu_scherm port map (clk, reset, ready, menu, x_menu, y_menu, c_menu);
+lbl1: menu_scherm port map (clk, reset, ready, menu, alarm, x_menu, y_menu, c_menu);
 
 clk <=	'1' after 0 ns,
 	'0' after 100 ns when clk /= '0' else '1' after 100 ns;
@@ -33,6 +35,6 @@ menu <=	"001" after 0 ns,
 	"100" after 1550 ns,
 	"000" after 1850 ns,
 	"010" after 2050 ns;
+alarm <= '0';
 end behaviour;
-
 
