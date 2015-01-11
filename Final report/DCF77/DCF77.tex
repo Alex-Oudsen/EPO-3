@@ -75,6 +75,7 @@ Het opdelen van het grote DCF77 blok in subblokken is bijzonder nuttig, maar nog
 \noindent In de state output worden dan de resultaten van de drie parity checks bij elkaar genomen. Dit gebeurt, om zo een strengere controle op de correctheid van de ontvangen bits te verkrijgen. Bovendien is op deze manier slechts \'e\'en signaal nodig dat aangeeft of de ontvangen tijd en datum correct zijn. Alleen als alle parity checks kloppen, zal het uitgangssignaal sync\_now hoog worden gemaakt. Hiermee worden vervolgens de tijd en datum vrijgegeven voor verder gebruik in de wekker. Ten slotte zal het subblok direct na het uitzenden van een puls op het sync\_now signaal weer teruggaan naar de state clear, zodat deze klaar staat om de volende minuut weer de parity checks uit te voeren. De cirkel is nu rond.
 
 \subsection{VHDL code}
+Met behulp van de FSM diagrammen kan er behavioural VHDL worden geschreven, welke vervolgens met behulp van structural VHDL aan elkaar kan worden gemaakt om zo uiteindelijk het hele DCF77 blok te vormen. Al deze behavioural en structural VHDL beschrijvingen zijn voorzien van enig commentaar en opgenomen in \cref{Ap: DCF_code}. Vanuit de top-level beschrijving in \cref{code: dcf77} is, eventueel met behulp van \cref{fig: dcf_subblokken}, gemakkelijk terug te vinden hoe alle andere VHDL beschrijvingen binnen het blok samenwerken.
 
 \section{Simulatie}
 

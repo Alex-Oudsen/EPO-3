@@ -1,83 +1,85 @@
 \chapter[VHDL code]{Vhdl code}
 \section{Vhdl code van het DCF77 blok}
-\label{Ap:DCF_code}
-\subsection{Klokdeler}
-\label{code:klokdeler}
-\scriptsize 
-\lstinputlisting [style= VHDL]{VHDL/DCF77/klokdeler.vhd}
-\hrule
-\lstinputlisting [style= VHDL]{VHDL/DCF77/klokdeler-behaviour.vhd}
-\normalsize
-\subsection{Mod24 (uren) teller}
-\label{code:mod24_tel}
-\scriptsize 
-\lstinputlisting [style= VHDL]{VHDL/DCF77/mod24_tel_bcd.vhd}
-\hrule
-\lstinputlisting [style= VHDL]{VHDL/DCF77/mod24_tel_bcd-behaviour.vhd}
-\normalsize
-\subsection{Mod60 (minuten) teller}
-\label{code:mod60_tel}
-\scriptsize 
-\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_tel_bcd.vhd}
-\hrule
-\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_tel_bcd-behaviour.vhd}
-\normalsize
-\subsection{Mod60 (seconden) teller}
-\label{code:mod60_clk}
-\scriptsize 
-\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_clk_bcd.vhd}
-\hrule
-\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_clk_bcd-behaviour.vhd}
-\normalsize
-\subsection{Autonome synchroniseerbare klok}
-\label{code:ausy_klok}
-\scriptsize 
-\lstinputlisting [style= VHDL]{VHDL/DCF77/ausy_klok_bcd.vhd}
-\hrule 
-\lstinputlisting [style= VHDL]{VHDL/DCF77/ausy_klok_bcd-structure.vhd}
-\normalsize
-\subsection{Edge detector}
-\label{code:edge_detector}
+\label{Ap: DCF_code}
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: edge_detector}\thesubsection.\quad Edge detector}
 \scriptsize 
 \lstinputlisting [style= VHDL]{VHDL/DCF77/edge_detector.vhd}
 \hrule
 \lstinputlisting [style= VHDL]{VHDL/DCF77/edge_detector-behaviour.vhd}
 \normalsize
-\subsection{DCF counter}
-\label{code:dcf_counter}
+\newpage
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: dcf_counter}\thesubsection.\quad DCF counter}
 \scriptsize 
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_counter.vhd}
 \hrule
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_counter-behaviour.vhd}
 \normalsize
-\subsection{DCF decoder}
-\label{code:dcf_decoder}
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: dcf_decoder}\thesubsection.\quad DCF decoder}
 \scriptsize 
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_decoder.vhd}
 \hrule
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_decoder-behaviour.vhd}
 \normalsize
-\subsection{Parity check}
-\label{code:parity_check}
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: parity_check}\thesubsection.\quad Parity check}
 \scriptsize 
 \lstinputlisting [style= VHDL]{VHDL/DCF77/parity_check.vhd}
 \hrule
 \lstinputlisting [style= VHDL]{VHDL/DCF77/parity_check-behaviour.vhd}
 \normalsize
-\subsection{Synctime}
-\label{code:synctime}
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: synctime}\thesubsection.\quad Synctime}
 \scriptsize 
 \lstinputlisting [style= VHDL]{VHDL/DCF77/synctime.vhd}
 \hrule
 \lstinputlisting [style= VHDL]{VHDL/DCF77/synctime-structure.vhd}
 \normalsize
-\subsection{DCF77 (top-level)}
-\label{code:dcf77_ent}
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: klokdeler}\thesubsection.\quad Klokdeler}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/klokdeler.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/klokdeler-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: mod60_clk}\thesubsection.\quad Mod60 (seconden) teller}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_clk_bcd.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_clk_bcd-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: mod60_tel}\thesubsection.\quad Mod60 (minuten) teller}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_tel_bcd.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_tel_bcd-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: mod24_tel}\thesubsection.\quad Mod24 (uren) teller}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod24_tel_bcd.vhd}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod24_tel_bcd-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: ausy_klok}\thesubsection.\quad Autonome synchroniseerbare klok}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/ausy_klok_bcd.vhd}
+\hrule 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/ausy_klok_bcd-structure.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: dcf77}\thesubsection.\quad DCF77 (top-level)}
 \scriptsize 
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_bcd.vhd}
 \hrule
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_bcd-structure.vhd}
 \normalsize
+\newpage
+
 
 \section{VHDL code controller}
 \label{Ap:code_controller}

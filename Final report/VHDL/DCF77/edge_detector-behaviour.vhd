@@ -30,7 +30,6 @@ begin
 
 				r_wait <= '0';
 				f_wait <= '0';
-
 				state <= clear;
 			else
 				rise <= new_rise;
@@ -39,7 +38,6 @@ begin
 
 				r_wait <= new_r_wait;
 				f_wait <= new_f_wait;
-
 				state <= new_state;
 			end if;
 		end if;
@@ -56,7 +54,6 @@ begin
 
 				new_r_wait <= '0';
 				new_f_wait <= '0';
-
 				new_state <= find_edge;
 			when find_edge =>	-- Maakt gebruik van vertragingstijd van de not
 				new_rise <= (not temp) and input;
@@ -65,7 +62,6 @@ begin
 
 				new_r_wait <= '0';
 				new_f_wait <= '0';
-
 				new_state <= output;
 			when output =>		-- Hier wordt gezorgd voor een bruikbare uitgangspuls
 				new_rise <= rise;
@@ -98,7 +94,6 @@ begin
 
 				new_r_wait <= '0';
 				new_f_wait <= '0';
-
 				new_state <= clear;
 		end case;
 	end process;
