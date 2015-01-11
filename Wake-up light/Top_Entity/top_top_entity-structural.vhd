@@ -66,7 +66,7 @@ component lcd_top is
 		licht_signaal 	: in	std_logic;
 		hz_1			: in 	std_logic;
 		wektijd_uren	: in	std_logic_vector (5 downto 0);
-		wektijd_minuten	: in	std_logic_vector (6 downto 0);
+		wektijd_min	: in	std_logic_vector (6 downto 0);
     	data_out  		: out   std_logic_vector (6 downto 0);
     	clk_out   		: out   std_logic);
 end component;
