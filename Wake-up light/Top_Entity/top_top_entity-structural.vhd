@@ -73,7 +73,7 @@ component lcd_top is
 end component;
 
 --signalen
-signal clk, reset, clk_1hz, dcf_led, dcf_in, date_ready, beep:	std_logic;
+signal clk_1hz, dcf_led, dcf_in, date_ready, beep:	std_logic;
 signal tijd_tijd_tijd : std_logic_vector (12 downto 0);
 signal wekkeur : std_logic_vector (15 downto 0);
 signal weekday, menu_plek : std_logic_vector (2 downto 0);
