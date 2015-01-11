@@ -52,6 +52,10 @@ begin
 	if(rising_edge(clk)) then
 		if(reset = '1') then
 			state <= rust;
+			hz_state <= '0';
+			ready_sig <= '0';
+			punt <= '0';
+			lsb_minuten <= '0';
 		else
 			state <= new_state;
 			--minuten_tijd <= new_minuten_tijd;
