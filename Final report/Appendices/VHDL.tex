@@ -1,5 +1,5 @@
 \chapter[VHDL code]{Vhdl code}
-\section{Vhdl code van het DCF77 blok}
+\section{VHDL beschrijving van het DCF77 blok}
 \label{Ap: DCF_code}
 \phantomsection\subsection*{\refstepcounter{subsection}\label{code: edge_detector}\thesubsection.\quad Edge detector}
 \scriptsize 
@@ -77,6 +77,86 @@
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_bcd.vhd}
 \hrule
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_bcd-structure.vhd}
+\normalsize
+\newpage
+
+
+\section{Testbenches voor het DCF77 blok}
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: edge_detector_tb}\thesubsection.\quad Testbench edge detector}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/edge_detector_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/edge_detector_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: dcf_counter_tb}\thesubsection.\quad Testbench DCF counter}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_counter_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_counter_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: dcf_decoder_tb}\thesubsection.\quad Testbench DCF decoder}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_decoder_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_decoder_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: parity_check_tb}\thesubsection.\quad Testbench parity check}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/parity_check_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/parity_check_tb-behaviour.vhdl}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: synctime_tb}\thesubsection.\quad Testbench synctime}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/synctime_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/synctime_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: klokdeler_tb}\thesubsection.\quad Testbench klokdeler}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/klokdeler_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/klokdeler_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: mod60_clk_tb}\thesubsection.\quad Testbench mod60 (seconden) teller}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_clk_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_clk_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: mod60_tel_tb}\thesubsection.\quad Testbench mod60 (minuten) teller}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_tel_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod60_tel_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: mod24_tel_tb}\thesubsection.\quad Testbench mod24 (uren) teller}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod24_tel_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/mod24_tel_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: ausy_klok_tb}\thesubsection.\quad Testbench autonome synchroniseerbare klok}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/ausy_klok_tb.vhdl}
+\hrule 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/ausy_klok_tb-behaviour.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: dcf77_tb}\thesubsection.\quad Testbench DCF77 (top-level)}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_tb.vhdl}
+\hrule
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_tb-behaviour.vhd}
 \normalsize
 \newpage
 
