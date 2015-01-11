@@ -157,14 +157,14 @@ architecture structure of lcd_top is
 	        	c            		:out   std_logic_vector(6 downto 0));
 	end component licht;
 
-	signal sec, ready_tijd, ready_menu, ready_geluid, ready_def, ready_dcf, ready_datum, ready_wek, ready_licht	: std_logic;
+	signal ready_tijd, ready_menu, ready_geluid, ready_def, ready_dcf, ready_datum, ready_wek, ready_licht	: std_logic;
 	signal sel	: std_logic_vector(2 downto 0);
 	signal x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_f	: std_logic_vector(6 downto 0);
         signal y_0, y_1, y_2, y_3, y_4, y_5, y_6, y_f	: std_logic_vector(5 downto 0);
         signal c_0, c_1, c_2, c_3, c_4, c_5, c_6, c_f	: std_logic_vector(6 downto 0);
 begin
 	sbus: send_bus			port map(clk, reset, sel, x_f, y_f, c_f, x_0, y_0, c_0, ready_tijd, x_1, y_1, c_1, ready_menu, x_2, y_2, c_2, ready_geluid, x_3, y_3, c_3, ready_dcf, x_4, y_4, c_4, ready_datum, x_5, y_5, c_5, ready_wek, x_6, y_6, c_6, ready_licht);
-	lbl_tijd: tijd			port map(clk, reset, uren, minuten, x_0, y_0, c_0, ready_tijd, sec);
+	lbl_tijd: tijd			port map(clk, reset, uren, minuten, x_0, y_0, c_0, ready_tijd, hz_1);
 	scontrol: send_control		port map(clk, reset, data_out, clk_out, sel, x_f, y_f, c_f);
 	mscherm: menu_scherm		port map(clk, reset, ready_menu, menu, alarm, x_1, y_1, c_1);
 	gel: geluid			port map(clk, reset, ready_geluid, menu, geluid_signaal, x_2, y_2, c_2);
