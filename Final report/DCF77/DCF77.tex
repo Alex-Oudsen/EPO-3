@@ -10,28 +10,31 @@ In dit onderdeel, genaamd DCF77,  wordt de basis van de wekker gelegd, door vers
 \end{figure}
 
 \section{Specificaties}
-In deze sectie zullen we de in- en uitgangen van de DCF-controller in een overzicht weergeven. Doordat het totale systeem met dit onderdeel start, bevat dit blok enkel standaard ingangen en een ingang van buitenaf. De uitgangen uren en minuten worden doorgestuurd naar de main-controller. De clk van 1 Hz zal in verschillende onderdelen worden gebruikt. De debug\_led zal rechtstreeks op het LCD worden weergegeven. 
+In deze sectie worden de in- en uitgangen van de DCF-controller overzichtelijk weergeven. Doordat dit onderdeel aan het begin staat van het totale systeem, bevat dit blok enkel standaard ingangen en een ingang van buitenaf met het DCF77 signaal. De uitgangen uren en minuten worden doorgestuurd naar de main-controller. De clk van 1 Hz zal in verschillende onderdelen worden gebruikt, zowel binnen als buiten het DCF77 blok. De datum en het signaal dcf\_led zullen rechtstreeks op het LCD scherm worden weergegeven. Enkele signalen zijn in BCD (Binairy Coded Decimal). Meer informatie over BCD is te vinden op ~\cite{BCDinfo}.
+
 \subsection{Ingangen}
 Dit onderdeel maakt gebruik van de volgende ingangen: 
-
 \begin{itemize}[nolistsep]
-\item Reset, standaard input.
-\item Klok, standaard input.
-\item DCF, signaal van 'logische' pulsen.
+\item De 32 kHz systeemklok, een standaard input.
+\item Het 'active high' resetsignaal, een standaard input.
+\item Het gedigitaliseerde DCF77 signaal, bestaande uit korte en lange pulsen.
 \end{itemize}
 \noindent
 
 \subsection{Uitgangen}
-Dit onderdeel heeft de volgende uitgangen:
+Dit onderdeel genereert de volgende uitgangen:
 \begin{itemize}[nolistsep]
-\item Uren, een BCD vector van 6 bits.
-\item minuten, een BCD vector van 7 bits.
-\item clk, een clk die elke seconde een puls geeft.
-\item debug\_led, een signaal dat een logische 1 doorgeeft zodra er een dcf signaal wordt ontvangen.
+\item Een kloksignaal met een frequentie van 1 Hz, welke gebruikt kan worden om secondes te tellen.
+\item Het debug signaal dcf\_led, wat een seconde lang hoog is na ontvangst van een puls van het DCF77 signaal.
+\item Uren; de uren van de huidige tijd in een BCD vector van 6 bits.
+\item Minuten; de minuten van de huidige tijd in een BCD vector van 7 bits.
+\item Weekdag; de dag van de week, binair gecodeerd met maandag als 001.
+\item Dag; de dag van de maand in een BCD vector van 6 bits.
+\item Maand; het nummer van de maand in een BCD vector van 5 bits.
+\item Jaar; de laatste twee cijfers van het jaartal in een BCD vector van 8 bits.
 \end{itemize}
 
-
-\section{Gedrag}
+\subsection{Gedrag}
 De DCF-controller heeft als belangrijkste gedragsfunctie om de tijd en datum door te geven. Al deze data moet zo vaak mogelijk worden gesynchroniseerd met een inkoment DCF-signaal. Dit signaal moet vanaf een antenne gedecodeerd worden en vervolgens moet het signaal via parity bits gecontroleerd worden. Pas als hieraan voldaan is moet het signaal in een register worden geschreven en doorgestuurd naar de andere onderdelen van de chip. Mocht het DCF-signaal signaal niet of slecht worden ontvangen dan moet de tijd instantaan en individueel door kunnen lopen. Indien het DCF-signaal weer terugkomt moet de controller dit automatisch oppakken. Om aan te geven of er een  DCF signaal is, moet er een zogenaamd debug lampje gaan branden als dit gebeurt. In de 60e seconde zal dit signaal laag moeten zijn, doordat dan geen bit doorgegeven wordt. \\
 De huidige, indien mogelijk met het DCF77 signaal gesynchroniseerde, tijd moet worden gegeven in uren (in een BCD gecodeerd signaal van 5-bits) en minuten (in een BCD gecodeerd signaal van 6-bits). De datum, afkomstig uit het DCF77 signaal dient na synchronisatie te worden bewaard totdat er opnieuw met het DCF77 signaal wordt gesynchroniseerd. De datum wordt gegeven in vier vectoren:
 \begin{itemize}[nolistsep]
