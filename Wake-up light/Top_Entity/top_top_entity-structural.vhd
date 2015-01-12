@@ -11,6 +11,17 @@ component alarm is
         pwm_signal:out   std_logic);
 end component;
 
+component datefix is
+	port(clk	:in  std_logic;
+	     reset	:in  std_logic;
+	     date_ready	:in  std_logic;
+	     jaar	:in  std_logic_vector(7 downto 0);
+	     maand	:in  std_logic_vector(4 downto 0);
+	     dag	:in  std_logic_vector(5 downto 0);
+	     weekdag	:in  std_logic_vector(2 downto 0);
+	     datum	:out std_logic_vector(21 downto 0));
+end component;
+
 component compare is
    port(clk       :in    std_logic;
         reset     :in    std_logic;
@@ -90,7 +101,9 @@ begin
 
 	dcf_1 : dcf77_bcd port map (clk, reset, dcf, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), weekday, dag_maand, month, year, date_ready);
 
-	lcd_toppie : lcd_top port map (clk, reset, tijd_tijd_tijd(12 downto 7), tijd_tijd_tijd(6 downto 0), weekday, dag_maand, month, year, dcf_led, wekkeur(15), menu_plek, wekkeur(13), wekkeur(14), clk_1hz, wekkeur(12 downto 7), wekkeur(6 downto 0), data_out, clk_out);
+	quickfix1: datefix	port map (clk, reset, date_ready, jaar, maand, dag, weekdag, datum);
+
+	lcd_toppie : lcd_top port map (clk, reset, tijd_tijd_tijd(12 downto 7), tijd_tijd_tijd(6 downto 0), datum(2 downto 0), datum(8 downto 3), datum (13 downto 9), datum(21 downto 14), dcf_led, wekkeur(15), menu_plek, wekkeur(13), wekkeur(14), clk_1hz, wekkeur(12 downto 7), wekkeur(6 downto 0), data_out, clk_out);
 
 -- AND port
 	licht_sg <= (lichtje AND wekkeur(15));
