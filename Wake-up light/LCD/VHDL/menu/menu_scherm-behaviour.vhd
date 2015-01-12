@@ -8,8 +8,8 @@ signal state, new_state: menu_state;
 signal buf, new_buf: std_logic_vector (2 downto 0);
 signal alarm_buf: std_logic;
 
-constant x_pos_menu: std_logic_vector (6 downto 0) := "0011001";	-- x-positie voor menu
-constant y_pos_menu: std_logic_vector (5 downto 0) := "110101";		-- y-positie voor menu
+constant x_pos_menu: std_logic_vector (6 downto 0) := "0000011";	-- x-positie voor menu
+constant y_pos_menu: std_logic_vector (5 downto 0) := "100011";		-- y-positie voor menu
 constant c_0: std_logic_vector (6 downto 0) := "0101010";	-- leeg, alarm aan
 constant c_1: std_logic_vector (6 downto 0) := "0100110"; -- uren aanpassen
 constant c_2: std_logic_vector (6 downto 0) := "0100111"; -- minuten aanpassen
