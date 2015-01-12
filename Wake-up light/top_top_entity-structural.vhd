@@ -86,10 +86,10 @@ end component;
 signal clk_1hz, dcf_led, date_ready, beep, licht_sg, lichtje:	std_logic;
 signal tijd_tijd_tijd : std_logic_vector (12 downto 0);
 signal wekkeur : std_logic_vector (15 downto 0);
-signal weekday, menu_plek : std_logic_vector (2 downto 0);
-signal dag_maand : std_logic_vector (5 downto 0);
-signal month	:	std_logic_vector (4 downto 0);
-signal year		:	std_logic_vector (7 downto 0);
+signal weekdag, menu_plek : std_logic_vector (2 downto 0);
+signal dag : std_logic_vector (5 downto 0);
+signal maand	:	std_logic_vector (4 downto 0);
+signal jaar		:	std_logic_vector (7 downto 0);
 signal datum	:	std_logic_vector (21 downto 0);
 
 begin
@@ -100,7 +100,7 @@ begin
 
 	kontroller_1 : controller port map (clk, reset, knoppen(3 downto 0), wekkeur(15 downto 0), menu_plek);
 
-	dcf_1 : dcf77_bcd port map (clk, reset, dcf, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), weekday, dag_maand, month, year, date_ready);
+	dcf_1 : dcf77_bcd port map (clk, reset, dcf, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), weekdag, dag, maand, jaar, date_ready);
 
 	quickfix1: datefix	port map (clk, reset, date_ready, jaar, maand, dag, weekdag, datum);
 
@@ -111,5 +111,8 @@ begin
 
 
 end structural;
+
+
+
 
 
