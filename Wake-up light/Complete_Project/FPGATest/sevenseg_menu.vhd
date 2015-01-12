@@ -8,12 +8,17 @@ port (clk 		 		: in  std_logic;
 			reset		 		: in  std_logic;
       menu_state  : in  std_logic_vector(6 downto 0);  --minuten input
       seg7_menu 	: out std_logic_vector(2 downto 0);  -- 3 bit decoded output.
-    
+			overig_1		: out std_logic_vector(2 downto 0);  -- 3 bit decoded output.
+			overig_2		: out std_logic_vector(2 downto 0);  -- 3 bit decoded output.
+			overig_3		: out std_logic_vector(2 downto 0);  -- 3 bit decoded output.
 end sevenseg_menu;
 
 architecture behavioral of sevenseg_menu is
 
 begin
+overig_1 <="0000001";  -- '0'
+overig_2 <="0000001";  -- '0'
+overig_3 <="0000001";  -- '0'
 
 process (clk, reset)
 begin
