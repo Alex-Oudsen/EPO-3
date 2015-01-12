@@ -61,15 +61,26 @@ component send_bus is
 			selector  		: out   std_logic_vector(2 downto 0)
 	       		);
 	end component send_control;
-	signal ready_tijd, ready_menu, ready_geluid, ready_def, ready_dcf, ready_datum, ready_wek, ready_licht	: std_logic;
+	--signal ready_tijd, ready_menu, ready_geluid, ready_def, ready_dcf, ready_datum, ready_wek, ready_licht	: std_logic;
 	signal sel	: std_logic_vector(2 downto 0);
-	signal x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_f	: std_logic_vector(6 downto 0);
-        signal y_0, y_1, y_2, y_3, y_4, y_5, y_6, y_f	: std_logic_vector(5 downto 0);
-        signal c_0, c_1, c_2, c_3, c_4, c_5, c_6, c_f	: std_logic_vector(6 downto 0);
+	--signal x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_f	: std_logic_vector(6 downto 0);
+    --    signal y_0, y_1, y_2, y_3, y_4, y_5, y_6, y_f	: std_logic_vector(5 downto 0);
+    --    signal c_0, c_1, c_2, c_3, c_4, c_5, c_6, c_f	: std_logic_vector(6 downto 0);
+	signal x_f,c_f : std_logic_vector(6 downto 0);
+	signal y_f	: std_logic_vector(5 downto 0);
 begin
-	sbus: send_bus			port map(clk, reset, sel, x_f, y_f, c_f, x_0, y_0, c_0, ready_tijd, x_1, y_1, c_1, ready_menu, x_2, y_2, c_2, ready_geluid, x_3, y_3, c_3, ready_dcf, x_4, y_4, c_4, ready_datum, x_5, y_5, c_5, ready_wek, x_6, y_6, c_6, ready_licht);
-	scontrol: send_control		port map(clk, reset, data_out, clk_out, sel, x_f, y_f, c_f);
+	sbus: send_bus			port map(clk, reset, sel, x_f, y_f, c_f, x_in_0, y_in_0, c_in_0, ready_0, x_in_1, y_in_1, c_in_1, ready_1, x_in_2, y_in_2, c_in_2, ready_2, x_in_3, y_in_3, c_in_3, ready_3, x_in_4, y_in_4, c_in_4, ready_4, x_in_5, y_in_5, c_in_5, ready_5, x_in_6, y_in_6, c_in_6, ready_6);
+	scontrol: send_control		port map(clk, reset, x_f, y_f, c_f, data_out, clk_out, sel) ;
 end structure;
+
+
+
+
+
+
+
+
+
 
 
 

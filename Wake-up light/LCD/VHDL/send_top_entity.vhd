@@ -40,5 +40,8 @@ port (	clk			: in	std_logic;
 	c_in_6			: in 	std_logic_vector(6 downto 0);
 	ready_6			: out 	std_logic;
 	data_out  		: out   std_logic_vector(6 downto 0);
-	clk_out		   	: out   std_logic;
+	clk_out		   	: out   std_logic);
 end send_top;
+
+
+

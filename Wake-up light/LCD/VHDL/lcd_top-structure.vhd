@@ -11,7 +11,7 @@ use ieee.numeric_std.all;
 
 architecture structure of lcd_top is
 
-	component sender is
+	component send_top is
 		port(	clk			: in	std_logic;
 			reset			: in	std_logic;
 			x_in_0			: in 	std_logic_vector(6 downto 0);
@@ -49,10 +49,9 @@ architecture structure of lcd_top is
 			c_in_6			: in 	std_logic_vector(6 downto 0);
 			ready_6			: out 	std_logic;
 			data_out  		: out   std_logic_vector(6 downto 0);
-			clk_out		   	: out   std_logic;
-			selector  		: out   std_logic_vector(2 downto 0)
+			clk_out		   	: out   std_logic
 		);
-	end component sender;
+	end component send_top;
 
 
 	component tijd is
@@ -143,7 +142,7 @@ architecture structure of lcd_top is
 	end component licht;
 
 	signal ready_tijd, ready_menu, ready_geluid, ready_def, ready_dcf, ready_datum, ready_wek, ready_licht	: std_logic;
-	signal sel	: std_logic_vector(2 downto 0);
+	--signal sel	: std_logic_vector(2 downto 0);
 	signal x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_f	: std_logic_vector(6 downto 0);
         signal y_0, y_1, y_2, y_3, y_4, y_5, y_6, y_f	: std_logic_vector(5 downto 0);
         signal c_0, c_1, c_2, c_3, c_4, c_5, c_6, c_f	: std_logic_vector(6 downto 0);
@@ -155,8 +154,11 @@ begin
 	lcddat: datum			port map(clk, reset, ready_datum, uren, dagvdweek, dagvdmaand, maand, jaar, x_4, y_4, c_4);
 	wktijd: wektijd			port map(clk, reset, ready_wek, menu, wektijd_uren, wektijd_min, x_5, y_5, c_5);
 	lichtje: licht			port map(clk, reset, ready_licht, menu, licht_signaal, x_6, y_6, c_6);
-	sender_pm: sender 		port map(clk ,reset, x_0, y_0, c_0, ready_tijd, x_1, y_1, c_1, ready_menu, x_2, y_2, c_2, ready_geluid, x_3, y_3, c_3, ready_dcf, x_4, y_4, c_4, ready_datum, x_5, y_5, c_5, ready_wek, x_6, y_6 ,ready_licht, data_out, clk_out);
+	sender_pm: send_top	port map(clk ,reset, x_0, y_0, c_0, ready_tijd, x_1, y_1, c_1, ready_menu, x_2, y_2, c_2, ready_geluid, x_3, y_3, c_3, ready_dcf, x_4, y_4, c_4, ready_datum, x_5, y_5, c_5, ready_wek, x_6, y_6 ,c_6, ready_licht, data_out, clk_out);
 end structure;
+
+
+
 
 
 
