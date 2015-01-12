@@ -1,4 +1,4 @@
--- Joran Out, 4331958
+-- Joran Out, 4331958 & Rens Hamburger 4292936
 -- Dit is de top-level beschrijving van
 -- de bcd versie van het LCD blok
 
@@ -11,15 +11,9 @@ use ieee.numeric_std.all;
 
 architecture structure of lcd_top is
 
-
-	component send_bus is
-  	 	port(	clk 	 		: in    std_logic;
-        		reset			: in    std_logic;
-			selector		: in 	std_logic_vector(2 downto 0);
-       		 	x_out			: out   std_logic_vector(6 downto 0);
-        		y_out			: out   std_logic_vector(5 downto 0);
-        		c_out			: out   std_logic_vector(6 downto 0);
-
+	component sender is
+		port(	clk			: in	std_logic;
+			reset			: in	std_logic;
 			x_in_0			: in 	std_logic_vector(6 downto 0);
 			y_in_0			: in 	std_logic_vector(5 downto 0);
 			c_in_0			: in 	std_logic_vector(6 downto 0);
@@ -53,21 +47,12 @@ architecture structure of lcd_top is
 			x_in_6			: in 	std_logic_vector(6 downto 0);
 			y_in_6			: in 	std_logic_vector(5 downto 0);
 			c_in_6			: in 	std_logic_vector(6 downto 0);
-			ready_6			: out 	std_logic
-			);
-	end component send_bus;
-
-	component send_control is
-	   	port(	clk       		: in    std_logic;
-	   		reset     		: in    std_logic;
-	        	data_out  		: out   std_logic_vector(6 downto 0);
-	        	clk_out   		: out   std_logic;
-			selector  		: out   std_logic_vector(2 downto 0);
-	        	x         		: in    std_logic_vector(6 downto 0);
-	        	y         		: in    std_logic_vector(5 downto 0);
-	        	c         		: in    std_logic_vector(6 downto 0)
-	       		);
-	end component send_control;
+			ready_6			: out 	std_logic;
+			data_out  		: out   std_logic_vector(6 downto 0);
+			clk_out		   	: out   std_logic;
+			selector  		: out   std_logic_vector(2 downto 0)
+		);
+	end component sender;
 
 
 	component tijd is
@@ -163,16 +148,14 @@ architecture structure of lcd_top is
         signal y_0, y_1, y_2, y_3, y_4, y_5, y_6, y_f	: std_logic_vector(5 downto 0);
         signal c_0, c_1, c_2, c_3, c_4, c_5, c_6, c_f	: std_logic_vector(6 downto 0);
 begin
-	sbus: send_bus			port map(clk, reset, sel, x_f, y_f, c_f, x_0, y_0, c_0, ready_tijd, x_1, y_1, c_1, ready_menu, x_2, y_2, c_2, ready_geluid, x_3, y_3, c_3, ready_dcf, x_4, y_4, c_4, ready_datum, x_5, y_5, c_5, ready_wek, x_6, y_6, c_6, ready_licht);
 	lbl_tijd: tijd			port map(clk, reset, uren, minuten, x_0, y_0, c_0, ready_tijd, hz_1);
-	scontrol: send_control		port map(clk, reset, data_out, clk_out, sel, x_f, y_f, c_f);
 	mscherm: menu_scherm		port map(clk, reset, ready_menu, menu, alarm, x_1, y_1, c_1);
 	gel: geluid			port map(clk, reset, ready_geluid, menu, geluid_signaal, x_2, y_2, c_2);
 	leddcf: dcf_lcd			port map(clk, reset, ready_dcf, dcf_debug, x_3, y_3, c_3);
 	lcddat: datum			port map(clk, reset, ready_datum, uren, dagvdweek, dagvdmaand, maand, jaar, x_4, y_4, c_4);
-	wktijd: wektijd		port map(clk, reset, ready_wek, menu, wektijd_uren, wektijd_min, x_5, y_5, c_5);
+	wktijd: wektijd			port map(clk, reset, ready_wek, menu, wektijd_uren, wektijd_min, x_5, y_5, c_5);
 	lichtje: licht			port map(clk, reset, ready_licht, menu, licht_signaal, x_6, y_6, c_6);
-
+	sender_pm: sender 		port map(clk ,reset, x_0, y_0, c_0, ready_tijd, x_1, y_1, c_1, ready_menu, x_2, y_2, c_2, ready_geluid, x_3, y_3, c_3, ready_dcf, x_4, y_4, c_4, ready_datum, x_5, y_5, c_5, ready_wek, x_6, y_6 ,ready_licht, data_out, clk_out);
 end structure;
 
 
