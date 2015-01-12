@@ -72,7 +72,7 @@ component lcd_top is
 end component;
 
 --signalen
-signal clk_1hz, dcf_led, dcf_in, date_ready, beep, licht_sg, lichtje:	std_logic;
+signal clk_1hz, dcf_led, date_ready, beep, licht_sg, lichtje:	std_logic;
 signal tijd_tijd_tijd : std_logic_vector (12 downto 0);
 signal wekkeur : std_logic_vector (15 downto 0);
 signal weekday, menu_plek : std_logic_vector (2 downto 0);
@@ -88,7 +88,7 @@ begin
 
 	kontroller_1 : controller port map (clk, reset, knoppen(3 downto 0), wekkeur(15 downto 0), menu_plek);
 
-	dcf_1 : dcf77_bcd port map (clk, reset, dcf_in, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), weekday, dag_maand, month, year, date_ready);
+	dcf_1 : dcf77_bcd port map (clk, reset, dcf, dcf_led, clk_1hz, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7), weekday, dag_maand, month, year, date_ready);
 
 	lcd_toppie : lcd_top port map (clk, reset, tijd_tijd_tijd(12 downto 7), tijd_tijd_tijd(6 downto 0), weekday, dag_maand, month, year, dcf_led, wekkeur(15), menu_plek, wekkeur(13), wekkeur(14), clk_1hz, wekkeur(12 downto 7), wekkeur(6 downto 0), data_out, clk_out);
 
