@@ -22,7 +22,7 @@ constant c_6: std_logic_vector (6 downto 0) := "0101100"; -- leeg, alarm uit
 
 begin
 
-lbl1: process(clk)
+lbl1: process(clk, reset, new_state, alarm, new_ready_sig, alarm_buf)
 	begin
 		if (clk'event and clk='1') then
 			if reset = '1' then
@@ -88,7 +88,7 @@ begin
 					else
 						c_menu <= c_6;
 					end if;
-					new_buf <= buf;
+					new_buf <= menu;
 			end case;
 			if(ready = '0') then
 				if(ready_sig = '1') then
@@ -110,6 +110,8 @@ begin
  end process;
 
 end behaviour;
+
+
 
 
 
