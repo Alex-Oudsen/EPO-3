@@ -82,8 +82,9 @@ component lcd_top is
     	clk_out   		: out   std_logic);
 end component;
 
+
 --signalen
-signal clk_1hz, dcf_led, date_ready, beep, licht_sg, lichtje:	std_logic;
+signal clk_1hz, dcf_led, date_ready, beep, licht_sg, lichtje,sound:	std_logic;
 signal tijd_tijd_tijd : std_logic_vector (12 downto 0);
 signal wekkeur : std_logic_vector (15 downto 0);
 signal weekdag, menu_plek : std_logic_vector (2 downto 0);
@@ -96,7 +97,7 @@ begin
 --port maps
 	alarm_1 : alarm port map (clk, reset, clk_1hz, licht_sg, led_lamp);
 
-	compare_1 : compare port map (clk, reset, tijd_tijd_tijd(10 downto 7), tijd_tijd_tijd(12 downto 11), tijd_tijd_tijd(3 downto 0), tijd_tijd_tijd(6 downto 4), wekkeur(10 downto 7), wekkeur(12 downto 11), wekkeur(3 downto 0), wekkeur(6 downto 4), knoppen(4), buzzer, lichtje);
+	compare_1 : compare port map (clk, reset, tijd_tijd_tijd(10 downto 7), tijd_tijd_tijd(12 downto 11), tijd_tijd_tijd(3 downto 0), tijd_tijd_tijd(6 downto 4), wekkeur(10 downto 7), wekkeur(12 downto 11), wekkeur(3 downto 0), wekkeur(6 downto 4), knoppen(4), sound, lichtje);
 
 	kontroller_1 : controller port map (clk, reset, knoppen(3 downto 0), wekkeur(15 downto 0), menu_plek);
 
@@ -107,10 +108,15 @@ begin
 	lcd_toppie : lcd_top port map (clk, reset, tijd_tijd_tijd(12 downto 7), tijd_tijd_tijd(6 downto 0), datum(2 downto 0), datum(8 downto 3), datum (13 downto 9), datum(21 downto 14), dcf_led, wekkeur(15), menu_plek, wekkeur(13), wekkeur(14), clk_1hz, wekkeur(12 downto 7), wekkeur(6 downto 0), data_out, clk_out);
 
 -- AND port
-	licht_sg <= (lichtje AND wekkeur(15));
+	licht_sg <= (lichtje AND wekkeur(15) and wekkeur(14));
+	buzzer <= (sound AND wekkeur(15) AND wekkeur(13));
+	
 
 
 end structural;
+
+
+
 
 
 
