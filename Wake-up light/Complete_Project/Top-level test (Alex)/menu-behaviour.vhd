@@ -72,7 +72,7 @@ begin
 
 			when uren_plus =>
 				enable <= '1';
-				menu_signal <= "101";
+				menu_signal <= "001";
 				if wekdata(12 downto 7) = "100011" then --23
 					wekker(12 downto 7) <= "000000"; --Bij de 23 uur weer opnieuw beginnen
 				else
@@ -102,7 +102,7 @@ begin
 				wekker(15 downto 13) <= wekdata(15 downto 13);
 				wekker(6 downto 0) <= wekdata(6 downto 0);
 				enable <= '1';
-				menu_signal <= "101";
+				menu_signal <= "001";
 
 			when minuten_set =>
 				enable <= '0';
@@ -122,7 +122,7 @@ begin
 						wekker(6 downto 4) <= wekdata(6 downto 4); -- Tientallen blijven constant
 					end if;
 				end if;
-				menu_signal <= "111";
+				menu_signal <= "010";
 				wekker(15 downto 7) <= wekdata(15 downto 7); --Af
 
 			when minuten_min =>
@@ -138,7 +138,7 @@ begin
 						wekker(6 downto 4) <= wekdata(6 downto 4);
 					end if;
 				end if;
-				menu_signal <= "111";
+				menu_signal <= "010";
 				wekker(15 downto 7) <= wekdata(15 downto 7); --Af
 		end case;
 	end process actie_uitvoeren;
