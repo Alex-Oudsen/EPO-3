@@ -92,12 +92,12 @@ begin
 			end case;
 			if(ready = '0') then
 				if(ready_sig = '1') then
-					new_state <= char_1_state;
+					new_state <= steady;
 				else
-					new_state <= char_0_state;
+					new_state <= schrijven;
 				end if;
 			else
-				new_state <= char_0_state;
+				new_state <= schrijven;
 			end if;
 		when others =>
 			x_menu <= x_pos_menu;
