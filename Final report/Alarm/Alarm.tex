@@ -29,6 +29,7 @@ Als 15 minuten zijn verstreken na het aangaan van de led, dus de ingestelde tijd
 
 \begin{figure}
 \section{Functionaliteit}
+Om te laten zien hoe het alarm werkt, zijn er FSM's gemaakt en is tevens VHDL code inbegrepen.
 \subsection{FSM}
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figuren/Alarm/FSM_compare.jpg}
 \caption{Alarm Compare FSM}
@@ -58,23 +59,15 @@ De code voor het alarm is te vinden in \cref{Ap:code_alarm}.
 \newpage
 \section{Resultaten}
 Alle onderdelen werken in de simulaties. Zowel de simulatie van de behaviour als van de extracted vhdl.
-Onderstaande afbeeldingen zijn de resultaten van de simulaties, eerst die van de behaviour daarna van de extracted.
-De eerste 2 afbeedingen zijn van ``alarm-compare", de andere 2 van ``alarm-pwm".
-\\
-
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figuren/Alarm/Compare_beh.jpg}
-
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figuren/Alarm/Compare_ext.jpg}
+De simulaties zijn te vinden in \cref{Ap:sim_alarm}.
 \\
 \\
-Te zien is in de 2 afbeeldingen hier boven dat wanneer de huidige tijd (tijd\_uur en tijd\_min) gelijk is aan de wekker tijd (wekker\_uur en wekker\_min) minus 15 minuten, dan gaat het signaal licht naar '1'. Als de huidige tijd gelijk is aan de wekker tijd, gaat ook het geluid signaal naar '1'.
+Te zien is in  \cref{fig:sim_beh_compare,fig:sim_ext_compare} dat wanneer de huidige tijd (tijd\_uur en tijd\_min) gelijk is aan de wekker tijd (wekker\_uur en wekker\_min) minus 15 minuten, dan gaat het signaal licht naar '1'. Als de huidige tijd gelijk is aan de wekker tijd, gaat ook het geluid signaal naar '1'.
 Ook is te zien dat wanneer de knop (in de simulatie stop\_alarm) naar '1' gaat het licht en/of geluid weer naar '0' gaat.
 \\
+\\
+\cref{fig:sim_beh_alarm,fig:sim_ext_alarm} laten zien dat op het moment dat er 15 seconde zijn verstreken het pwm-signaal breder wordt.
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figuren/Alarm/Alarm_beh.jpg}
-\\
-
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figuren/Alarm/Alarm_ext.jpg}
-\\
-\\
-Bovenstaande 2 afbeeldingen laten zien dat op het moment dat er 15 seconde zijn verstreken het pwm-signaal breder wordt.
+\section{Testen}
+Nadat alles er goed uitzag bij de simulaties is het alarm uitvoerig getest op de FPGA.
+Hier bleek alles ook prima te werken. Er was te zien dat een led steeds feller werd, dus het pwm-signaal werd steeds breder. Ook was te zien dat als de huidige tijd gelijk was aan de ingestelde wekker tijd minus 15 minuten er een signaal naar de pwm generator gaat om die aan te zetten.
