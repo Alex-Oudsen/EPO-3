@@ -1,0 +1,1 @@
+No. of transistors (total / used):    33864/7920 = 23.39 %
