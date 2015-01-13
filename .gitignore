@@ -15,7 +15,6 @@
 *.dpf
 *.ini
 *.log
-*.lst
 *.mess
 *.mr
 *.plt
