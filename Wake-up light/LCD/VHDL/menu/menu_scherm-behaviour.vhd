@@ -7,6 +7,7 @@ type menu_state is (steady, schrijven, ready_state);
 signal state, new_state: menu_state;
 signal buf, new_buf: std_logic_vector (2 downto 0);
 signal alarm_buf: std_logic;
+signal ready_sig, new_ready_sig : std_logic;
 
 constant x_pos_menu: std_logic_vector (6 downto 0) := "0000011";	-- x-positie voor menu
 constant y_pos_menu: std_logic_vector (5 downto 0) := "100011";		-- y-positie voor menu
@@ -28,10 +29,12 @@ lbl1: process(clk)
 				state <= steady;
 				buf <= "000";
 				alarm_buf <= '0';
+				ready_sig <= '0';
 			else
 				state <= new_state;
 				buf <= new_buf;
 				alarm_buf <= alarm;
+				ready_sig <= new_ready_sig;
 			end if;
 		end if;
 	end process;
@@ -45,6 +48,7 @@ begin
 			y_menu <= y_pos_menu;
 			c_menu <= "0000000";
 			new_buf <= buf;
+			new_ready_sig <= ready;
 			if (alarm /= alarm_buf) then
 				new_state <= schrijven;
 			else
@@ -58,6 +62,7 @@ begin
 		when schrijven =>
 			x_menu <= x_pos_menu;
 			y_menu <= y_pos_menu;
+			new_ready_sig <= ready;
 			case menu is
 				when "001" =>
 					c_menu <= c_1;
@@ -85,21 +90,22 @@ begin
 					end if;
 					new_buf <= buf;
 			end case;
-			if (ready = '1') then
-				new_state <= ready_state;
+			if(ready = '0') then
+				if(ready_sig = '1') then
+					new_state <= char_1_state;
+				else
+					new_state <= char_0_state;
+				end if;
 			else
-				new_state <= schrijven;
+				new_state <= char_0_state;
 			end if;
-		when ready_state =>
+		when others =>
 			x_menu <= x_pos_menu;
 			y_menu <= y_pos_menu;
 			c_menu <= "0000000";
 			new_buf <= buf;
-			if (ready = '0') then
-				new_state <= steady;
-			else
-				new_state <= ready_state;
-			end if;
+			new_ready_sig <= ready;
+			
 	end case;	
  end process;
 
