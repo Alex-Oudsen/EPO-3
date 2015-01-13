@@ -81,20 +81,6 @@ component synctime is
 		      clk_1hz:  out std_logic);
 	end component klokdeler;
 
-	component ausy_klok_bcd is
-    		port (clk:		in  std_logic;
-		      s_clk:		in  std_logic;
-		      reset:		in  std_logic;
-		      sync_now: in  std_logic;
-		      min_ref:		in  std_logic_vector(6 downto 0);
-		      hr_ref:		in  std_logic_vector(5 downto 0);
-	  	      minutes:  out std_logic_vector(6 downto 0);
-		      hours:    out std_logic_vector(5 downto 0));
-	end component ausy_klok_bcd;
-
-
-
-
 component lcd_top is
     	port (	clk		: in	std_logic;
 		reset			: in	std_logic;
@@ -116,6 +102,33 @@ component lcd_top is
     	clk_out   		: out   std_logic);
 end component;
 
+	component mod60_clk_bcd is
+   		port(clk:		in    std_logic;
+        		     clk_in:		in    std_logic;
+        		     reset:		in    std_logic;
+		     sync_now:		in    std_logic;
+        		     ref:		in    std_logic_vector(6 downto 0);
+		     m_clk:		out   std_logic);
+	end component mod60_clk_bcd;
+
+	component mod60_tel_bcd is
+		port (clk:		in  std_logic;
+		      clk_in:		in  std_logic;
+		      reset:		in  std_logic;
+		      sync_now: in  std_logic;
+		      ref:		in  std_logic_vector(6 downto 0);
+		      count:    out std_logic_vector(6 downto 0);
+	  	      h_clk:    out std_logic);
+	end component mod60_tel_bcd;
+
+	component mod24_tel_bcd is
+    		port (clk:		in  std_logic;
+		      clk_in:		in  std_logic;
+		      reset:		in  std_logic;
+		      sync_now: in  std_logic;
+		      ref:		in  std_logic_vector(5 downto 0);
+	  	      count:    out std_logic_vector(5 downto 0));
+	end component mod24_tel_bcd;
 
 --signalen
 signal clk_1hz, dcf_led, date_ready, beep, licht_sg, lichtje,sound:	std_logic;
@@ -129,7 +142,9 @@ signal datum	:	std_logic_vector (21 downto 0);
 	signal sync, s_clk: std_logic;
 	signal minuut: std_logic_vector(6 downto 0);
 	signal uur: std_logic_vector(5 downto 0);
-
+	signal m_clk: std_logic;
+	signal h_clk: std_logic;
+	signal sec_ref: std_logic_vector(6 downto 0);
 
 begin
 --port maps
@@ -144,10 +159,18 @@ begin
 	date_ready <= sync;
 	clk_1hz <= s_clk;
 
-	sytime: synctime			port map(clk, reset, dcf, dcf_led, sync, minuut, uur, weekdag, dag, maand, jaar);
+	sytime: synctime					port map(clk, reset, dcf, dcf_led, sync, minuut, uur, weekdag, dag, maand, jaar);
 	divide: klokdeler    			port map(clk, reset, s_clk);
-	r_time: ausy_klok_bcd			port map(clk, s_clk, reset, sync, minuut, uur, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7));
+	--r_time: ausy_klok_bcd			port map(clk, s_clk, reset, sync, minuut, uur, tijd_tijd_tijd(6 downto 0), tijd_tijd_tijd(12 downto 7));
+	
+	sec_ref <= "0000000";
 
+	SEC: mod60_clk_bcd port map(clk, s_clk, reset, sync, sec_ref, m_clk);
+	MIN: mod60_tel_bcd port map(clk, m_clk, reset, sync, minuut, tijd_tijd_tijd(6 downto 0), h_clk);
+	HRS: mod24_tel_bcd port map(clk, h_clk, reset, sync, uur, tijd_tijd_tijd(12 downto 7));
+
+
+	
 	quickfix1: datefix	port map (clk, reset, date_ready, jaar, maand, dag, weekdag, datum);
 
 	lcd_toppie : lcd_top port map (clk, reset, tijd_tijd_tijd(12 downto 7), tijd_tijd_tijd(6 downto 0), datum(2 downto 0), datum(8 downto 3), datum (13 downto 9), datum(21 downto 14), dcf_led, wekkeur(15), menu_plek, wekkeur(13), wekkeur(14), clk_1hz, wekkeur(12 downto 7), wekkeur(6 downto 0), data_out, clk_out);
