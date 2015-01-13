@@ -3,30 +3,7 @@
 
 \section{Specificaties}
 
-\subsection{Entity}
-\textbf{Ingangen:}
-
-\begin{itemize}
-\item Klok, dit is een standaard input;
-\item Reset, ook dit is een standaard input;
-\item Menu vanaf de main controller;
-\item Tijd en datum vanaf de DCF controller;
-\item Wektijd vanaf de main controller;
-\end{itemize}
-
-\textbf{Uitgangen:}
-\begin{itemize}
-\item Data: dit is een lijn voor het versturen van de x en y coordinaten naar het LCD scherm;
-\item SCK, is een klok. Werkt in combinatie met de data lijn. Werkt als een soort spi;
-\end{itemize}
-
-\subsection{}
-\begin{itemize}
-\item Data, dit is een lijn voor het versturen van de x en y coordinaten naar het LCD scherm;
-\item SCK, is een klok. Werkt in combinatie met de data lijn. Werkt als een soort spi;
-\end{itemize}
-
-
+\section{Entity}
 
 \begin{center}
 \label{table:uitgangen}
@@ -44,17 +21,15 @@ maand					&in std$\_$logic$\_$vector(4 downto 0) 		&data signaal met de actuele 
 jaar						&in std$\_$logic$\_$vector(7 downto 0)	 		&data signaal met het actuele jaar afkomstig van DCF  \\ \hline
 dcf$\_$debug		&in std$\_$logic 												& ????  \\ \hline
 menu					&in std$\_$logic$\_$vector(2 downto 0)			&data signaal die de actuele menu state weergeeft \\ \hline
+alarm 					&in std$\_$logic												&buffer signaal dat weergeeft of alarmfunctie in of uitgeschakeld is
 geluid$\_$signaal 		&in std$\_$logic 		 										&buffer signaal dat weergeeft of geluidsfunctie in of uitgeschakeld is \\ \hline
 licht$\_$signaal 	&in std$\_$logic 		 										&buffer signaal dat weergeeft of lichtfunctie in of uitgeschakeld is  \\ \hline 
 wektijd$\_$uren 	& in std$\_$logic$\_$vector(5 downto 0)		&data signaal met ingestelde wektijd uren \\ \hline 
 wektijd$\_$min 	&in std$\_$logic$\_$vector(6 downto 0) 		&data signaal met ingestelde wektijd minuten \\ \hline 
 data$\_$out 		&in std$\_$logic$\_$vector(6 downto 0) 		&data signaal dat de x,y,c informatie doorgeeft aan de microcontroller \\ \hline 
 clk$\_$out 			&in std$\_$logic 		 										&clock om microcontroller clock mee te synchroniseren \\ \hline 
-
-
 \end{tabular}
 \end{center}
-
 
 \subsection{Gedrag}
 
