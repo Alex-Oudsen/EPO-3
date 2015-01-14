@@ -1,6 +1,14 @@
 \chapter{LCD controller}
 \section{LCD Controller}
-Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook mee dat het erg gecompliceerd kan worden. Het LCD dat zal worden gebruikt is van de fabrikant MIDAS, typenummer MC128064B6W-BNMLW. Het betreft een graphical LCD van 128 x 64 pixels met een register die geschreven kan worden. De bibliotheek met characters en de controller om het LCD te schrijven zal extern van deze chip plaatsvinden door middel van een atmega32-16pu. Deze keuze is gemaakt omdat voor de characters niet genoeg ruimte is op de chip. De LCD controller op de chip zal dus alleen de inkomende data moeten omzetten naar een positie waarnaar het geschreven moet worden en een bijbehorend character. \\
+Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook mee dat het erg gecompliceerd kan worden. Het LCD dat zal worden gebruikt is van de fabrikant MIDAS, typenummer MC128064B6W-BNMLW. Het betreft een graphical LCD van 128 x 64 pixels met een register die geschreven kan worden. De bibliotheek met characters en de controller om het LCD te schrijven zal extern van deze chip plaatsvinden door middel van een atmega32-16pu. Deze keuze is gemaakt omdat voor de characters niet genoeg ruimte is op de chip. De LCD controller op de chip zal dus alleen de inkomende data moeten omzetten naar een positie waarnaar het geschreven moet worden en een bijbehorend character. De layout van het display is al vastgesteld, zodat de posities alvast bekend zijn.  Zie voor de layout afbeelding \ref{fig:lcdlayout}.  \\
+
+\begin{figure}
+  \centering
+     \includegraphics[angle = 0, scale= 1]{Figuren/LCD/voorbeeld_lcd.png}
+       \caption{LCD layout}
+\label{fig:lcdlayout}
+\end{figure}
+
 \section{Specificaties}
 
 \begin{center}
@@ -34,7 +42,7 @@ clk$\_$out 			&out std$\_$logic 		 										&clock om microcontroller clock mee
   \centering
      \includegraphics[angle = 0, scale= 0.75]{verslag_schemas/toplevel_entity.png}
        \caption{Toplevel Entity}
-\label{fig:simlayout}
+\label{fig:lcdtoplevel}
 \end{figure}
 \newpage
 
@@ -57,15 +65,20 @@ Nadat de mux de data naar de zender heeft gebufferd, zal de zender de signalen e
 \include{geluidenlicht}
 
 \subsection{VHDL code}
-%*** VHDL CODE ***
+Zie \ref{code:ent_lcdtop} voor de entity code. \\
+Zie \ref{code:beh_lcdtop} voor de behavioural code.\\
+Zie \ref{code:lcdtop_tb} voor de testbench die is gebruikt.
 
 \section{Simulatie}
-
+Zie \ref{fig:sim_lcdtop} voor de simulatie van de behavioural code. \\
+Zie \ref{fig:sim_lcdtop_circuit} voor de simulatie van het gesynthetiseerde circuit. \\
 
 \section{Testen}
+Tijdens het testen van verschillende subcircuits zijn veel dingen fout gegaan. Vaak waren de circuits dan ook wel goed, maar was de testbench niet correct. Zo hebben we in het begin met een te hoge clock frequentie getest, maar ook met signalen die niet lang genoeg hoog bleven. \\
+Het systeem is ook getest op een Altera FPGA bord. Eerst dachten we dat het niet werkte, maar achteraf bleek dat, wat best logisch is,  het systeem zodanig snel werkt dat wij zelf het niet konden waarnemen. Door de klok te pulsen met een button konden we zien dat het systeem weldegelijk correct werkt.
 
 \section{Resultaten}
-
+De resultaten zijn goed. Het systeem heeft 2 errors in de switch level simulatie. Dat heeft te maken met de testbench waarin een situatie wordt gecre\¨eerd die zich nooit zal voordoen. Dat maakt dus niks uit.
 
 \subsection{Conclusie en discussie}
-
+De controller werkt naar verwachting. Omdat vanwege tijdgebrek en gestelde prioriteiten de microcontroller nog niet af is voor het LCD kan nog niet worden getest of het systeem ook daarmee goed functioneerd. Al verwachten wij, omdat de simulaties en de test op de FPGA positief zijn, dat het kan gaan werken.\\
