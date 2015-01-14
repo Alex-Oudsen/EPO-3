@@ -1,0 +1,80 @@
+# Tabular Link File created on Wed 14 Jan 2015 20:33:40
+# By Program: design_flow
+# From Source: /home/jvanuffelen/dcf/dcf_lcd.lst
+# Clock_column: 0
+INP clk;
+INP reset;
+INP ready;
+INP dcf_debug;
+OUT x_6_0_6;
+OUT x_6_0_5;
+OUT x_6_0_4;
+OUT x_6_0_3;
+OUT x_6_0_2;
+OUT x_6_0_1;
+OUT x_6_0_0;
+OUT y_5_0_5;
+OUT y_5_0_4;
+OUT y_5_0_3;
+OUT y_5_0_2;
+OUT y_5_0_1;
+OUT y_5_0_0;
+OUT c_6_0_6;
+OUT c_6_0_5;
+OUT c_6_0_4;
+OUT c_6_0_3;
+OUT c_6_0_2;
+OUT c_6_0_1;
+OUT c_6_0_0;
+PERIOD 200ns;
+TIME_UNIT 1.0e-10s;
+TABLE_FORMAT D<24c;
+DATA_SECTION
+             00<HHLXllllllllllllllllllll
+           1000<LHLXllllllllllllllllllll
+           1500<LHHXllllllllllllllllllll
+           2000<HLHXllllllllllllllllllll
+           2500<HLHHllllllllllllllllllll
+           3000<LLHHllllllllllllllllllll
+           3500<LLHLllllllllllllllllllll
+           4000<HLHLllllllllllllllllllll
+           4500<HLLLllllllllllllllllllll
+           5000<LLLLllllllllllllllllllll
+           5500<LLLHllllllllllllllllllll
+           6000<HLLHllllllhlllllhlhllhll
+           6500<HLHHllllllhlllllhlhllhll
+           7000<LLHHllllllhlllllhlhllhll
+           7500<LLHLllllllhlllllhlhllhll
+           8000<HLHLllllllhlllllhlhllhll
+           8500<HLHHllllllhlllllhlhllhll
+           9000<LLHHllllllhlllllhlhllhll
+           9500<LLLLllllllhlllllhlhllhll
+          10000<HLLLllllllllllllllllllll
+          10500<HLLHllllllllllllllllllll
+          11000<LLLHllllllllllllllllllll
+          12000<HLLHllllllhlllllhlhllhll
+          13000<LLLHllllllhlllllhlhllhll
+          13500<LLLLllllllhlllllhlhllhll
+          14000<HLLLllllllhlllllhlhllhlh
+          14500<HLHLllllllhlllllhlhllhlh
+          15000<LLHLllllllhlllllhlhllhlh
+          16000<HLHLllllllhlllllhlhllhlh
+          17000<LLHLllllllhlllllhlhllhlh
+          18000<HLHLllllllhlllllhlhllhlh
+          19000<LLHLllllllhlllllhlhllhlh
+          19500<LLLLllllllhlllllhlhllhlh
+          20000<HLLLllllllllllllllllllll
+          21000<LLLLllllllllllllllllllll
+          22000<HLLLllllllllllllllllllll
+          22500<HLHLllllllllllllllllllll
+          23000<LLHLllllllllllllllllllll
+          24000<HLHLllllllllllllllllllll
+          25000<LLHLllllllllllllllllllll
+          26000<HLHLllllllllllllllllllll
+          27000<LLHLllllllllllllllllllll
+          28000<HLHLllllllllllllllllllll
+          28500<HLLLllllllllllllllllllll
+          29000<LLLLllllllllllllllllllll
+          30000<HLLLllllllllllllllllllll
+
+

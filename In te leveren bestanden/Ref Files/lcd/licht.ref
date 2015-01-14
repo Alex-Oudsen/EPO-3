@@ -1,0 +1,80 @@
+# Tabular Link File created on Wed 14 Jan 2015 20:30:01
+# By Program: design_flow
+# From Source: /home/jvanuffelen/licht/licht.lst
+# Clock_column: 0
+INP clk;
+INP reset;
+INP ready;
+INP menu_2_0_2;
+INP menu_2_0_1;
+INP menu_2_0_0;
+INP licht_signaal;
+OUT x_6_0_6;
+OUT x_6_0_5;
+OUT x_6_0_4;
+OUT x_6_0_3;
+OUT x_6_0_2;
+OUT x_6_0_1;
+OUT x_6_0_0;
+OUT y_5_0_5;
+OUT y_5_0_4;
+OUT y_5_0_3;
+OUT y_5_0_2;
+OUT y_5_0_1;
+OUT y_5_0_0;
+OUT c_6_0_6;
+OUT c_6_0_5;
+OUT c_6_0_4;
+OUT c_6_0_3;
+OUT c_6_0_2;
+OUT c_6_0_1;
+OUT c_6_0_0;
+PERIOD 200ns;
+TIME_UNIT 1.0e-10s;
+TABLE_FORMAT D<27c;
+DATA_SECTION
+             00<HHLLLLHllllllllllllllllllll
+           1000<LHLLLLHllllllllllllllllllll
+           1500<LHHLLLHllllllllllllllllllll
+           2000<HLHLLLHllllllllllllllllllll
+           2500<HLHLHHHllllllllllllllllllll
+           3000<LLHLHHHllllllllllllllllllll
+           4000<HLHLHHHllllllhllhhlllhlllhl
+           4500<HLLLHHLllllllhllhhlllhlllhl
+           5000<LLLLHHLllllllhllhhlllhlllhl
+           6000<HLLLHHLllllllhllhhlllhlllhh
+           6500<HLHLHHLllllllhllhhlllhlllhh
+           7000<LLHLHHLllllllhllhhlllhlllhh
+           8000<HLHLHHLllllllhllhhlllhlllhh
+           9000<LLHLHHLllllllhllhhlllhlllhh
+           9500<LLLLHHHllllllhllhhlllhlllhh
+          10000<HLLLHHHllllllllllllllllllll
+          11000<LLLLHHHllllllllllllllllllll
+          12000<HLLLHHHllllllhllhhlllhlllhl
+          12500<HLLLLHHllllllhllhhlllhlllhl
+          13000<LLLLLHHllllllhllhhlllhlllhl
+          14000<HLLLLHHllllllhllhhlllhlllhl
+          14500<HLHLLHLllllllhllhhlllhlllhl
+          15000<LLHLLHLllllllhllhhlllhlllhl
+          16000<HLHLLHLllllllhllhhlllhlllhl
+          17000<LLHLLHLllllllhllhhlllhlllhl
+          18000<HLHLLHLllllllhllhhlllhlllhl
+          19000<LLHLLHLllllllhllhhlllhlllhl
+          19500<LLLLHHHllllllhllhhlllhlllhl
+          20000<HLLLHHHllllllllllllllllllll
+          21000<LLLLHHHllllllllllllllllllll
+          22000<HLLLHHHllllllhllhhlllhlllhl
+          22500<HLHLHHHllllllhllhhlllhlllhl
+          23000<LLHLHHHllllllhllhhlllhlllhl
+          24000<HLHLHHHllllllhllhhlllhlllhl
+          24500<HLHLHHLllllllhllhhlllhlllhl
+          25000<LLHLHHLllllllhllhhlllhlllhl
+          26000<HLHLHHLllllllhllhhlllhlllhh
+          27000<LLHLHHLllllllhllhhlllhlllhh
+          28000<HLHLHHLllllllhllhhlllhlllhh
+          28500<HLLLHHLllllllhllhhlllhlllhh
+          29000<LLLLHHLllllllhllhhlllhlllhh
+          29500<LLLLHHHllllllhllhhlllhlllhh
+          30000<HLLLHHHllllllllllllllllllll
+
+
