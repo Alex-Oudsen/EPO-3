@@ -1,6 +1,6 @@
-%\chapter{LCD controller}
-\chapter{Inleiding}
-Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook 
+\chapter{LCD controller}
+\section{Inleiding}
+Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook mee dat het erg gecompliceerd kan worden. Het LCD dat zal worden gebruikt is van de fabrikant MIDAS, typenummer MC128064B6W-BNMLW. Het betreft een graphical LCD van 128 x 64 pixels met een register die geschreven kan worden. De bibliotheek met characters en de controller om het LCD te schrijven zal extern van deze chip plaatsvinden door middel van een atmega32-16pu. Deze keuze is gemaakt omdat voor de characters niet genoeg ruimte is op de chip. De LCD controller op de chip zal dus alleen de inkomende data moeten omzetten naar een positie waarnaar het geschreven moet worden en een bijbehorend character. \\
 \section{Specificaties}
 
 \section{Entity}
@@ -31,34 +31,22 @@ clk$\_$out 			&in std$\_$logic 		 										&clock om microcontroller clock mee 
 \end{tabular}
 \end{center}
 
-\subsection{Gedrag}
+\section{Gedrag}
 
 \section{Functionaliteit}
 
 
 \section{Subsystemen LCD}
-\subsection{...}
-\include{bladiebla}
 
-- gedrag
-- functionaliteit
-- FSM
-- VHDL code 
-- Testen 
-- Simulatie
-- Resultaten
-- Discussie
+\include{datum}
 
-	
-
-\subsection{FSM}
 
 
 \subsection{VHDL code}
 
-\section{Testen}
-
 \section{Simulatie}
+
+\section{Testen}
 
 \section{Resultaten}
 
