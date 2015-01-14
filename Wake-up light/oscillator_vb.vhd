@@ -6,7 +6,7 @@ architecture behaviour of test is
 component osc10 is
 port(e : in std_logic;
 f : out std_logic;
-XI : inout std_logic;
+XI : in std_logic;
 XO : inout std_logic);
 end component;
 
