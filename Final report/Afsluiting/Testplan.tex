@@ -1,7 +1,13 @@
 \chapter{Plan voor het testen van de chip}
-%Moet het gaan over het testen van de daadwerkelijke gemaakte chip in Q4 of moet het gaan over het testen op de fpga
-Voor het testen zijn een aantal momenten in het proces waarop getest wordt. Zo wordt elk module getest in een simulatie in Modelsim. Hieruit kan opgemaakt worden wat het verwachte gedrag is. Maar een simulatie is niet alles. Daarom kan een module ook nog getest worden door middel van een FPGA te programmeren. De uiteindelijke chip zal getest worden met een logic analyzer en natuurlijk door te kijken of de chip de gewenste output geeft.
-\section{FPGA bord}
-Het bord dat gebruikt kan worden is een Altera FPGA bord. Dit bord komt met eigen software genaamt Quartus. Deze software kan gebruikt worden om de gemaakte VHDL code om te zetten in een bitstream file en vervolgens het FPGA bord te programmeren. Door de VHDL code op een FPGA te programmeren kan worden geverifieerd of de code het gedrag vertoont wat verwacht wordt. Door simulatie is dit namelijk niet altijd helemaal te zien. Mocht op de FPGA een fout ontdekt worden, dan zal de code hierop aangepast worden en zal de code opnieuw gesimuleerd worden.
-\section{Logic Analyzer}
-De gemaakte chip zal in Q4 worden getest. De chip zal eerst op een logic analyzer worden aangesloten. De analyzer die gebruikt zal worden is een LA-5580.
+
+\section{Logic analyzer}
+Zodra de chip daadwerkelijk gemaakt is, kan die in kwartaal vier getest worden. Dit wordt gedaan met behulp van de logic analyzer LA-5580. Dit meetinstrument meet de uitgangsspanningen (logische \'e\'en of nul) als functie van de tijd. De voordelen van deze analyzer ten opzichte van een oscilloscoop is dat de analyzer een groot aantal uitgangsspanningen kan meten en tegelijkertijd ingangssignalen de chip in kan sturen.\\
+Voor het testen van de chip met een logic analyzer zijn een paar referentiedocumenten nodig die geproduceerd worden tijdens het ontwerpen van de chip. De ingangssignalen die in de referentiedocumenten staan worden als ingang naar de chip gestuurd en de uitgangssignalen van de chip en die van de documenten worden met elkaar vergeleken.
+
+\section{Testsignalen}
+De meeste uitgangssignalen die uit de chip komen, gaan naar een LCD-scherm. Mocht er iets mis gegaan zijn tussen de chip, microcontroller en het scherm, dan zal de weergave op het scherm niet goed zijn. Om te checken of de fout in de chip zelf zit of in de communicatie tussen de chip en het LCD zullen er testsignalen op de niet-gebruikte pinnen van de chip gezet worden. Op die manier kunnen de signalen tussen de subblokken ook getest worden.
+De testsignalen die op de pinnen gezet worden zijn de volgende:
+\begin{itemize}
+\item Het dcf\_debug signaal, om te zien of het DCF-signaal opgevangen wordt.
+\item Het \'e\'en-Hertz-signaal
+\end{itemize}
