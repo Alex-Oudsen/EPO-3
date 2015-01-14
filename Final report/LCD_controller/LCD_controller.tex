@@ -1,5 +1,5 @@
 \chapter{LCD controller}
-\section{Inleiding}
+\section{LCD Controller}
 Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook mee dat het erg gecompliceerd kan worden. Het LCD dat zal worden gebruikt is van de fabrikant MIDAS, typenummer MC128064B6W-BNMLW. Het betreft een graphical LCD van 128 x 64 pixels met een register die geschreven kan worden. De bibliotheek met characters en de controller om het LCD te schrijven zal extern van deze chip plaatsvinden door middel van een atmega32-16pu. Deze keuze is gemaakt omdat voor de characters niet genoeg ruimte is op de chip. De LCD controller op de chip zal dus alleen de inkomende data moeten omzetten naar een positie waarnaar het geschreven moet worden en een bijbehorend character. \\
 \section{Specificaties}
 
@@ -17,7 +17,7 @@ dagvdweek			&in std$\_$logic$\_$vector(2 downto 0)			&data signaal met de actuel
 dagvdmaand		&in std$\_$logic$\_$vector(5 downto 0) 		&data signaal met de actuele dag van de maand afkomstig van DCF \\ \hline
 maand					&in std$\_$logic$\_$vector(4 downto 0) 		&data signaal met de actuele maand afkomstig van DCF  \\ \hline
 jaar						&in std$\_$logic$\_$vector(7 downto 0)	 		&data signaal met het actuele jaar afkomstig van DCF  \\ \hline
-dcf$\_$debug		&in std$\_$logic 												& ????  \\ \hline
+dcf$\_$debug		&in std$\_$logic 												&signaal afkomstig van het dcf component en weergeeft of het DCF signaal ontvangen wordt of niet \\ \hline
 menu					&in std$\_$logic$\_$vector(2 downto 0)			&data signaal die de actuele menu state weergeeft \\ \hline
 alarm 					&in std$\_$logic												&buffer signaal dat weergeeft of alarmfunctie in of uitgeschakeld is\\ \hline
 geluid$\_$signaal 		&in std$\_$logic 		 										&buffer signaal dat weergeeft of geluidsfunctie in of uitgeschakeld is \\ \hline
@@ -54,8 +54,7 @@ Nadat de mux de data naar de zender heeft gebufferd, zal de zender de signalen e
 \include{Wektijd}
 \include{menu}
 \include{dcf}
-\include{licht}
-\include{geluid}
+\include{geluidenlicht}
 
 \subsection{VHDL code}
 %*** VHDL CODE ***
