@@ -3,8 +3,6 @@
 Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook mee dat het erg gecompliceerd kan worden. Het LCD dat zal worden gebruikt is van de fabrikant MIDAS, typenummer MC128064B6W-BNMLW. Het betreft een graphical LCD van 128 x 64 pixels met een register die geschreven kan worden. De bibliotheek met characters en de controller om het LCD te schrijven zal extern van deze chip plaatsvinden door middel van een atmega32-16pu. Deze keuze is gemaakt omdat voor de characters niet genoeg ruimte is op de chip. De LCD controller op de chip zal dus alleen de inkomende data moeten omzetten naar een positie waarnaar het geschreven moet worden en een bijbehorend character. \\
 \section{Specificaties}
 
-\section{Entity}
-
 \begin{center}
 \label{table:uitgangen}
 \begin{tabular}{| l | l | p{4.5cm} |}
@@ -26,29 +24,49 @@ geluid$\_$signaal 		&in std$\_$logic 		 										&buffer signaal dat weergeeft 
 licht$\_$signaal 	&in std$\_$logic 		 										&buffer signaal dat weergeeft of lichtfunctie in of uitgeschakeld is  \\ \hline 
 wektijd$\_$uren 	& in std$\_$logic$\_$vector(5 downto 0)		&data signaal met ingestelde wektijd uren \\ \hline 
 wektijd$\_$min 	&in std$\_$logic$\_$vector(6 downto 0) 		&data signaal met ingestelde wektijd minuten \\ \hline 
-data$\_$out 		&in std$\_$logic$\_$vector(6 downto 0) 		&data signaal dat de x,y,c informatie doorgeeft aan de microcontroller \\ \hline 
-clk$\_$out 			&in std$\_$logic 		 										&clock om microcontroller clock mee te synchroniseren \\ \hline 
+data$\_$out 		&out std$\_$logic$\_$vector(6 downto 0) 		&data signaal dat de x,y,c informatie doorgeeft aan de microcontroller \\ \hline 
+clk$\_$out 			&out std$\_$logic 		 										&clock om microcontroller clock mee te synchroniseren \\ \hline 
 \end{tabular}
 \end{center}
 
-\section{Gedrag}
+\newpage
+\begin{figure}
+  \centering
+     \includegraphics[angle = 0, scale= 0.75]{verslag_schemas/toplevel_entity.png}
+       \caption{Toplevel Entity}
+\label{fig:simlayout}
+\end{figure}
+\newpage
+
+\subsection{Gedrag}
+De LCD controller zal na de reset alle informatie die hij binnen krijgt omzetten naar een karakter met bij behorende x en y positie en wegschrijven naar de microprocessor van de LCD. Daarna zal de controller alleen de data die veranderd op de ingangen omzetten en  wegschrijven naar de microprocessor om tijd en onnodige acties te besparen. \\
+Het verzenden van de x,y en c gaat door een data signaal van 7 bits samen met een clock$\_$out. Een neergaande klokflank geeft aan dat de data klaar staat om te verzenden zodat er op de opgaande klokflank kan worden gesampled. Zo zal eerst de x, daarna de y en als laatste de c worden verzonden. Het versturen van een karakter duurt dus 3 klokslagen van de clock$\_$out. een klokslag van de clock$\_$out is gelijk aan 2 klokslagen van de ingaande clk. 
 
 \section{Functionaliteit}
-
+De systemen links (datum, tijd, etc)  zorgen per stuk voor het ontvangen van de inkomende informatie en het omzetten naar een x,y positie met een karakter. De x,y en de c zal op de uitgang van het component worden gezet. 
+Het component send$\_$buffer is een MUX en zorgt voor het uitlezen van de x,y en c en zal door middel van de ready signalen aangeven welk signaal hij heeft uigelezen en naar de zender heeft verstuurd. Zodra de ready laag wordt, weet het desbetreffende component dat de data is uitgelezen en zal daarna nieuwe data klaar zetten. 
+Nadat de mux de data naar de zender heeft gebufferd, zal de zender de signalen een voor een door  verzenden naar de microcontroller. Tegelijkertijd zal de zender een clock$\_$out geven, zodra de clock laag wordt staat de data klaar, zodat op de opgaande klokflank de data vanaf de chip kan worden uitgelezen. 
 
 \section{Subsystemen LCD}
 
 \include{datum}
-
-
+\include{Tijd}
+\include{Wektijd}
+\include{menu}
+\include{dcf}
+\include{licht}
+\include{geluid}
 
 \subsection{VHDL code}
+%*** VHDL CODE ***
 
 \section{Simulatie}
+
 
 \section{Testen}
 
 \section{Resultaten}
+
 
 \subsection{Conclusie en discussie}
 
