@@ -26,40 +26,49 @@ De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd d
 
 \subsection{Uitgangen}
 \begin{itemize}[nolistsep]
-\item Wekker, dit is de tijd dat de wekker af moet gaan en de wekkerdata, dus of het licht en geluid aan staan, en of de wekker uberhaupt aanstaat;
-\item Menu-state, dit is de staat in welke de FSM zich op het moment bevindt. Deze informatie wordt doorgevoerd naar het LCD-scherm om zo te kunnen zien waar in het menu men zit.\\
+\item Wekker, dit is een vector van 16 lang. In dit signaal zijn alle instellelingen te vineden van hoelaat de wekker afgaat tot of het alarm aan of uit is.
+\item Menu, een vector van 3 lang hierin is gecodeerd welke state de gebruiker is zodat de lcd de output eraan kan aanpassen.\\
 \end{itemize}
 In \cref{tab:uitgangen_controller} staat wat voor informatie te vinden is in de uitgangen van de controller.
 \begin{table}[ht!]
 \caption{Uitgangen van de controller}
 \label{tab:uitgangen_controller}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill} }|l| p{.75\textwidth}|}
+\begin{tabular}{|p{.25\textwidth}| p{.75\textwidth}|}
 \hline
 Uitgang & Informatie over wat in de uitgang te vinden is \\ \hline
 wekker & De huidige info over de wekker instellingen uit geheugen \newline
-wekker[5 down to 0] daarin staan de minuten \newline
-wekker[10 down to 6] daarin staan de uren \newline
-wekker[11] geluid bit \newline
-wekker[12] led bit \newline
-wekker[13] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
+wekker[6 down to 0] daarin staan de minuten \newline
+wekker[12 down to 7] daarin staan de uren \newline
+wekker[13] geluid bit \newline
+wekker[14] led bit \newline
+wekker[15] wekker bit (Of de wekker uberhaupt aan is of niet) \\ \hline
 menu & Deze geeft door aan de in welke state we zitten aan de lcd module \newline
-000 : Het normale scherm weergeven met alarm en wekkertijd weergave state: Rust,Wekkertijd \newline
-001 : Uren aanpassen \newline
-010 : Minuten aanpassen \newline
-011 : Led aanpassen \newline
-100 : Geluid aanpassen \\ \hline
-\end{tabular*}
+000 : Het normale scherm weergeven met alarm en wekkertijd weergave states : (Rust, wekker toggle \newline
+001 : Uren aanpassen states : (uren set, uren min/plus) \newline
+010 : Minuten aanpassen states : (minuten  set, minuten min/plus) \newline
+011 : Led aanpassen states : (Led, Led toggle)\newline
+100 : Geluid aanpassen states : (Geluid, Geluid toggle)\newline
+101 : De menu is geopend states : (Wekkertijd)\\ \hline
+\end{tabular}
 \end{table}
 \newpage
 \subsection{Gedrag}
-Om te beginnen moet de tijd waarop de wekker af moet gaan ingesteld kunnen worden. Dit wordt gedaan door eerst de huidige wekkertijd weer te geven, vervolgens het uur waarop gewekt moet worden te wijzigen en daarna de minuut. Hierna wordt de huidige tijd weer weergegeven. \\
-Daarnaast is een vereiste dat de led uitgezet moet kunnen worden. Afhankelijk van een instelling moet het wake-up-light gedeelte wel of niet aangaan. Hetzelfde geld voor het geluid. \\
-Dit alles moet zo gebruiksvriendelijk mogelijk gebeuren.
+Om te beginnen moet de tijd waarop de wekker af gaat ingesteld kunnen worden. Dit wordt gedaan door eerst de huidige wekkertijd weer te geven, vervolgens het uur waarop gewekt moet worden te wijzigen en daarna de minuten. Hierna wordt de huidige tijd weer weergegeven. \\
+Daarnaast is een vereiste dat de alarm in het geheel of gedeeltelijk uitgezet kan worden. Afhankelijk van een instelling moet het niks gebeuren of een combinatie van het afgaan van de led en geluid.\\
+Dit alles moet gebruiksvriendelijk zijn.
 
 \section{Functionaliteit}
 
-\subsection{FSM}
-In \cref{fig:FSM_controller} staat de gemaakte fsm en in \cref{tab:states_controller} staan de uitgangen per state gespecificeerd.
+Om de controller goed hierach te kunnen ontworpen is deze op gedeeld in 3 componenten.
+Een buffer voor de vier knoppen, geheugen element en het menu zelf. In \cref{fig:blk_controller} is te vinden hoe de blok diagram van de controller eruit ziet.
+
+\begin{figure}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figuren/Controller/blok_controller.png}
+\caption{Blok diagramma van de controller}
+\label{fig:blk_controller}
+\end{figure}
+
+Voor het menu is een grote FSM die in \cref{fig:FSM_controller} staat de gemaakte fsm en in \cref{tab:states_controller} staan de uitgangen per state gespecificeerd. 
 
 \begin{figure}[ht!]
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figuren/Controller/FSM_controller.png}
@@ -67,7 +76,7 @@ In \cref{fig:FSM_controller} staat de gemaakte fsm en in \cref{tab:states_contro
 \label{fig:FSM_controller}
 \end{figure}
 
-\begin{longtable}{|l| p{10cm} |}
+\begin{longtable}{|p{.25\textwidth}| p{.75\textwidth}|}
 \hline
 Rust &
 enable = '0' \newline
@@ -130,12 +139,12 @@ menu = "010" \\ \hline
 \label{tab:states_controller}
 \end{longtable}
 
-\subsection{VHDL code}
+\section{VHDL code}
 De code voor de controller van de wekker is te vinden in \cref{Ap:code_controller}. Voor de overzicht en het modular opbouwen is de code in vier blokken geschreven.
 \begin{itemize}[nolistsep]
 \item De top entity met de port map. Deze is te vinden in \cref{code:controller_ent,code:controller_beh}.
 \item Het menu, hierin zit de echte logica verwerkt. Deze is te vinden in \cref{code:menu_ent,code:menu_beh}.
-\item Het gebruikte geheugen element voor de opslag van 14 bits, te vinden in \cref{code:geheugen_ent,code:geheugen_beh}.
+\item Het gebruikte geheugen element voor de opslag van 16 bits, te vinden in \cref{code:geheugen_ent,code:geheugen_beh}.
 \item De gebruikte buffer is te vinden in \cref{code:buffer_ent,code:buffer_beh}. De buffer regelt het ingangssignaal, en zorgt ervoor dat er maar 1 klokperiode lang een hoog signaal gelezen word.
 \end{itemize}
 Voor het testen van de code zijn er testbenches gemaakt welke te vind zijn in \cref{code:tb_controller,code:tb_menu,code:tb_geheugen,code:tb_buffer}.
@@ -150,8 +159,7 @@ De resultaten van de simulatie staan in \cref{Ap:sim_controller}. De testbench i
 Van \cref{fig:sim_beh_0-2_5} tot en met \cref{fig:sim_ext_7_5-} is te zien dat iedere simulatie tot hetzelde resultaat leid en daarmee succesvol is.
 De minimale klokperiode kan afgelezen worden aan de hand van \cref{fig:timing_controller}. Hieruit is op te makken dat deze 60ns is.
 \subsection{Conclusie en discussie}
-De controller werkt op alle gesimuleerde niveau's naar verwachting. 
+De controller werkt op alle gesimuleerde niveau's naar verwachting. Voor een correcte werking heeft de controller een klok periode die volgens de simutalties ten minste 60ns moet bedragen om verkeerde 
 De minimale klok periode bedraagt 60ns om gliches te voorkomen bij het optellen en aftrekken van uren en minuten. 
-De controller maakt op dit moment gebruik van 9088 transitoren waarvan er voor de daadwerkelijke schakelingen slechts 2914 worden gebruikt. 
-De controller maakt op dit moment nog gebruik van het binaire telsysteem (dat gebruik maakt van machten van 2), er bleek echter dat voor de lcd scherm BCD veel beter werkt. Dit moet nog worden geimplementeerd. Vlak nadat het inputbuffer gemaakt was kwam men er achter dat in plaats van een buffer ook de rising\textunderscore edge functie gebruikt had kunnen worden. 
+De controller maakt gebruik van 8606 transitoren waarvan er voor de daadwerkelijke schakelingen slechts 2965 worden gebruikt. Vlak nadat het inputbuffer gemaakt was kwam men er achter dat in plaats van een buffer ook de \emph{rising\textunderscore edge} functie gebruikt had kunnen worden. Hier is niet voor gekozen omdat het dan niet altijd even duidelijk is wat er gebeurd als er twee knoppen tegelijk ingedrukt worden.
 
