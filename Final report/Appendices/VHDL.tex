@@ -1,4 +1,3 @@
-% !TeX spellcheck = de_DE
 \chapter[VHDL code]{Vhdl code}
 \section{VHDL beschrijving van het DCF77 blok}
 \label{Ap: DCF_code}
@@ -159,6 +158,45 @@
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_tb.vhdl}
 \hrule
 \lstinputlisting [style= VHDL]{VHDL/DCF77/dcf77_tb-behaviour.vhd}
+\normalsize
+\newpage
+
+
+\section{FPGA hulpbestanden van het DCF77 blok}
+\label{Ap: FPGA_dcftest}
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: fpga_buff}\thesubsection.\quad Date ready buffer}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/buff.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: fpga_gen32khz}\thesubsection.\quad Klokdeler 50 MHz naar 32 kHz}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/gen32khz.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: fpga_gen10hz}\thesubsection.\quad Klokdeler 50 MHz naar 10 Hz}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/gen10hz.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: fpga_dcfgen}\thesubsection.\quad DCF generator}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_gen.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: fpga_dcfswitch}\thesubsection.\quad Schakelaar voor de DCF generator}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/dcf_switch.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: fpga_switch}\thesubsection.\quad Schakelmogelijkheid tussen dag, maand en jaar}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/switch.vhd}
+\normalsize
+
+\phantomsection\subsection*{\refstepcounter{subsection}\label{code: fpga_sevenseg}\thesubsection.\quad Aansturing seven-segment display}
+\scriptsize 
+\lstinputlisting [style= VHDL]{VHDL/DCF77/sevenseg.vhd}
 \normalsize
 \newpage
 
