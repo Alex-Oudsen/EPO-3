@@ -5,10 +5,12 @@ Belangrijk aan elke interface is dat deze gebruiksvriendelijk is.
 Dit kan onder andere bereikt worden door een optimum voor het aantal knoppen te bepalen. 
 Te veel knoppen, en de gebruiker weet niet welke knop wat doet, te weinig knoppen, en de gebruiker moet navigeren door een nodeloos ingewikkeld menu. \\
 Daarnaast is er nog een beperkende factor: het aantal pinnen op de chip. \\
-Al deze informatie samengenomen is besloten dat 4 knoppen voor de interface het meest gebruiksvriendelijke resultaat oplevert. Daarnaast is er nog een knop die slechts gebruikt wordt om een afgaand alarm uit te zetten. \\
+Dit alles bijeengenomen leverde een zo gebruiksvriendelijk mogelijke interface als er gebruik word gemaakt van 4 knoppen. Daarnaast is er nog een knop die slechts gebruikt wordt om een afgaand alarm uit te zetten. \\
 De controller stuurt een hoop dingen aan, en van te voren was al geanticipeerd dat dit hierdoor een van de grootste onderdelen op de chip zou kunnen worden.
 
 \section{Specificaties}
+De controller moet aan een aantal eisen voldoen zodat andere componten overweg kunnen met de uitgangsignalen van de controller. De tijd moet gecodeerd worden volgens het DCB codering. Om door te geven of het alarm of onderelen aan of uit zijn wordt gebruik gemaakt van positieve logica. Dit houd in als er een $1$ als uitgangsignaal is dan staat het onderdeel aan.
+
 \subsection{Ingangen}
 \begin{itemize}[nolistsep]
 \item Klok, dit is een standaard input;
@@ -55,12 +57,12 @@ menu & Deze geeft door aan de in welke state we zitten aan de lcd module \newlin
 \subsection{Gedrag}
 Om te beginnen moet de tijd waarop de wekker af gaat ingesteld kunnen worden. Dit wordt gedaan door eerst de huidige wekkertijd weer te geven, vervolgens het uur waarop gewekt moet worden te wijzigen en daarna de minuten. Hierna wordt de huidige tijd weer weergegeven. \\
 Daarnaast is een vereiste dat de alarm in het geheel of gedeeltelijk uitgezet kan worden. Afhankelijk van een instelling moet het niks gebeuren of een combinatie van het afgaan van de led en geluid.\\
-Dit alles moet gebruiksvriendelijk zijn.
+Dit alles moet gebruiksvriendelijk mogelijk zijn.
 
 \section{Functionaliteit}
 
-Om de controller goed hierach te kunnen ontworpen is deze op gedeeld in 3 componenten.
-Een buffer voor de vier knoppen, geheugen element en het menu zelf. In \cref{fig:blk_controller} is te vinden hoe de blok diagram van de controller eruit ziet.
+Om de controller goed hi\"{e}rarchisch te kunnen ontwerpen is deze opgedeeld in 3 componenten.
+Een buffer voor de vier knoppen, geheugenelement en het menu zelf. In \cref{fig:blk_controller} is te vinden hoe de blok diagram van de controller eruit ziet.
 
 \begin{figure}
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figuren/Controller/blok_controller.png}
@@ -150,7 +152,8 @@ De code voor de controller van de wekker is te vinden in \cref{Ap:code_controlle
 Voor het testen van de code zijn er testbenches gemaakt welke te vind zijn in \cref{code:tb_controller,code:tb_menu,code:tb_geheugen,code:tb_buffer}.
 
 \section{Testen}
-Om zeker te zijn dat alles goed werkt worden er drie verschillende testen uitgevoerd. De eerste is op behavioural niveau. Hier wordt getest of de basis van de code werkt zoals verwacht. Na een goed geslaagd resultaat kan de code worden gesynthetiseerd, en deze gesynthetiseerde code worden gesimuleerd. Als er geen fouten optreden kan het ontwerp gemaakt worden, daarna geextraheerd en nogmaals getest worden. De testen worden uitgevoerd met behulp van \emph{Modelsim}.
+Om zeker te zijn dat alles goed werkt worden er vier verschillende testen uitgevoerd. De belangrijkste zijn de behavoural en switch level simulatie. Om zeker te zijn dat alles goed werkt wordt er ook nog een test gedaan door de code te synthetiseren en te extracten uit de schakeling.
+Bij een test op behavioural niveau wordt er gekeken of de code werkt zoals verwacht. Na een geslaagd resultaat kan de code worden gesynthetiseerd, en deze gesynthetiseerde code worden gesimuleerd. Als er geen fouten optreden kan het ontwerp gemaakt worden, daarna ge\"{e}xtraheerd en nogmaals getest worden. De testen worden uitgevoerd met behulp van \emph{Modelsim}. De laatste stap bevat de switch level simulatie deze is als bijlage ingeleverd bij het document.
 
 
 \section{Simulatie}
@@ -159,7 +162,6 @@ De resultaten van de simulatie staan in \cref{Ap:sim_controller}. De testbench i
 Van \cref{fig:sim_beh_0-2_5} tot en met \cref{fig:sim_ext_7_5-} is te zien dat iedere simulatie tot hetzelde resultaat leid en daarmee succesvol is.
 De minimale klokperiode kan afgelezen worden aan de hand van \cref{fig:timing_controller}. Hieruit is op te makken dat deze 60ns is.
 \subsection{Conclusie en discussie}
-De controller werkt op alle gesimuleerde niveau's naar verwachting. Voor een correcte werking heeft de controller een klok periode die volgens de simutalties ten minste 60ns moet bedragen om verkeerde 
-De minimale klok periode bedraagt 60ns om gliches te voorkomen bij het optellen en aftrekken van uren en minuten. 
-De controller maakt gebruik van 8606 transitoren waarvan er voor de daadwerkelijke schakelingen slechts 2965 worden gebruikt. Vlak nadat het inputbuffer gemaakt was kwam men er achter dat in plaats van een buffer ook de \emph{rising\textunderscore edge} functie gebruikt had kunnen worden. Hier is niet voor gekozen omdat het dan niet altijd even duidelijk is wat er gebeurd als er twee knoppen tegelijk ingedrukt worden.
+De controller werkt op alle gesimuleerde niveau's naar verwachting. Voor een correcte werking heeft de controller een klok periode die volgens de simulaties ten minste 60ns moet bedragen om gliches te voorkomen
+De controller maakt gebruik van 8606 transitoren waarvan er voor de daadwerkelijke logica slechts 2965 worden gebruikt. Vlak nadat het inputbuffer gemaakt was kwam men er achter dat in plaats van een buffer ook de \emph{rising\textunderscore edge} functie gebruikt had kunnen worden. Hier is niet voor gekozen omdat het dan niet altijd even duidelijk is wat er gebeurd als er twee knoppen tegelijk ingedrukt worden.
 
