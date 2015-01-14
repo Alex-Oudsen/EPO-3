@@ -4,7 +4,7 @@ Na een reset of \'e\'en keer per dag om 12 uur middernacht zal het datum compone
 
 \begin{figure}
   \centering
-     \includegraphics[angle = 0, scale= 0.75]{verslag_schemas/datum_entity.png}
+     \includegraphics[angle = 0, scale= 0.75{verslag_schemas/datum_entity.png}
        \caption{Entity datum}
 \label{fig:simlayout}
 \end{figure}
@@ -21,18 +21,19 @@ In het aparte process zal de de data$\_$buf worden gekoppeld aan de input die ho
 \subsubsection{FSM}
 \begin{figure}
   \centering
-     \includegraphics[angle = 0, scale= 0.75]{verslag_schemas/datum_fsm.png}
+     \includegraphics[angle = 0, scale= 0.6]{verslag_schemas/datum_fsm.png}
        \caption{FSM Datum}
 \label{fig:simlayout}
 \end{figure}
 
 \subsubsection{VHDL code}
-\ref{code:ent_datum}
-\ref{code:beh_datum}
+Zie \ref{code:ent_datum} voor de entity code. \\
+Zie \ref{code:beh_datum} voor de behavioural code.
+Zie \ref{code:datum_tb} voor de testbench die is gebruikt.
 \subsubsection{Simulaties}
+Zie \ref{ap:sim_datum_behavioural} voor de simulatie van de behavioural code. \\
+Zie \ref{ap:sim_datum_circuit} voor de simulatie van het gesynthetiseerde circuit. 
+De simulaties zijn uitgevoerd met een clock van 2000ns.  Er is getest tot 300k ns, zie de testbench in \ref{code:datum_tb} voor meer informatie.
 
-\subsubsection{Testen}
-Tijdens het testen is de
 \subsubsection{Resultaten}
-De schakeling werkt correct. 
-\subsubsection{Discussie}
+Uit de simulaties is gebleken dat het circuit doet waarvoor het is ontworpen.
