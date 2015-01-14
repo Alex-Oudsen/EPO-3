@@ -2,19 +2,30 @@
 
 \subsubsection{Gedrag}
 Na een reset of bij het veranderen van de minuten zal de entity tijd data gaan verzenden. De data die verzonden wordt bevat informatie over welk character geprint moet worden en zijn positie. De characters die moeten worden verzonden worden bepaalt aan de hand van de minuten en uren die de entity in gaan. Dit zal altijd op de volgende volgorde gaan: tientallen uren, eentallen uren, tientallen minuten en als laatste eentallen minuten. Ook zal de module bij een opgaande flank van het \'e\'en Hz signaal de dubbele punt tussen de uren en minuten aan of uit zetten.\\
-Het component wektijd verzend dezelfde informatie naar het LCD, alzij het op een andere positie. De wektijd zal beginnen met verzenden op het moment dat de wektijd wordt aangepast in het menu. De volgorde van de
+Het component wektijd verzend dezelfde informatie naar het LCD, alzij het op een andere positie. De wektijd zal beginnen met verzenden op het moment dat de wektijd wordt aangepast in het menu. De volgorde van de van de wektijd is hetzelfde als die van het component tijd.
 
 \subsubsection{Functionaliteit}
-Het component werkt volgens het Moore principe. Om de seconde wordt een nieuw character naar het LCD gestuurd. Dit character is voor de dubbele punt tussen de uren en minuten. Als er een minuut om is dan zal de nieuwe tijd naar het LCD worden verzonden.
+Het component tijd werkt volgens het Moore principe. Om de seconde wordt een nieuw character naar het LCD gestuurd. Dit character is voor de dubbele punt tussen de uren en minuten. Als er een minuut om is dan zal de nieuwe tijd naar het LCD worden verzonden.\\
+Het component wektijd werkt ook volgens een Moore principe. Op het moment dat er in het menu de wektijd wordt aangepast zal het component wektijd het LCD blijven updaten met de huidige wektijd, dit om een goede feedback te geven naar de gebruiker.
 
 \subsubsection{FSM}
+\begin{figure}[h!]
+	\center
+	\includegraphics[scale=1.9]{Figuren/LCD/tijd.png}
+	\caption{FSM van component tijd}
+	\label{fig:fsm_tijd}
+\end{figure}
+\begin{figure}[h!]
+	\center
+	\includegraphics[scale=1.9]{Figuren/LCD/fsm_wektijd.png}
+	\caption{FSM van component wektijd}
+	\label{fig:fsm_wektijd}
+\end{figure}
 
 \subsubsection{VHDL code}
 
 \subsubsection{Simulaties}
 
-\subsubsection{Testen}
-
 \subsubsection{Resultaten}
 
-\subsubsection{Discussie}
+
