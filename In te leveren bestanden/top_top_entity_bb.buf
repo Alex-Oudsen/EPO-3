@@ -1,0 +1,32 @@
+t1  INPUT  XI
+t2  DIRECT XO
+t3  INPUT  reset
+t4  INPUT  knoppen_4_0_4
+t5  INPUT  knoppen_4_0_3
+t6  INPUT  knoppen_4_0_2
+t7  INPUT  knoppen_4_0_1
+t8  INPUT  knoppen_4_0_0
+t9  INPUT  dcf
+t10 OUTPUT data_out_6_0_6
+t11 OUTPUT data_out_6_0_5
+t12 OUTPUT data_out_6_0_4
+t13 OUTPUT data_out_6_0_3
+t14 OUTPUT data_out_6_0_2
+t15 OUTPUT data_out_6_0_1
+t16 OUTPUT data_out_6_0_0
+t17 OUTPUT buzzer
+t18 OUTPUT led_lamp
+t19 OUTPUT clk_out
+t20 NC
+t21 NC
+t22 NC
+t23 NC
+t24 NC
+t25 NC
+t26 NC
+t27 NC
+t28 NC
+t29 NC
+t30 NC
+t31 NC
+t32 NC
