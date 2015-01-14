@@ -69,7 +69,7 @@ In \cref{fig:FSM_controller} staat de gemaakte fsm en in \cref{tab:states_contro
 
 \begin{longtable}{|l| p{10cm} |}
 \hline
-Rust, Reset &
+Rust &
 enable = '0' \newline
 wekker=wekdata \newline
 menu= "000" \\ \hline
@@ -102,7 +102,7 @@ wekker[10 down to 0]=wekdata[10 down to 0] \newline
 wekker[11] = niet wekdata[11] \newline
 wekker[13 downto 12] = wekdata[13 downto 12] \newline
 menu = "100" \\ \hline
-Tijd uren &
+Uren set &
 enable ='0' \newline
 wekker=wekdata \newline
 menu = "001" \\ \hline
@@ -114,7 +114,7 @@ Uren min &
 enable ='1' \newline
 wekker=wekdata-1 \newline
 menu = "001" \\ \hline
-Tijd minuten &
+Minuten set&
 enable ='0' \newline
 wekker=wekdata \newline
 menu = "010" \\ \hline
