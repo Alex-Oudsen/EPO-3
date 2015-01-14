@@ -5,10 +5,11 @@ Zodra de chip daadwerkelijk gemaakt is, kan die in kwartaal vier getest worden. 
 Voor het testen van de chip met een logic analyzer zijn een paar referentiedocumenten nodig die geproduceerd worden tijdens het ontwerpen van de chip. De ingangssignalen die in de referentiedocumenten staan worden als ingang naar de chip gestuurd en de uitgangssignalen van de chip en die van de documenten worden met elkaar vergeleken.
 
 \section{Testsignalen}
-De meeste uitgangssignalen die uit de chip komen, gaan naar een LCD-scherm. Mocht er iets mis gegaan zijn tussen de chip, microcontroller en het scherm, dan zal de weergave op het scherm niet goed zijn. Om te checken of de fout in de chip zelf zit of in de communicatie tussen de chip en het LCD zullen er testsignalen op de niet-gebruikte pinnen van de chip gezet worden. Op die manier kunnen de signalen tussen de subblokken ook getest worden.
-De testsignalen die op de pinnen gezet worden zijn de volgende:
+Er hadden nog testsignalen op de lege pinnen gezet kunnen worden. Op die manier zouden ook signalen getest kunnen worden die van het ene subblok naar het andere subblok gaan. Mocht er een subblok niet functioneren, kan dat getest worden met behulp van de testsignalen en eventueel kunnen die testsignalen nog gebruikt worden om op een andere manier een bruikbaar en visueel uitgangssignaal te krijgen.\\
+Het zou dan om de volgende signalen gaan
 \begin{itemize}
-\item Het dcf\_debug signaal, om te zien of het DCF-signaal opgevangen wordt.
-\item Het Hz\_1-signaal.
-\item Het menu\_state-signaal.
+\item Het DCF\_debug signaal
+\item Het Hz\_1 signaal
+\item En de vector menu\_state.
 \end{itemize}
+Door tijd en ruimtegebrek was dit alleen niet meer mogelijk.
