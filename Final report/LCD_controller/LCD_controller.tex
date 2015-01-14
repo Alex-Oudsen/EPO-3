@@ -1,6 +1,6 @@
-\chapter{LCD controller}
-\section{Inleiding}
-
+%\chapter{LCD controller}
+\chapter{Inleiding}
+Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook 
 \section{Specificaties}
 
 \section{Entity}
@@ -21,7 +21,7 @@ maand					&in std$\_$logic$\_$vector(4 downto 0) 		&data signaal met de actuele 
 jaar						&in std$\_$logic$\_$vector(7 downto 0)	 		&data signaal met het actuele jaar afkomstig van DCF  \\ \hline
 dcf$\_$debug		&in std$\_$logic 												& ????  \\ \hline
 menu					&in std$\_$logic$\_$vector(2 downto 0)			&data signaal die de actuele menu state weergeeft \\ \hline
-alarm 					&in std$\_$logic												&buffer signaal dat weergeeft of alarmfunctie in of uitgeschakeld is
+alarm 					&in std$\_$logic												&buffer signaal dat weergeeft of alarmfunctie in of uitgeschakeld is\\ \hline
 geluid$\_$signaal 		&in std$\_$logic 		 										&buffer signaal dat weergeeft of geluidsfunctie in of uitgeschakeld is \\ \hline
 licht$\_$signaal 	&in std$\_$logic 		 										&buffer signaal dat weergeeft of lichtfunctie in of uitgeschakeld is  \\ \hline 
 wektijd$\_$uren 	& in std$\_$logic$\_$vector(5 downto 0)		&data signaal met ingestelde wektijd uren \\ \hline 
@@ -34,6 +34,22 @@ clk$\_$out 			&in std$\_$logic 		 										&clock om microcontroller clock mee 
 \subsection{Gedrag}
 
 \section{Functionaliteit}
+
+
+\section{Subsystemen LCD}
+\subsection{...}
+\include{bladiebla}
+
+- gedrag
+- functionaliteit
+- FSM
+- VHDL code 
+- Testen 
+- Simulatie
+- Resultaten
+- Discussie
+
+	
 
 \subsection{FSM}
 
