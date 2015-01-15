@@ -13,12 +13,13 @@ component pwm
 	port(	clk   :in    std_logic;
         		reset :in    std_logic;
         		length:in    std_logic_vector(5 downto 0);
+			licht :in	 std_logic;
         		pwm_signal   :out   std_logic);
 end component;
 signal length : std_logic_vector (5 downto 0);
 begin
 	counter_1 : counter port map (clk => clk, reset => reset, sec => sec, licht => licht, length => length);
-	pwm_1 : pwm port map (clk => clk, reset => reset, length => length, pwm_signal => pwm_signal);
+	pwm_1 : pwm port map (clk => clk, reset => reset, length => length, licht => licht, pwm_signal => pwm_signal);
 end behaviour;
 
 
