@@ -6,7 +6,7 @@ architecture behaviour of send_bus is
 
 
 begin
-process(selector)
+process(selector, x_in_0, y_in_0, c_in_0, x_in_1, y_in_1, c_in_1, x_in_2, y_in_2, c_in_2, x_in_3, y_in_3, c_in_3, x_in_4, y_in_4, c_in_4, x_in_5, y_in_5, c_in_5, x_in_6, y_in_6, c_in_6)
 begin
 	case (selector) is
 		when "000" =>

@@ -26,7 +26,7 @@ if(rising_edge(clk)) then
 end if;
 end process;
 
-process(state, next_selectort, x, y, c)
+process(state, selectort, next_selectort, x, y, c)
 begin
 	case(state) is 
 		when rust =>

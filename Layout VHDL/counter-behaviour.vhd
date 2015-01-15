@@ -22,7 +22,7 @@ begin
 			length2 <= new_length2;
 		end if;
 	end process;
-	lbl2: process(sec, count, length2)
+	lbl2: process(sec, count, length2, state)
 	begin
 		case state is
 			when init =>

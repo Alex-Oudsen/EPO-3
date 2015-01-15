@@ -22,9 +22,9 @@ constant c_6: std_logic_vector (6 downto 0) := "0101100"; -- leeg, alarm uit
 
 begin
 
-lbl1: process(clk, reset, new_state, alarm, new_ready_sig, alarm_buf)
+lbl1: process(clk)
 	begin
-		if (clk'event and clk='1') then
+		if (clk'event and clk= '1') then
 			if reset = '1' then
 				state <= steady;
 				buf <= "000";
@@ -40,7 +40,7 @@ lbl1: process(clk, reset, new_state, alarm, new_ready_sig, alarm_buf)
 	end process;
 
 
-lbl2: process (state, menu, ready, buf, alarm, alarm_buf)
+lbl2: process (state, menu, ready, buf, alarm, alarm_buf, ready_sig)
 begin
 	case state is
 		when steady =>
@@ -49,12 +49,7 @@ begin
 			c_menu <= "0000000";
 			new_buf <= buf;
 			new_ready_sig <= ready;
-			if (alarm /= alarm_buf) then
-				new_state <= schrijven;
-			else
-				new_state <= steady;
-			end if;
-			if (menu /= buf) then
+			if (alarm /= alarm_buf or menu /= buf) then
 				new_state <= schrijven;
 			else
 				new_state <= steady;
@@ -90,12 +85,8 @@ begin
 					end if;
 					new_buf <= menu;
 			end case;
-			if(ready = '0') then
-				if(ready_sig = '1') then
-					new_state <= steady;
-				else
-					new_state <= schrijven;
-				end if;
+			if(ready = '0' and ready_sig = '1') then
+				new_state <= steady;
 			else
 				new_state <= schrijven;
 			end if;
@@ -105,13 +96,8 @@ begin
 			c_menu <= "0000000";
 			new_buf <= buf;
 			new_ready_sig <= ready;
-			
+			new_state <= steady;
 	end case;	
  end process;
 
 end behaviour;
-
-
-
-
-

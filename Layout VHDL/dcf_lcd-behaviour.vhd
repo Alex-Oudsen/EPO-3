@@ -87,7 +87,6 @@ lbl2: process (state, dcf_debug,buf, ready)
                 c <= "0000000";
                 new_buf <= dcf_debug; 
                 new_state <= steady; 
-                
         end case;
     end process;
 end behaviour;

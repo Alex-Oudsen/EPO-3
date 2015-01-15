@@ -66,7 +66,7 @@ begin
 	end if;
 end process;
 
-process(ready, hz_sig, uren, minuten, state)--process voor rekenen
+process(ready, hz_sig, uren, minuten, state, punt, lsb_minuten, hz_state, ready_sig)--process voor rekenen
 begin
 	case(state) is
 		when rust =>

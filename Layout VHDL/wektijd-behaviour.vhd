@@ -51,7 +51,7 @@ begin
 	end if;
 end process;
 
-process(ready, wektijd_uren, wektijd_min, state)--process voor rekenen
+process(ready, wektijd_uren, wektijd_min, state, menu, ready_sig)--process voor rekenen
 begin
 	case(state) is
 		when rust =>
