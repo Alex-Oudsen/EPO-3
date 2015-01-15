@@ -1,6 +1,6 @@
 \chapter{LCD controller}
 \section{LCD Controller}
-Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook mee dat het erg gecompliceerd kan worden. Het LCD dat zal worden gebruikt is van de fabrikant MIDAS, typenummer MC128064B6W-BNMLW. Het betreft een graphical LCD van 128 x 64 pixels met een register die geschreven kan worden. De bibliotheek met characters en de controller om het LCD te schrijven zal extern van deze chip plaatsvinden door middel van een atmega32-16pu. Deze keuze is gemaakt omdat voor de characters niet genoeg ruimte is op de chip. De LCD controller op de chip zal dus alleen de inkomende data moeten omzetten naar een positie waarnaar het geschreven moet worden en een bijbehorend character. De layout van het display is al vastgesteld, zodat de posities alvast bekend zijn.  Zie voor de layout afbeelding \ref{fig:lcdlayout}.  \\
+Op de LCD zal de huidige tijd, ingestelde wekkertijd, datum en ingeschakelde functies te zien zijn. Een LCD is daar handig voor omdat het veel ontwerp vrijheid bied. Dat neemt ook mee dat het erg gecompliceerd kan worden. Het LCD dat zal worden gebruikt is van de fabrikant MIDAS, typenummer MC128064B6W-BNMLW~\cite{Datasheet_lcd}. Het betreft een graphical LCD van 128 x 64 pixels met een register die geschreven kan worden. De bibliotheek met characters en de controller om het LCD te schrijven zal extern van deze chip plaatsvinden door middel van een atmega32-16pu~\cite{Datasheet_micro}. Deze keuze is gemaakt omdat voor de characters niet genoeg ruimte is op de chip. De LCD controller op de chip zal dus alleen de inkomende data moeten omzetten naar een positie waarnaar het geschreven moet worden en een bijbehorend character. De layout van het display is al vastgesteld, zodat de posities alvast bekend zijn.  Zie voor de layout afbeelding \ref{fig:lcdlayout}.  \\
 
 \begin{figure}
   \centering
@@ -40,7 +40,7 @@ clk$\_$out 			&out std$\_$logic 		 										&clock om microcontroller clock mee
 \newpage
 \begin{figure}
   \centering
-     \includegraphics[angle = 0, scale= 0.75]{verslag_schemas/toplevel_entity.png}
+     \includegraphics[angle = 0, scale= 0.5]{verslag_schemas/toplevel_entity.png}
        \caption{Toplevel Entity}
 \label{fig:lcdtoplevel}
 \end{figure}
