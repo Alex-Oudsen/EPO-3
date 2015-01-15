@@ -1,0 +1,17 @@
+--blame Kevin, 4287592
+
+
+library IEEE;
+use IEEE.std_logic_1164.ALL;
+
+entity top_top_entity is
+	port (	XI			:	in	std_logic;
+			XO			:	inout	std_logic;
+			reset		:	in	std_logic;
+			knoppen		:	in	std_logic_vector (4 downto 0);
+			dcf			:	in	std_logic;
+			data_out	:	out	std_logic_vector(6 downto 0);
+			buzzer		:	out std_logic;
+			led_lamp	:	out std_logic;
+        	clk_out   	:	out	std_logic);
+end top_top_entity;
