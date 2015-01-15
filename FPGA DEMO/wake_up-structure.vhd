@@ -84,7 +84,7 @@ component lcd_top is
     	  clk_out   	:out std_logic);
 end component lcd_top;
 
-signal clk_1hz, alarmlicht, licht_enable, dcf_led, date_ready: std_logic;
+signal clk_1hz, alarmlicht, licht_enable, dcf_led, date_ready, sound: std_logic;
 signal minuten: 	std_logic_vector(6 downto 0);
 signal uren: 		std_logic_vector(5 downto 0);
 signal wekkerdata: 	std_logic_vector(15 downto 0);
