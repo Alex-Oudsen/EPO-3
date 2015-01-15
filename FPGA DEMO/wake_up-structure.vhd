@@ -106,10 +106,11 @@ begin
 	dcfled <= dcf_led;
 	date <= datum;
 
-	alarmlicht <= (licht_enable and wekkerdata(15));
+	alarmlicht <= (licht_enable and wekkerdata(15) and wekkerdata(14));
+	buzzer <= (sound and wekkerdata(15) and wekkerdata(13));
 
 alarmblok: alarm 	port map (clk, reset, clk_1hz, alarmlicht, led_lamp);
-comparing: compare 	port map (clk, reset, uren(3 downto 0), uren(5 downto 4), minuten(3 downto 0), minuten(6 downto 4), wekkerdata(10 downto 7), wekkerdata(12 downto 11), wekkerdata(3 downto 0), wekkerdata(6 downto 4), snooze, buzzer, licht_enable);
+comparing: compare 	port map (clk, reset, uren(3 downto 0), uren(5 downto 4), minuten(3 downto 0), minuten(6 downto 4), wekkerdata(10 downto 7), wekkerdata(12 downto 11), wekkerdata(3 downto 0), wekkerdata(6 downto 4), snooze, sound, licht_enable);
 menu_blok: controller 	port map (clk, reset, knoppen, wekkerdata(15 downto 0), menu_state);
 quickfix1: datefix	port map (clk, reset, date_ready, jaar, maand, dag, weekdag, datum);
 dcf77sync: dcf77_bcd 	port map (clk, reset, dcf_in, dcf_led, clk_1hz, minuten(6 downto 0), uren(5 downto 0), weekdag, dag, maand, jaar, date_ready);
