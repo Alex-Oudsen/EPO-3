@@ -1,0 +1,29 @@
+Switch 9: DCF aansluiten
+Switch 8: Weergeven menu-state op 7-segment display
+Switch 7: Weergeven wekkertijd op 7-segment display
+Switch 6: Weergeven huidige tijd op 7-segment display
+Switch 5: Weergeven dag v.d. week op rode ledjes 2 t/m 0
+Switch 4: Weergeven dag v.d. maand op rode ledjes 5 t/m 0
+Switch 3: Weergeven nummer v.d. maand op rode ledjes 4 t/m 0
+Switch 2: Weergeven laatste twee cijfers v.h. jaar op rode ledjes 7 t/m 0
+Switch 1: Reset
+Switch 0: Snooze
+
+Button 3: Down
+Button 2: Up
+Button 1: Set
+Button 0: Menu
+
+Led_green 7: Wekker toggle state
+Led_green 6: Licht toggle state
+Led_green 5: Geluid toggle state
+Led_green 4: UNUSED
+Led_green 3: DCF_led debug signaal
+Led_green 2: Clk_1hz
+Led_green 1: Licht pwm signaal
+Led_green 0: Geluid (buzzer) signaal
+
+GPIO_0 (0) t/m GPIO_0 (6): Data_out (0) t/m Data_out (6)
+GPIO_0 (7): Clk_out
+
+(GPIO_0 (11): VCC (5 V) & GPIO_0 (12): GND)
