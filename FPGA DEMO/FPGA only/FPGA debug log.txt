@@ -1,0 +1,14 @@
+DCF functionaliteit: ok
+Menu functionaliteit: ok
+Alarm functionaliteit: ok
+LCD functionaliteit: unknown
+
+Known issues:
+- Een alarm instellen dat over minder dan 15 minuten aan dient te gaan,
+  zal het licht pas op de ingestelde wektijd triggeren.
+- Een alarm instellen, waarbij de wektijd tijdelijk 15 minuten voorbij de huidige tijd passeert,
+  zal het licht onbedoeld triggeren. Het geluid blijft gewoon uit tot de ingestelde wektijd.
+	FIX: Snoozen na of tijdens het instellen van de wektijd verhelpt dit probleem.
+
+Possible improvements:
+- Er kan gebruik worden gemaakt van minder switches of er kunnen extra debugsignalen worden gemultiplext.
