@@ -23,7 +23,12 @@ Led_green 2: Clk_1hz
 Led_green 1: Licht pwm signaal
 Led_green 0: Geluid (buzzer) signaal
 
+--> 3,3 V logic level outputs:
 GPIO_0 (0) t/m GPIO_0 (6): Data_out (0) t/m Data_out (6)
 GPIO_0 (7): Clk_out
+GPIO_0 (34): Licht pwm signaal
+GPIO_0 (35): Geluid (buzzer) signaal
 
-(GPIO_0 (11): VCC (5 V) & GPIO_0 (12): GND)
+--> DC power outputs:
+GPIO_0 (11): VCC (5 V) & GPIO_0 (12): GND
+GPIO_0 (29): VCC (3,3 V) & GPIO_0 (30): GND
