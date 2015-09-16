@@ -1,0 +1,63 @@
+t1  INPUT  xi
+
+t2  DIRECT xo
+
+t3  INPUT  reset
+
+t4  INPUT  dcf_in
+
+t5  INPUT  snooze
+
+t6  INPUT  knoppen_3_0_3
+
+t7  INPUT  knoppen_3_0_2
+
+t8  INPUT  knoppen_3_0_1
+
+t9  INPUT  knoppen_3_0_0
+
+t10 INPUT  schakelaars_2_0_2
+
+t11 INPUT  schakelaars_2_0_1
+
+t12 INPUT  schakelaars_2_0_0
+
+t13 OUTPUT debug_out_7_0_7
+
+t14 OUTPUT debug_out_7_0_6
+
+t15 OUTPUT debug_out_7_0_5
+
+t16 OUTPUT debug_out_7_0_4
+
+t17 OUTPUT debug_out_7_0_3
+
+t18 OUTPUT debug_out_7_0_2
+
+t19 OUTPUT debug_out_7_0_1
+
+t20 OUTPUT debug_out_7_0_0
+
+t21 OUTPUT data_out_6_0_6
+
+t22 OUTPUT data_out_6_0_5
+
+t23 OUTPUT data_out_6_0_4
+
+t24 OUTPUT data_out_6_0_3
+
+t25 OUTPUT data_out_6_0_2
+
+t26 OUTPUT data_out_6_0_1
+
+t27 OUTPUT data_out_6_0_0
+
+t28 OUTPUT clk_out
+
+t29 OUTPUT buzzer
+
+t30 OUTPUT led_lamp
+
+t31 NC
+
+t32 NC
